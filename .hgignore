@@ -1,4 +1,12 @@
 syntax: regexp
+(^|/)install-sh$
+(^|/)missing$
+(^|/)Makefile\.in$
+(^|/)configure$
+(^|/)config\.h\.in$
+(^|/)aclocal\.m4$
+(^|/)autom4te\.cache/
+(^|/)stamp-
 \.rej$
 \.orig$
 ~$
