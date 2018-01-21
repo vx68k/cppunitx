@@ -10,10 +10,12 @@ syntax: regexp
 ^config\.h\.in$
 ^configure$
 ^aclocal\.m4$
+^stamp-h1$
 ^build-aux/
 ^m4/
 ^autom4te\.cache/
-(^|/)stamp-
+\.lo$
+\.o$
 \.rej$
 \.orig$
 ~$
