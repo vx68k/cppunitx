@@ -1,4 +1,4 @@
-// base.cpp
+// cppunitx/bits/base.h
 // Copyright (C) 2018 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
@@ -16,4 +16,7 @@
 //
 // SPDX-Licence-Identifier: GPL-3.0-or-later
 
-#include <cppunitx/bits/base.h>
+#ifndef _CPPUNITX_BITS_BASE_H
+#define _CPPUNITX_BITS_BASE_H 1
+
+#endif
