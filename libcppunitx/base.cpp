@@ -16,4 +16,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#if HAVE_CONFIG_H
+#include <config.h>
+#endif
 #include <cppunitx/bits/base.h>
