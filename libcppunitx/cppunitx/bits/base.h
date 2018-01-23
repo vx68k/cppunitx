@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License along with
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-// SPDX-Licence-Identifier: GPL-3.0-or-later
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 #ifndef _CPPUNITX_BITS_BASE_H
 #define _CPPUNITX_BITS_BASE_H 1
