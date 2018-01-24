@@ -10,6 +10,7 @@ LT_INIT([dlopen])
 AM_INIT_AUTOMAKE([foreign no-define])
 AC_PROG_CC
 AC_PROG_CXX
+AC_SUBST([LTLDFLAGS])dnl
 AC_CONFIG_FILES([Makefile libcppunitx/Makefile])
 AC_CONFIG_HEADERS([config.h])
 AC_OUTPUT

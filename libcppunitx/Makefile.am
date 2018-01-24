@@ -2,7 +2,7 @@
 
 lib_LTLIBRARIES = libcppunitx.la
 
-libcppunitx_la_LDFLAGS = -no-undefined -version-info 0:0:0
+libcppunitx_la_LDFLAGS = -no-undefined -version-info 0:0:0 $(LTLDFLAGS)
 libcppunitx_la_SOURCES = base.cpp
 
 nobase_include_HEADERS = cppunitx/bits/base.h
