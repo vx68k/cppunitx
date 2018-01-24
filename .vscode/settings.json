@@ -1,0 +1,12 @@
+{
+    "files.exclude": {
+        "**/.libs": true,
+        "**/.deps": true,
+        "**/autom4te.cache": true,
+        "**/*.lo": true,
+        "**/*.o": true,
+        "**/*.rej": true,
+        "**/*.orig": true,
+        "**/*~": true
+    }
+}
