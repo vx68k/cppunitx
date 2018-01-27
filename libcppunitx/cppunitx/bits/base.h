@@ -19,4 +19,10 @@
 #ifndef _CPPUNITX_BITS_BASE_H
 #define _CPPUNITX_BITS_BASE_H 1
 
+namespace cppunitx
+{
+    // Returns the run-time version of CppUnitX.
+    extern const char *version();
+}
+
 #endif

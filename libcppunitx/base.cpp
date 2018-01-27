@@ -20,3 +20,8 @@
 #include <config.h>
 #endif
 #include <cppunitx/bits/base.h>
+
+const char *cppunitx::version()
+{
+    return PACKAGE_VERSION;
+}
