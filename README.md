@@ -4,7 +4,7 @@ CppUnitX is another xUnit testing framework for C++11 or later.
 
 This program is provided under the terms and conditions of the [GNU General Public License, version 3][GPL-3.0] or any later version.
 
-See the [repository wiki][wiki] for additional information.
+See the [repository wiki][wiki] for more information.
 
 [![(GNU General Public License v3.0 or later)](https://img.shields.io/badge/license-GPL--3.0--or--later-blue.svg)][GPL-3.0]
 [![(Open Issues)](https://img.shields.io/bitbucket/issues/vx68k/cppunitx.svg)][open issues]
