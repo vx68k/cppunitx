@@ -1,18 +1,14 @@
 syntax: regexp
 (^|/)Makefile$
 (^|/)Makefile\.in$
-^libtool$
-^stamp-h1$
-^config\.h$
-^config\.status$
-^config\.log$
-^config\.h\.in$
-^configure$
-^aclocal\.m4$
-^build-aux/
-(^|/)\.libs/
-(^|/)\.deps/
-(^|/)autom4te\.cache/
+(^|/)libtool$
+(^|/)aclocal\.m4$
+(^|/)configure$
+(^|/)config\.[^/]*$
+(^|/)stamp-[^/]*$
+(^|/)\.libs$
+(^|/)\.deps$
+(^|/)autom4te\.cache$
 \.lo$
 \.o$
 \.rej$
