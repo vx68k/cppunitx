@@ -23,4 +23,17 @@ namespace cppunitx::module
 {
 }
 
+#ifdef MODULE_NAME
+
+#define _CPPUNITX_DLNAME_(M, F) M ## _LTX_ ## F
+#define _CPPUNITX_DLNAME(M, F) _CPPUNITX_DLNAME_(M, F)
+
+#define init _CPPUNITX_DLNAME(MODULE_NAME, init)
+
+extern "C" void init()
+{
+}
+
+#endif /* defined MODULE_NAME */
+
 #endif
