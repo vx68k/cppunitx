@@ -1,4 +1,7 @@
 syntax: regexp
+^libcppunitx/libcppunitx\.la$
+^examples/selftest\.la$
+^examples/run$
 (^|/)Makefile$
 (^|/)config\.status$
 (^|/)config\.cache$
