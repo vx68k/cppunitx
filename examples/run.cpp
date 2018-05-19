@@ -19,8 +19,9 @@
 #if HAVE_CONFIG_H
 #include <config.h>
 #endif
+#include <cppunitx/engine>
 
-int main()
+int main(const int argc, char *argv[])
 {
-    return 0;
+    return cppunitx::main(argc, argv);
 }
