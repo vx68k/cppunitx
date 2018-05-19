@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "POSIX",
+            "intelliSenseMode": "clang-x64",
+            "includePath": [
+                "${workspaceFolder}/libcppunitx"
+            ],
+            "defines": [
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/libcppunitx"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}
