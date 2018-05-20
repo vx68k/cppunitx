@@ -1,4 +1,4 @@
-// cppunitx/bits/module.h
+// module_loader.cpp - implementation of the module loader
 // Copyright (C) 2018 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
@@ -16,35 +16,12 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef _CPPUNITX_BITS_MODULE_H
-#define _CPPUNITX_BITS_MODULE_H 1
-
-namespace cppunitx
-{
-    /// Module loader.
-    ///
-    /// Any object of this class is not copyable.
-    class module_loader final
-    {
-    public:
-        module_loader(const module_loader &) = delete;
-        void operator=(const module_loader &) = delete;
-
-        virtual ~module_loader();
-    };
-}
-
-#ifdef MODULE_NAME
-
-#define _CPPUNITX_DLNAME_(M, F) M ## _LTX_ ## F
-#define _CPPUNITX_DLNAME(M, F) _CPPUNITX_DLNAME_(M, F)
-
-#define init _CPPUNITX_DLNAME(MODULE_NAME, init)
-
-extern "C" void init()
-{
-}
-
-#endif /* defined MODULE_NAME */
-
+#if HAVE_CONFIG_H
+#include <config.h>
 #endif
+#include <cppunitx/bits/module.h>
+
+cppunitx::module_loader::~module_loader()
+{
+    // Nothing to do.
+}
