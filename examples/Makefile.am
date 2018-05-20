@@ -18,7 +18,7 @@ selftest_la_LIBADD = $(top_builddir)/libcppunitx/libcppunitx.la
 selftest_la_SOURCES = selftest.cpp
 
 run_SOURCES = run.cpp
-run_LDADD = -dlpreopen selftest.la $(top_builddir)/libcppunitx/libcppunitx.la
+run_LDADD = -dlopen selftest.la $(top_builddir)/libcppunitx/libcppunitx.la
 
 $(top_builddir)/libcppunitx/libcppunitx.la:
 	cd $(top_builddir)/libcppunitx && $(MAKE) $(AM_MAKEFLAGS) libcppunitx.la
