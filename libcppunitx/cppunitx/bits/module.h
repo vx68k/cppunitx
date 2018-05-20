@@ -19,8 +19,12 @@
 #ifndef _CPPUNITX_BITS_MODULE_H
 #define _CPPUNITX_BITS_MODULE_H 1
 
-namespace cppunitx::module
+namespace cppunitx
 {
+    /// Module loader.
+    class module_loader final
+    {
+    };
 }
 
 #ifdef MODULE_NAME
