@@ -5,6 +5,13 @@ AM_CPPFLAGS = -I$(top_builddir)/libcppunitx -I$(top_srcdir)/libcppunitx
 check_LTLIBRARIES = selftest.la
 check_PROGRAMS = run
 
+TESTS = $(check_LTLIBRARIES)
+# All tests are expeced to fail for now.
+XFAIL_TESTS = $(TESTS)
+
+TEST_EXTENSIONS = .la
+LA_LOG_COMPILER = ./run
+
 # A '-rpath' option is required to produce a loadable module.
 selftest_la_LDFLAGS = -rpath $(libdir) -no-undefined -module -avoid-version
 selftest_la_LIBADD = $(top_builddir)/libcppunitx/libcppunitx.la
