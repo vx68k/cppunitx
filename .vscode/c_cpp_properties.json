@@ -4,15 +4,17 @@
             "name": "POSIX",
             "intelliSenseMode": "clang-x64",
             "includePath": [
+                "${workspaceFolder}",
                 "${workspaceFolder}/libcppunitx"
             ],
             "defines": [
+                "HAVE_CONFIG_H"
             ],
             "cStandard": "c11",
             "cppStandard": "c++11",
             "browse": {
                 "path": [
-                    "${workspaceFolder}/libcppunitx"
+                    "${workspaceFolder}"
                 ],
                 "limitSymbolsToIncludedHeaders": true
             }
