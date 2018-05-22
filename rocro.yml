@@ -9,3 +9,6 @@ inspecode:
   experimental:
     ignore:
       - build-aux
+  misspell: {}
+  cpd: {}
+  cppcheck: {}
