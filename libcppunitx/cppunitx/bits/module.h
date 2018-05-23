@@ -31,6 +31,8 @@ namespace cppunitx
         void operator=(const module_loader &) = delete;
 
         virtual ~module_loader();
+    public:
+        module_loader &load(const char *name);
     };
 }
 

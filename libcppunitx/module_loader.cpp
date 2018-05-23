@@ -21,7 +21,14 @@
 #endif
 #include <cppunitx/bits/module.h>
 
-cppunitx::module_loader::~module_loader()
+using namespace cppunitx;
+
+module_loader::~module_loader()
 {
     // Nothing to do.
+}
+
+module_loader &module_loader::load(const char *const name)
+{
+    return *this;
 }
