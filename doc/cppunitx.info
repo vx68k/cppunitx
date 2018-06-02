@@ -1,0 +1,36 @@
+This is cppunitx.info, produced by makeinfo version 6.3 from
+cppunitx.texi.
+
+
+File: cppunitx.info,  Node: Top,  Next: Introduction,  Up: (dir)
+
+CppUnitX
+********
+
+* Menu:
+
+* Introduction::
+* Writing tests::
+
+
+File: cppunitx.info,  Node: Introduction,  Next: Writing tests,  Prev: Top,  Up: Top
+
+1 Introduction
+**************
+
+CppUnitX is another XUnit-style testing framework for modern C++.
+
+
+File: cppunitx.info,  Node: Writing tests,  Prev: Introduction,  Up: Top
+
+2 Writing tests
+***************
+
+
+
+Tag Table:
+Node: Top77
+Node: Introduction209
+Node: Writing tests395
+
+End Tag Table
