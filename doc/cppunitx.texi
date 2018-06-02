@@ -1,0 +1,29 @@
+\input texinfo
+@c %**start of header
+@include version.texi
+@setfilename cppunitx.info
+@settitle CppUnitX Reference Manual
+@c %**end of header
+
+@titlepage
+@title CppUnitX Reference Manual
+@subtitle For version @value{VERSION}
+@page
+@end titlepage
+
+@contents
+
+@ifnottex
+@node Top
+@top CppUnitX
+@end ifnottex
+
+@node Introduction
+@chapter Introduction
+
+CppUnitX is another @var{x}Unit-style testing framework for modern C++.
+
+@node Writing tests
+@chapter Writing tests
+
+@bye
