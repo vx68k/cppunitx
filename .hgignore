@@ -11,7 +11,7 @@ syntax: regexp
 (^|/)config\.h\.in$
 (^|/)configure$
 (^|/)aclocal\.m4$
-(^|/)stamp-[^/]*$
+(^|/)stamp-h[^/]*$
 (^|/)\.libs$
 (^|/)\.deps$
 (^|/)autom4te\.cache$
