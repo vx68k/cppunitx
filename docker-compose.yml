@@ -1,4 +1,4 @@
-# docker-compose.yml - compose file to build CppUnitX in a container
+# docker-compose.yml
 # Copyright (C) 2018 Kaz Nishimura
 #
 # Copying and distribution of this file, with or without modification, are
@@ -7,11 +7,11 @@
 ---
 version: "3"
 services:
-  builder:
+  build:
     build: etc/gcc
     image: kazssym/cppunitx-builder:gcc
     network_mode: host
     volumes:
       - .:/usr/src/cppunitx
     working_dir: /usr/src/cppunitx
-    command: make
+    command: make check

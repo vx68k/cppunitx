@@ -15,6 +15,7 @@ syntax: regexp
 (^|/)\.libs$
 (^|/)\.deps$
 (^|/)autom4te\.cache$
+(^|/)\.env$
 \.lo$
 \.o$
 \.trs$
