@@ -1,6 +1,8 @@
+This file provides basic information about CppUnitX.
+
 # Description
 
-CppUnitX is another xUnit testing framework for C++11 or later.
+CppUnitX is another xUnit-style testing framework for modern C++.
 
 This program is provided under the terms and conditions of the [GNU General
 Public License, version 3][GPL-3.0] or any later version.
