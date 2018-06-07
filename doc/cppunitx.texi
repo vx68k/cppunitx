@@ -5,10 +5,17 @@
 @settitle CppUnitX Reference Manual
 @c %**end of header
 
+@copying
+Copyright @copyright{} 2018 Kaz Nishimura
+@end copying
+
 @titlepage
 @title CppUnitX Reference Manual
 @subtitle For version @value{VERSION}
+@author Kaz Nishimura
 @page
+@vskip 0pt plus 1filll
+@insertcopying
 @end titlepage
 
 @contents
