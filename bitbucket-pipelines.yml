@@ -16,4 +16,4 @@ pipelines:
           script:
             - autoreconf -i
             - ./configure --prefix=/opt/cppunitx
-            - make check dist
+            - make check
