@@ -1,5 +1,5 @@
 # bitbucket-pipelines.yml - Bitbucket Pipelines configuration
-# Copyright (C) 2017-2018 Kaz Nishimura
+# Copyright (C) 2017-2019 Kaz Nishimura
 #
 # Copying and distribution of this file, with or without modification, are
 # permitted in any medium without royalty provided the copyright notice and
@@ -8,11 +8,12 @@
 # See <https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html>
 # for details.
 ---
-image: kazssym/cppunitx-builder:gcc
 pipelines:
-  default:
-    - step:
-        script:
-          - autoreconf -i
-          - ./configure --prefix=/opt/cppunitx
-          - make check dist
+  branches:
+    master:
+      - step:
+          image: kazssym/cppunitx-builder:gcc
+          script:
+            - autoreconf -i
+            - ./configure --prefix=/opt/cppunitx
+            - make check dist
