@@ -14,7 +14,7 @@ definitions:
         name: Test
         image: kazssym/cppunitx-builder:gcc
         script:
-          - autoreconf -i
+          - autoreconf --install
           - ./configure --prefix=/opt/cppunitx
           - make check
 pipelines:
