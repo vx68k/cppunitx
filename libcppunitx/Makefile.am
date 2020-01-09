@@ -2,8 +2,7 @@
 
 lib_LTLIBRARIES = libcppunitx.la
 
-libcppunitx_la_LDFLAGS = -no-undefined -version-info 0:0:0 $(LTLDFLAGS)
-libcppunitx_la_LIBADD = $(LIBLTDL)
+libcppunitx_la_LDFLAGS = -version-info 0:0:0 $(LTLDFLAGS)
 libcppunitx_la_SOURCES = engine.cpp module_loader.cpp base.cpp
 
 nobase_include_HEADERS = cppunitx/engine cppunitx/module cppunitx/test \
