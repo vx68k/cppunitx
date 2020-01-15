@@ -1,0 +1,35 @@
+# azure-pipelines.yml - configuration for Azure Pipelines
+# Copyright (C) 2020 Kaz Nishimura
+#
+# Copying and distribution of this file, with or without modification, are
+# permitted in any medium without royalty provided the copyright notice and
+# this notice are preserved.  This file is offered as-is, without any warranty.
+---
+trigger:
+  - master
+  - "feature/**"
+jobs:
+  - job: build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-16.04
+    container: kazssym/cppunitx-builder:gcc
+    steps:
+      - bash: |
+          autoreconf
+        displayName: Bootstrap
+      - bash: |
+          mkdir -p _build
+          cd _build
+          ../configure
+        displayName: Configure
+      - bash: |
+          cd _build
+          make check
+        displayName: Build
+      - task: PublishTestResults@2
+        displayName: Publish test results
+        condition: succeededOrFailed()
+        inputs:
+          testResultsFiles: "**/test-reports/*.xml"
+      - publish: _build
