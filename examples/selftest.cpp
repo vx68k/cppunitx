@@ -1,5 +1,5 @@
 // selftest.cpp
-// Copyright (C) 2018 Kaz Nishimura
+// Copyright (C) 2018-2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -22,3 +22,14 @@
 
 #define MODULE_NAME selftest
 #include <cppunitx/module>
+
+#include <cppunitx/framework>
+
+using namespace cppunitx;
+
+class Selftest
+{
+private:
+    Test test1 = {"test1", [this] {}};
+};
+TestRegistrant<Selftest> selftest("selftest");
