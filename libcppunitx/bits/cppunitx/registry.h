@@ -19,22 +19,13 @@
 #ifndef _CPPUNITX_REGISTRY_H
 #define _CPPUNITX_REGISTRY_H 1
 
+#include <bits/cppunitx.h>
 #include <functional>
 #include <string>
 
 namespace cppunitx
 {
-    class Test
-    {
-    public:
-        Test(const std::string &name, std::function<void ()> &&method);
-
-        // To suppress implicit definitions.
-        Test(const Test &) = delete;
-        Test &operator =(const Test &) = delete;
-    };
-
-    class TestRegistrantBase
+    class _CPPUNITX_PUBLIC TestRegistrantBase
     {
     public:
         explicit TestRegistrantBase(const std::string &)
@@ -46,7 +37,7 @@ namespace cppunitx
     };
 
     template<class Fixture>
-    class TestRegistrant : public TestRegistrantBase
+    class _CPPUNITX_PUBLIC TestRegistrant : public TestRegistrantBase
     {
         using inherited = TestRegistrantBase;
 
@@ -58,7 +49,7 @@ namespace cppunitx
     };
 
     // Regitry for tests.
-    class TestRegistry
+    class _CPPUNITX_PUBLIC TestRegistry
     {
     public:
         TestRegistry() = default;

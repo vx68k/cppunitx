@@ -1,4 +1,4 @@
-// <cppunitx/framework>
+// <bits/cppunitx/test.h>
 // Copyright (C) 2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
@@ -16,10 +16,24 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef _CPPUNITX_FRAMEWORK
-#define _CPPUNITX_FRAMEWORK 1
+#ifndef _CPPUNITX_TEST_H
+#define _CPPUNITX_TEST_H 1
 
-#include <bits/cppunitx/registry.h>
-#include <bits/cppunitx/test.h>
+#include <bits/cppunitx.h>
+#include <functional>
+#include <string>
+
+namespace cppunitx
+{
+    class _CPPUNITX_PUBLIC Test
+    {
+    public:
+        Test(const std::string &name, std::function<void ()> &&function);
+
+        // To suppress implicit definitions.
+        Test(const Test &) = delete;
+        Test &operator =(const Test &) = delete;
+    };
+}
 
 #endif
