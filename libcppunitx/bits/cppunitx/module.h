@@ -38,10 +38,10 @@ namespace cppunitx
 
 #if defined SUITE
 
-#define _CPPUNITX_DLNAME_(M, F) M ## _LTX_ ## F
-#define _CPPUNITX_DLNAME(M, F) _CPPUNITX_DLNAME_(M, F)
+#define _CPPUNITX_LT_NAME(M, F) __CPPUNITX_LT_NAME(M, F)
+#define __CPPUNITX_LT_NAME(M, F) M ## _LTX_ ## F
 
-#define init _CPPUNITX_DLNAME(SUITE, init)
+#define init _CPPUNITX_LT_NAME(SUITE, init)
 
 extern "C" void init()
 {
