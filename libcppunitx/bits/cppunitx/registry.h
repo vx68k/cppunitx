@@ -61,7 +61,7 @@ namespace cppunitx
     // Regitry for tests.
     class _CPPUNITX_PUBLIC TestRegistry
     {
-    protected:
+    public:
         TestRegistry();
 
         // To suppress implicit definitions.

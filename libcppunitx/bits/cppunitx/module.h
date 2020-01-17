@@ -19,6 +19,8 @@
 #ifndef _CPPUNITX_MODULE_H
 #define _CPPUNITX_MODULE_H 1
 
+#include <bits/cppunitx.h>
+
 namespace cppunitx
 {
     /// Module loader.
@@ -38,13 +40,21 @@ namespace cppunitx
 
 #if defined SUITE
 
+#include <cppunitx/framework>
+#include <memory>
+
 #define _CPPUNITX_LT_NAME(M, F) __CPPUNITX_LT_NAME(M, F)
 #define __CPPUNITX_LT_NAME(M, F) M ## _LTX_ ## F
 
-#define init _CPPUNITX_LT_NAME(SUITE, init)
+#define cppunitx_registry _CPPUNITX_LT_NAME(SUITE, cppunitx_registry)
 
-extern "C" void init()
+extern "C" const std::shared_ptr<cppunitx::TestRegistry> &cppunitx_registry();
+
+_CPPUNITX_PUBLIC const std::shared_ptr<cppunitx::TestRegistry>
+    &cppunitx_registry()
 {
+    static auto registry = std::make_shared<cppunitx::TestRegistry>();
+    return registry;
 }
 
 #endif /* defined SUITE */
