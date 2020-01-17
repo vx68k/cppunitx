@@ -19,7 +19,8 @@
 #if HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <cppunitx/bits/module.h>
+
+#include <bits/cppunitx/module.h>
 
 using namespace cppunitx;
 

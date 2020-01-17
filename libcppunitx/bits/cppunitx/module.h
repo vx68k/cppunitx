@@ -1,5 +1,5 @@
-// cppunitx/bits/module.h
-// Copyright (C) 2018 Kaz Nishimura
+// <bits/cppunitx/module.h>
+// Copyright (C) 2018-2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -16,8 +16,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef _CPPUNITX_BITS_MODULE_H
-#define _CPPUNITX_BITS_MODULE_H 1
+#ifndef _CPPUNITX_MODULE_H
+#define _CPPUNITX_MODULE_H 1
 
 namespace cppunitx
 {
@@ -36,7 +36,7 @@ namespace cppunitx
     };
 }
 
-#ifdef MODULE_NAME
+#if defined MODULE_NAME
 
 #define _CPPUNITX_DLNAME_(M, F) M ## _LTX_ ## F
 #define _CPPUNITX_DLNAME(M, F) _CPPUNITX_DLNAME_(M, F)

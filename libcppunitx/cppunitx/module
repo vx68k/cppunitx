@@ -1,5 +1,5 @@
-// cppunitx/module - public interface for test modules
-// Copyright (C) 2018 Kaz Nishimura
+// <cppunitx/module>
+// Copyright (C) 2018-2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -19,7 +19,6 @@
 #ifndef _CPPUNITX_MODULE
 #define _CPPUNITX_MODULE 1
 
-#include <cppunitx/bits/base.h>
-#include <cppunitx/bits/module.h>
+#include <bits/cppunitx/module.h>
 
 #endif
