@@ -36,17 +36,17 @@ namespace cppunitx
     };
 }
 
-#if defined MODULE_NAME
+#if defined SUITE
 
 #define _CPPUNITX_DLNAME_(M, F) M ## _LTX_ ## F
 #define _CPPUNITX_DLNAME(M, F) _CPPUNITX_DLNAME_(M, F)
 
-#define init _CPPUNITX_DLNAME(MODULE_NAME, init)
+#define init _CPPUNITX_DLNAME(SUITE, init)
 
 extern "C" void init()
 {
 }
 
-#endif /* defined MODULE_NAME */
+#endif /* defined SUITE */
 
 #endif

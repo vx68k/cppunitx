@@ -20,7 +20,7 @@
 #include <config.h>
 #endif
 
-#define MODULE_NAME selftest
+#define SUITE selftest
 #include <cppunitx/module>
 
 #include <cppunitx/framework>
