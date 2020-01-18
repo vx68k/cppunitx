@@ -21,6 +21,8 @@
 #endif
 
 #define SUITE selftest
+
+#define MODULE_MAIN 1
 #include <cppunitx/module>
 
 #include <cppunitx/framework>
