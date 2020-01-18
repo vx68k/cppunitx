@@ -20,6 +20,7 @@
 #define _CPPUNITX_REGISTRY_H 1
 
 #include <bits/cppunitx.h>
+#include <memory>
 #include <string>
 
 namespace cppunitx
@@ -69,8 +70,26 @@ namespace cppunitx
         TestRegistry &operator =(const TestRegistry &) = delete;
 
     public:
-        virtual ~TestRegistry();
+        virtual ~TestRegistry() = 0;
+    };
+
+    template<class T>
+    class _CPPUNITX_PUBLIC TestRegistryImpl : public TestRegistry
+    {
+    public:
+        static std::shared_ptr<TestRegistryImpl> getInstance()
+        {
+            static auto instance = std::make_shared<TestRegistryImpl>();
+            return instance;
+        }
     };
 }
+
+#if defined SUITE
+
+class SUITE;
+extern template class cppunitx::TestRegistryImpl<SUITE>;
+
+#endif /* defined SUITE */
 
 #endif
