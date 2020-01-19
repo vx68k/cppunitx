@@ -2,7 +2,7 @@
 
 lib_LTLIBRARIES = libcppunitx.la
 
-nobase_include_HEADERS = cppunitx/framework cppunitx/engine cppunitx/module \
+nobase_include_HEADERS = cppunitx/framework cppunitx/module cppunitx/driver \
 bits/cppunitx.h bits/cppunitx/registry.h bits/cppunitx/test.h \
 bits/cppunitx/module.h bits/cppunitx/driver.h \
 cppunitx/bits/test_runner.h cppunitx/bits/base.h
