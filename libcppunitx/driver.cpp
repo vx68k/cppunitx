@@ -1,5 +1,5 @@
-// engine.cpp - test engine
-// Copyright (C) 2018 Kaz Nishimura
+// driver.cpp
+// Copyright (C) 2018-2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -20,10 +20,21 @@
 #include <config.h>
 #endif
 
+#define _CPPUNITX_DRIVER_IMPLEMENTATION 1
 #include <bits/cppunitx/driver.h>
+
 #include <cstdlib>
+
+using namespace cppunitx;
+
+// Class 'TestDriver' implementation.
+
+int TestDriver::main(const int argc, char **const argv)
+{
+    return EXIT_FAILURE; // TODO: Implement this function.
+}
 
 int cppunitx::main(const int argc, char *argv[])
 {
-    return EXIT_FAILURE; // TODO: Do work.
+    return TestDriver::main(argc, argv);
 }
