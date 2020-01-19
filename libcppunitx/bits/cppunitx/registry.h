@@ -46,6 +46,9 @@ namespace cppunitx
         {
             return _name;
         }
+
+        /// Runs tests.
+        virtual void runTests() const = 0;
     };
 
     // Regitry for tests.
@@ -107,6 +110,13 @@ namespace cppunitx
         {
             auto registry = getRegistry();
             registry->removeRegistrant(this);
+        }
+
+    public:
+        void runTests() const override
+        {
+            std::unique_ptr<Fixture> fixture(new Fixture());
+            // TODO: Run tests here.
         }
     };
 }

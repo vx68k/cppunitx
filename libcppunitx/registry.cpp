@@ -63,5 +63,6 @@ void TestRegistry::runTests() const
 {
     for_each(registrants.begin(), registrants.end(),
         [](const TestRegistrantBase *const registrant) {
+        registrant->runTests();
     });
 }
