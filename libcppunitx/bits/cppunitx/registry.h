@@ -48,7 +48,7 @@ namespace cppunitx
         }
     };
 
-    template<class Fixture>
+    template<class Fixture, class Suite>
     class _CPPUNITX_PUBLIC TestRegistrant : public TestRegistrantBase
     {
         using inherited = TestRegistrantBase;
