@@ -19,7 +19,8 @@
 #if HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <cppunitx/bits/engine.h>
+
+#include <bits/cppunitx/driver.h>
 #include <cstdlib>
 
 int cppunitx::main(const int argc, char *argv[])

@@ -19,7 +19,6 @@
 #ifndef _CPPUNITX_ENGINE
 #define _CPPUNITX_ENGINE 1
 
-#include <cppunitx/bits/base.h>
-#include <cppunitx/bits/engine.h>
+#include <bits/cppunitx/driver.h>
 
 #endif
