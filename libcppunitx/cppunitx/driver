@@ -1,5 +1,5 @@
-// cppunitx/engine - public interface for the test engine
-// Copyright (C) 2018 Kaz Nishimura
+// <cppunitx/driver>
+// Copyright (C) 2018-2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -16,8 +16,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef _CPPUNITX_ENGINE
-#define _CPPUNITX_ENGINE 1
+#ifndef _CPPUNITX_DRIVER
+#define _CPPUNITX_DRIVER 1
 
 #include <bits/cppunitx/driver.h>
 
