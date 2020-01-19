@@ -21,7 +21,9 @@
 #endif
 #include <cppunitx/engine>
 
-int main(const int argc, char *argv[])
+using namespace cppunitx;
+
+int main(const int argc, char **const argv)
 {
-    return cppunitx::main(argc, argv);
+    return TestDriver::main(argc, argv);
 }

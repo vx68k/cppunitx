@@ -23,8 +23,6 @@
 
 namespace cppunitx
 {
-    extern int main(int argc, char *argv[]);
-
     /// Test driver.
     class _CPPUNITX_PUBLIC TestDriver
     {

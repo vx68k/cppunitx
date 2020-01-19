@@ -33,8 +33,3 @@ int TestDriver::main(const int argc, char **const argv)
 {
     return EXIT_FAILURE; // TODO: Implement this function.
 }
-
-int cppunitx::main(const int argc, char *argv[])
-{
-    return TestDriver::main(argc, argv);
-}
