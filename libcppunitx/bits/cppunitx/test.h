@@ -33,28 +33,37 @@ namespace cppunitx
         // To suppress implicit definitions.
         Test(const Test &) = delete;
         Test &operator =(const Test &) = delete;
+
+    public:
+        ~Test();
     };
 
-    // Setup function.
+    // Object to specify a set-up function.
     class _CPPUNITX_PUBLIC Before
     {
     public:
-        explicit Before(std::function<void ()> &&function);
+        Before(std::function<void ()> &&function);
 
         // To suppress implicit definitions.
         Before(const Before &) = delete;
         Before &operator =(const Before &) = delete;
+
+    public:
+        ~Before();
     };
 
-    // Teardown function.
+    // Object to specify a tear-down function.
     class _CPPUNITX_PUBLIC After
     {
     public:
-        explicit After(std::function<void ()> &&function);
+        After(std::function<void ()> &&function);
 
         // To suppress implicit definitions.
         After(const After &) = delete;
         After &operator =(const After &) = delete;
+
+    public:
+        ~After();
     };
 }
 

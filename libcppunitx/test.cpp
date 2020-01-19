@@ -32,6 +32,10 @@ Test::Test(const std::string &, std::function<void ()> &&)
     // TODO: Implement this function.
 }
 
+Test::~Test()
+{
+}
+
 // Class 'Before' implementation.
 
 Before::Before(std::function<void ()> &&)
@@ -39,9 +43,17 @@ Before::Before(std::function<void ()> &&)
     // TODO: Implement this function.
 }
 
+Before::~Before()
+{
+}
+
 // Class 'After' implementation.
 
 After::After(std::function<void ()> &&)
 {
     // TODO: Implement this function.
+}
+
+After::~After()
+{
 }
