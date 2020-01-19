@@ -33,3 +33,7 @@ int TestDriver::main(const int argc, char **const argv)
 {
     return EXIT_FAILURE; // TODO: Implement this function.
 }
+
+TestDriver::~TestDriver()
+{
+}

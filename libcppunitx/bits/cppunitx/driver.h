@@ -28,6 +28,9 @@ namespace cppunitx
     {
     public:
         static int main(int argc, char **argv);
+
+    public:
+        virtual ~TestDriver();
     };
 }
 
