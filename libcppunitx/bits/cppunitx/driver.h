@@ -1,5 +1,5 @@
-// cppunitx/bits/engine.h
-// Copyright (C) 2018 Kaz Nishimura
+// <bits/cppunitx/driver.h>
+// Copyright (C) 2018-2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -16,12 +16,21 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef _CPPUNITX_BITS_ENGINE_H
-#define _CPPUNITX_BITS_ENGINE_H 1
+#ifndef _CPPUNITX_DRIVER_H
+#define _CPPUNITX_DRIVER_H 1
+
+#include <bits/cppunitx.h>
 
 namespace cppunitx
 {
     extern int main(int argc, char *argv[]);
+
+    /// Test driver.
+    class _CPPUNITX_PUBLIC TestDriver
+    {
+    public:
+        static int main(int argc, char **argv);
+    };
 }
 
 #endif
