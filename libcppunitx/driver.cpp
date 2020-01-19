@@ -26,14 +26,13 @@
 #include <cstdlib>
 
 using std::shared_ptr;
-using std::make_shared;
 using namespace cppunitx;
 
 // Class 'TestDriver' implementation.
 
 shared_ptr<TestDriver> TestDriver::getInstance()
 {
-    static auto instance = make_shared<TestDriver>();
+    static shared_ptr<TestDriver> instance(new TestDriver());
     return instance;
 }
 
@@ -41,6 +40,10 @@ int TestDriver::main(const int argc, char **const argv)
 {
     auto driver = getInstance();
     return EXIT_FAILURE; // TODO: Implement this function.
+}
+
+TestDriver::TestDriver()
+{
 }
 
 TestDriver::~TestDriver()

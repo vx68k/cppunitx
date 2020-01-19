@@ -32,6 +32,12 @@ namespace cppunitx
 
         static int main(int argc, char **argv);
 
+    protected:
+        TestDriver();
+
+        TestDriver(const TestDriver &) = delete;
+        TestDriver &operator =(const TestDriver &) = delete;
+
     public:
         virtual ~TestDriver();
     };
