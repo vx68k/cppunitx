@@ -78,6 +78,9 @@ namespace cppunitx
 
         /// Removes a registrant from this registry.
         void removeRegistrant(const TestRegistrantBase *registrant);
+
+        /// Runs tests for each registrant.
+        void runTests() const;
     };
 
     template<class Fixture, class Suite>
