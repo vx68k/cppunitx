@@ -48,18 +48,6 @@ namespace cppunitx
         }
     };
 
-    template<class Fixture, class Suite>
-    class _CPPUNITX_PUBLIC TestRegistrant : public TestRegistrantBase
-    {
-        using inherited = TestRegistrantBase;
-
-    public:
-        explicit TestRegistrant(const std::string &name)
-            : inherited(name)
-        {
-        }
-    };
-
     // Regitry for tests.
     class _CPPUNITX_PUBLIC TestRegistry
     {
@@ -90,6 +78,33 @@ namespace cppunitx
 
         /// Removes a registrant from this registry.
         void removeRegistrant(const TestRegistrantBase *registrant);
+    };
+
+    template<class Fixture, class Suite>
+    class _CPPUNITX_PUBLIC TestRegistrant : public TestRegistrantBase
+    {
+        using inherited = TestRegistrantBase;
+
+    protected:
+        static std::shared_ptr<TestRegistry> getRegistry()
+        {
+            return TestRegistry::getInstance<Suite>();
+        }
+
+    public:
+        explicit TestRegistrant(const std::string &name)
+            : inherited(name)
+        {
+            auto registry = getRegistry();
+            registry->addRegistrant(this);
+        }
+
+    public:
+        ~TestRegistrant()
+        {
+            auto registry = getRegistry();
+            registry->removeRegistrant(this);
+        }
     };
 }
 
