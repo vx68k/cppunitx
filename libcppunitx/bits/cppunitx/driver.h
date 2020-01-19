@@ -20,6 +20,7 @@
 #define _CPPUNITX_DRIVER_H 1
 
 #include <bits/cppunitx.h>
+#include <memory>
 
 namespace cppunitx
 {
@@ -27,6 +28,8 @@ namespace cppunitx
     class _CPPUNITX_PUBLIC TestDriver
     {
     public:
+        static std::shared_ptr<TestDriver> getInstance();
+
         static int main(int argc, char **argv);
 
     public:
