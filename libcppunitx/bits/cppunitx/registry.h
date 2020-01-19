@@ -63,6 +63,14 @@ namespace cppunitx
     class _CPPUNITX_PUBLIC TestRegistry
     {
     public:
+        template<class Suite = void>
+        static std::shared_ptr<TestRegistry> getInstance()
+        {
+            static auto instance = std::make_shared<TestRegistry>();
+            return instance;
+        }
+
+    public:
         TestRegistry();
 
         // To suppress implicit definitions.
@@ -70,26 +78,8 @@ namespace cppunitx
         TestRegistry &operator =(const TestRegistry &) = delete;
 
     public:
-        virtual ~TestRegistry() = 0;
-    };
-
-    template<class T>
-    class _CPPUNITX_PUBLIC TestRegistryImpl : public TestRegistry
-    {
-    public:
-        static std::shared_ptr<TestRegistryImpl> getInstance()
-        {
-            static auto instance = std::make_shared<TestRegistryImpl>();
-            return instance;
-        }
+        virtual ~TestRegistry();
     };
 }
-
-#if defined SUITE
-
-class SUITE;
-extern template class cppunitx::TestRegistryImpl<SUITE>;
-
-#endif /* defined SUITE */
 
 #endif

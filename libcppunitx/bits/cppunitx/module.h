@@ -48,16 +48,16 @@ namespace cppunitx
 
 #define cppunitx_registry _CPPUNITX_LT_NAME(SUITE, cppunitx_registry)
 
+class SUITE;
+
 extern "C" std::shared_ptr<cppunitx::TestRegistry> cppunitx_registry();
 
 #if MODULE_MAIN
 
-template class cppunitx::TestRegistryImpl<SUITE>;
-
 _CPPUNITX_PUBLIC std::shared_ptr<cppunitx::TestRegistry> cppunitx_registry()
 {
     using namespace cppunitx;
-    return TestRegistryImpl<SUITE>::getInstance();
+    return TestRegistry::getInstance<SUITE>();
 }
 
 #endif /* MODULE_MAIN */
