@@ -20,6 +20,7 @@
 #define _CPPUNITX_REGISTRY_H 1
 
 #include <bits/cppunitx.h>
+#include <unordered_set>
 #include <memory>
 #include <string>
 
@@ -70,6 +71,9 @@ namespace cppunitx
             return instance;
         }
 
+    private:
+        std::unordered_set<const TestRegistrantBase *> registrants;
+
     public:
         TestRegistry();
 
@@ -79,6 +83,13 @@ namespace cppunitx
 
     public:
         virtual ~TestRegistry();
+
+    public:
+        /// Adds a registrant to this registry.
+        void addRegistrant(const TestRegistrantBase *registrant);
+
+        /// Removes a registrant from this registry.
+        void removeRegistrant(const TestRegistrantBase *registrant);
     };
 }
 

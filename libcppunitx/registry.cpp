@@ -45,3 +45,13 @@ TestRegistry::TestRegistry()
 TestRegistry::~TestRegistry()
 {
 }
+
+void TestRegistry::addRegistrant(const TestRegistrantBase *const registrant)
+{
+    registrants.insert(registrant); // TODO: Handle duplicates?
+}
+
+void TestRegistry::removeRegistrant(const TestRegistrantBase *const registrant)
+{
+    registrants.erase(registrant);
+}
