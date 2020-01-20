@@ -25,8 +25,13 @@
 
 namespace cppunitx
 {
+    /// Object to specify a test case.
     class _CPPUNITX_PUBLIC Test
     {
+    private:
+        const std::string _name;
+        const std::function<void ()> _function;
+
     public:
         Test(const std::string &name, std::function<void ()> &&function);
 
@@ -38,9 +43,12 @@ namespace cppunitx
         ~Test();
     };
 
-    // Object to specify a set-up function.
+    /// Object to specify a before-test procedure.
     class _CPPUNITX_PUBLIC Before
     {
+    private:
+        const std::function<void ()> _function;
+
     public:
         Before(std::function<void ()> &&function);
 
@@ -52,9 +60,12 @@ namespace cppunitx
         ~Before();
     };
 
-    // Object to specify a tear-down function.
+    /// Object to specify an after-test procedure.
     class _CPPUNITX_PUBLIC After
     {
+    private:
+        const std::function<void ()> _function;
+
     public:
         After(std::function<void ()> &&function);
 

@@ -23,11 +23,14 @@
 #define _CPPUNITX_FRAMEWORK_IMPLEMENTATION 1
 #include <bits/cppunitx/test.h>
 
+using std::string;
+using std::function;
 using namespace cppunitx;
 
 // Class 'Test' implementation.
 
-Test::Test(const std::string &, std::function<void ()> &&)
+Test::Test(const string &name, function<void ()> &&function)
+    : _name(name), _function(function)
 {
     // TODO: Implement this function.
 }
@@ -38,7 +41,8 @@ Test::~Test()
 
 // Class 'Before' implementation.
 
-Before::Before(std::function<void ()> &&)
+Before::Before(function<void ()> &&function)
+    : _function(function)
 {
     // TODO: Implement this function.
 }
@@ -49,7 +53,8 @@ Before::~Before()
 
 // Class 'After' implementation.
 
-After::After(std::function<void ()> &&)
+After::After(function<void ()> &&function)
+    : _function(function)
 {
     // TODO: Implement this function.
 }
