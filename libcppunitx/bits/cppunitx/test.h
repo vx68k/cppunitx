@@ -41,6 +41,12 @@ namespace cppunitx
 
     public:
         ~Test();
+
+    public:
+        const std::string &getName() const
+        {
+            return _name;
+        }
     };
 
     /// Object to specify a before-test procedure.
