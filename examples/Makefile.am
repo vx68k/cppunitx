@@ -13,7 +13,7 @@ TEST_EXTENSIONS = .la
 LA_LOG_COMPILER = ./runtest
 
 runtest_LDFLAGS = -no-install
-runtest_SOURCES = run.cpp
+runtest_SOURCES = runtest.cpp
 runtest_LDADD = -dlopen selftest.la \
 $(top_builddir)/libcppunitx/libcppunitx.la $(LIBLTDL)
 
