@@ -40,6 +40,9 @@ namespace cppunitx
 
     public:
         virtual ~TestDriver();
+
+    public:
+        virtual void run(const char *suiteName);
     };
 }
 

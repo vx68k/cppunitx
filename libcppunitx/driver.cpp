@@ -49,3 +49,7 @@ TestDriver::TestDriver()
 TestDriver::~TestDriver()
 {
 }
+
+void TestDriver::run(const char *suiteName)
+{
+}
