@@ -27,6 +27,11 @@
 #if defined SUITE
 // This makes the suite name available as a type name.
 class SUITE;
+#define _CPPUNITX_DEFAULT_SUITE ::SUITE
+#endif
+
+#ifndef _CPPUNITX_DEFAULT_SUITE
+#define _CPPUNITX_DEFAULT_SUITE void
 #endif
 
 namespace cppunitx
@@ -60,7 +65,7 @@ namespace cppunitx
     class _CPPUNITX_PUBLIC TestRegistry
     {
     public:
-        template<class Suite = void>
+        template<class Suite = _CPPUNITX_DEFAULT_SUITE>
         static std::shared_ptr<TestRegistry> getInstance()
         {
             static auto instance = std::make_shared<TestRegistry>();
@@ -91,7 +96,7 @@ namespace cppunitx
         void runTests() const;
     };
 
-    template<class Fixture, class Suite>
+    template<class Fixture, class Suite = _CPPUNITX_DEFAULT_SUITE>
     class _CPPUNITX_PUBLIC TestRegistrant : public TestRegistrantBase
     {
         using inherited = TestRegistrantBase;
