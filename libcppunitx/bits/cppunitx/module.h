@@ -48,8 +48,6 @@ namespace cppunitx
 
 #define cppunitx_registry _CPPUNITX_LT_NAME(SUITE, cppunitx_registry)
 
-class SUITE;
-
 extern "C" std::shared_ptr<cppunitx::TestRegistry> cppunitx_registry();
 
 #if MODULE_MAIN

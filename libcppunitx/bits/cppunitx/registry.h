@@ -24,6 +24,11 @@
 #include <memory>
 #include <string>
 
+#if defined SUITE
+// This makes the suite name available as a type name.
+class SUITE;
+#endif
+
 namespace cppunitx
 {
     class _CPPUNITX_PUBLIC TestRegistrantBase
