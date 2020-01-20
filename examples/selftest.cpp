@@ -42,4 +42,4 @@ private:
         // TODO: Add assertions here.
     }};
 };
-TestRegistrant<Selftest, SUITE> selftest("selftest");
+TestRegistrant<Selftest> selftest("selftest");
