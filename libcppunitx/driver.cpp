@@ -23,10 +23,19 @@
 #define _CPPUNITX_DRIVER_IMPLEMENTATION 1
 #include <bits/cppunitx/driver.h>
 
-#include <cstdlib>
+#include <stdexcept>
+#include <cstdio>
 
+using std::exception;
 using std::shared_ptr;
+using std::fprintf;
 using namespace cppunitx;
+
+namespace
+{
+    const int SKIP = 77;
+    const int ERROR = 99;
+}
 
 // Class 'TestDriver' implementation.
 
@@ -38,8 +47,17 @@ shared_ptr<TestDriver> TestDriver::getInstance()
 
 int TestDriver::main(const int argc, char **const argv)
 {
-    auto driver = getInstance();
-    return EXIT_FAILURE; // TODO: Implement this function.
+    try {
+        auto driver = getInstance();
+        for (int i = 1; i != argc; i += 1) {
+            driver->run(argv[i]);
+        }
+    }
+    catch (const exception &e) {
+        fprintf(stderr, "Caught exception: %s\n", e.what());
+        return SKIP;
+    }
+    return 0;
 }
 
 TestDriver::TestDriver()
@@ -50,6 +68,7 @@ TestDriver::~TestDriver()
 {
 }
 
-void TestDriver::run(const char *suiteName)
+void TestDriver::run(const char *const suiteName)
 {
+    throw std::logic_error("Not implemented");
 }
