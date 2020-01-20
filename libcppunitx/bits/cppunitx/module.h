@@ -19,28 +19,12 @@
 #ifndef _CPPUNITX_MODULE_H
 #define _CPPUNITX_MODULE_H 1
 
-#include <bits/cppunitx.h>
-
-namespace cppunitx
-{
-    /// Module loader.
-    ///
-    /// Any object of this class is not copyable.
-    class module_loader final
-    {
-    public:
-        module_loader(const module_loader &) = delete;
-        void operator=(const module_loader &) = delete;
-
-        virtual ~module_loader();
-    public:
-        module_loader &load(const char *name);
-    };
-}
-
-#if defined SUITE
+#if !defined SUITE
+#error "The required macro 'SUITE' not defined"
+#endif
 
 #include <cppunitx/framework>
+#include <bits/cppunitx.h>
 #include <memory>
 
 #define _CPPUNITX_LT_NAME(M, F) __CPPUNITX_LT_NAME(M, F)
@@ -59,7 +43,5 @@ _CPPUNITX_PUBLIC std::shared_ptr<cppunitx::TestRegistry> cppunitx_registry()
 }
 
 #endif /* MODULE_MAIN */
-
-#endif /* defined SUITE */
 
 #endif
