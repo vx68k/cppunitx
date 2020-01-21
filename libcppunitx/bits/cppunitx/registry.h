@@ -41,8 +41,8 @@ namespace cppunitx
     private:
         const std::string _name;
 
-    protected:
-        explicit TestRegistrantBase(const std::string &name);
+    public:
+        TestRegistrantBase(const std::string &name);
 
         // To suppress implicit definitions.
         TestRegistrantBase(const TestRegistrantBase &) = delete;
@@ -108,7 +108,7 @@ namespace cppunitx
         }
 
     public:
-        explicit TestRegistrant(const std::string &name)
+        TestRegistrant(const std::string &name)
             : inherited(name)
         {
             auto registry = getRegistry();
