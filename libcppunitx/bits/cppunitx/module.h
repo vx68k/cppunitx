@@ -25,21 +25,20 @@
 
 #include <cppunitx/framework>
 #include <bits/cppunitx.h>
-#include <memory>
 
 #define _CPPUNITX_LT_NAME(M, F) __CPPUNITX_LT_NAME(M, F)
 #define __CPPUNITX_LT_NAME(M, F) M ## _LTX_ ## F
 
 #define cppunitx_registry _CPPUNITX_LT_NAME(SUITE, cppunitx_registry)
 
-extern "C" std::shared_ptr<cppunitx::TestRegistry> cppunitx_registry();
+extern "C" cppunitx::TestRegistry *cppunitx_registry();
 
 #if MODULE_MAIN
 
-_CPPUNITX_PUBLIC std::shared_ptr<cppunitx::TestRegistry> cppunitx_registry()
+_CPPUNITX_PUBLIC cppunitx::TestRegistry *cppunitx_registry()
 {
     using namespace cppunitx;
-    return TestRegistry::getInstance<SUITE>();
+    return TestRegistry::getInstance<SUITE>().get();
 }
 
 #endif /* MODULE_MAIN */
