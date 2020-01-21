@@ -20,7 +20,7 @@
 #include <config.h>
 #endif
 
-#define SUITE selftest
+#define SUITE example
 
 #define MODULE_MAIN 1
 #include <cppunitx/module>
@@ -42,4 +42,4 @@ private:
         // TODO: Add assertions here.
     }};
 };
-TestRegistrant<Selftest> selftest("selftest");
+TestRegistrant<Selftest> example = {"example"};
