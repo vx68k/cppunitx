@@ -19,5 +19,5 @@ $(top_builddir)/libcppunitx/libcppunitx.la $(LIBLTDL)
 
 # A '-rpath' option is required to produce a loadable module.
 selftest_la_LDFLAGS = -module -avoid-version -rpath $(libdir)
-selftest_la_SOURCES = selftest.cpp
+selftest_la_SOURCES = example.cpp
 selftest_la_LIBADD = $(top_builddir)/libcppunitx/libcppunitx.la
