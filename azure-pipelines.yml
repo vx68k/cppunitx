@@ -34,7 +34,7 @@ jobs:
           testResultsFiles: "**/test-reports/*.xml"
       - bash: |
           cd _build
-          make dist
+          make dist VERSION="`sh ./config.status --version | sed -n '1s/^.* config\.status //p'`-$(Build.BuildNumber)"
         displayName: Make source archive
       - publish: _build
         displayName: Publish artifacts
