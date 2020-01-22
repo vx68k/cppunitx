@@ -26,20 +26,30 @@
 #include <cppunitx/module>
 
 #include <cppunitx/framework>
+#include <memory>
 
 using namespace cppunitx;
 
-class Selftest
+class Example
+{
+};
+
+class ExampleTest
 {
 private:
+    std::unique_ptr<Example> example;
+
+private:
     Before setUp {[this]() {
+        example.reset(new Example());
     }};
 
     After tearDown {[this]() {
+        example.reset();
     }};
 
     Test test1 {"test1", [this]() {
         // TODO: Add assertions here.
     }};
 };
-TestRegistrant<Selftest> example {"example"};
+TestRegistrant<ExampleTest> example {"example"};
