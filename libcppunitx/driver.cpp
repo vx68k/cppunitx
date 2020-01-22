@@ -23,12 +23,13 @@
 #define _CPPUNITX_DRIVER_IMPLEMENTATION 1
 #include <bits/cppunitx/driver.h>
 
+#include <cppunitx/framework>
 #include <stdexcept>
 #include <cstdio>
 #include "ltdl_utility.h"
 
+using std::string;
 using std::exception;
-using std::logic_error;
 using std::runtime_error;
 using std::shared_ptr;
 using std::fprintf;
@@ -75,6 +76,14 @@ TestDriver::~TestDriver()
 
 void TestDriver::run(const char *const suiteName)
 {
-    module opened(suiteName);
-    throw logic_error("Not implemented");
+    typedef TestRegistry *(*getRegistryFunction)();
+    module suite(suiteName);
+    auto getRegistry = reinterpret_cast<getRegistryFunction>(
+        lt_dlsym(suite.handle, "cppunitx_registry"));
+    if (getRegistry == nullptr) {
+        throw runtime_error(string(suiteName) + ": Not test suite module");
+    }
+
+    auto registry = (*getRegistry)();
+    registry->runTests();
 }
