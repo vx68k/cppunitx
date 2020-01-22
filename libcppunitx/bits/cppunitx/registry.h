@@ -36,25 +36,25 @@ class SUITE;
 
 namespace cppunitx
 {
-    class _CPPUNITX_PUBLIC TestRegistrantBase
+    class _CPPUNITX_PUBLIC AbstractTestRegistrant
     {
     private:
-        const std::string _name;
+        std::string name;
 
     public:
-        TestRegistrantBase(const std::string &name);
+        explicit AbstractTestRegistrant(const std::string &name);
 
         // To suppress implicit definitions.
-        TestRegistrantBase(const TestRegistrantBase &) = delete;
-        TestRegistrantBase &operator =(const TestRegistrantBase &) = delete;
+        AbstractTestRegistrant(const AbstractTestRegistrant &) = delete;
+        void operator =(const AbstractTestRegistrant &) = delete;
 
     public:
-        virtual ~TestRegistrantBase() = 0;
+        virtual ~AbstractTestRegistrant() = 0;
 
     public:
-        const std::string &getName() const
+        const std::string &getName() const noexcept
         {
-            return _name;
+            return name;
         }
 
         /// Runs tests.
@@ -73,33 +73,34 @@ namespace cppunitx
         }
 
     private:
-        std::unordered_set<const TestRegistrantBase *> registrants;
+        std::unordered_set<const AbstractTestRegistrant *> registrants;
 
     public:
         TestRegistry();
 
         // To suppress implicit definitions.
         TestRegistry(const TestRegistry &) = delete;
-        TestRegistry &operator =(const TestRegistry &) = delete;
+        void operator =(const TestRegistry &) = delete;
 
     public:
         virtual ~TestRegistry();
 
     public:
         /// Adds a registrant to this registry.
-        void addRegistrant(const TestRegistrantBase *registrant);
+        void addRegistrant(const AbstractTestRegistrant *registrant);
 
         /// Removes a registrant from this registry.
-        void removeRegistrant(const TestRegistrantBase *registrant);
+        void removeRegistrant(const AbstractTestRegistrant *registrant);
 
         /// Runs tests for each registrant.
         void runTests() const;
     };
 
+    /// Registrant for task registries.
     template<class Fixture, class Suite = _CPPUNITX_DEFAULT_SUITE>
-    class _CPPUNITX_PUBLIC TestRegistrant : public TestRegistrantBase
+    class _CPPUNITX_PUBLIC TestRegistrant : public AbstractTestRegistrant
     {
-        using inherited = TestRegistrantBase;
+        using inherited = AbstractTestRegistrant;
 
     protected:
         static std::shared_ptr<TestRegistry> getRegistry()
@@ -108,7 +109,7 @@ namespace cppunitx
         }
 
     public:
-        TestRegistrant(const std::string &name)
+        explicit TestRegistrant(const std::string &name)
             : inherited(name)
         {
             auto registry = getRegistry();
