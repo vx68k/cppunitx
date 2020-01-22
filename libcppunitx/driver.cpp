@@ -25,54 +25,7 @@
 
 #include <stdexcept>
 #include <cstdio>
-#include <ltdl.h>
-
-namespace
-{
-    /// Helper class for 'lt_dlinit' and 'lt_dlexit'.
-    struct libltdl
-    {
-        libltdl()
-        {
-            int result = lt_dlinit();
-            if (result != 0) {
-                throw std::runtime_error("'lt_dlinit' failed");
-            }
-        }
-
-        ~libltdl()
-        {
-            int result = lt_dlexit();
-            if (result != 0) {
-                // Destructors cannot throw exceptions.
-                std::fprintf(stderr, "'lt_dlexit' failed\n");
-            }
-        }
-    };
-
-    /// Helper class for 'lt_dlopen' and 'lt_dlclose'.
-    struct module
-    {
-        lt_dlhandle handle;
-
-        explicit module(const char *const name)
-            : handle(lt_dlopen(name))
-        {
-            if (handle == nullptr) {
-                throw std::runtime_error("'lt_dlopen' failed");
-            }
-        }
-
-        ~module()
-        {
-            int result = lt_dlclose(handle);
-            if (result != 0) {
-                // Destructors cannot throw exceptions.
-                std::fprintf(stderr, "'lt_dlclose' failed\n");
-            }
-        }
-    };
-}
+#include "ltdl_utility.h"
 
 using std::exception;
 using std::logic_error;
@@ -80,6 +33,7 @@ using std::runtime_error;
 using std::shared_ptr;
 using std::fprintf;
 using namespace cppunitx;
+using namespace ltdl;
 
 const int SKIP = 77;
 const int ERROR = 99;
@@ -96,6 +50,9 @@ int TestDriver::main(const int argc, char **const argv)
 {
     try {
         libltdl lib;
+        // To search the current directory only.
+        lt_dlsetsearchpath(".");
+
         auto driver = getInstance();
         for (int i = 1; i != argc; i += 1) {
             driver->run(argv[i]);
