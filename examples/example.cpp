@@ -32,14 +32,14 @@ using namespace cppunitx;
 class Selftest
 {
 private:
-    Before setUp = {[this]() {
+    Before setUp {[this]() {
     }};
 
-    After tearDown = {[this]() {
+    After tearDown {[this]() {
     }};
 
-    Test test1 = {"test1", [this]() {
+    Test test1 {"test1", [this]() {
         // TODO: Add assertions here.
     }};
 };
-TestRegistrant<Selftest> example = {"example"};
+TestRegistrant<Selftest> example {"example"};
