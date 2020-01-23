@@ -86,9 +86,9 @@ TestDriver::~TestDriver()
 
 void TestDriver::run(const char *const suiteName)
 {
-    typedef TestRegistry *(*getRegistryFunction)();
+    using GetRegistryFunction = TestRegistry *();
     module suite(suiteName);
-    auto getRegistry = reinterpret_cast<getRegistryFunction>(
+    auto getRegistry = reinterpret_cast<GetRegistryFunction *>(
         lt_dlsym(suite.handle, "cppunitx_registry"));
     if (getRegistry == nullptr) {
         throw runtime_error(string(suiteName) + ": Not test suite module");
