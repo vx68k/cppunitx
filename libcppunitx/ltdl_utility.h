@@ -32,7 +32,7 @@ namespace ltdl
         {
             int result = lt_dlinit();
             if (result != 0) {
-                throw std::runtime_error("'lt_dlinit' failed");
+                throw std::runtime_error(lt_dlerror());
             }
         }
 
@@ -41,7 +41,7 @@ namespace ltdl
             int result = lt_dlexit();
             if (result != 0) {
                 // Destructors cannot throw exceptions.
-                std::fprintf(stderr, "'lt_dlexit' failed\n");
+                std::fprintf(stderr, "'%s\n", lt_dlerror());
             }
         }
     };
@@ -57,7 +57,7 @@ namespace ltdl
         {
             if (handle == 0) {
                 throw std::runtime_error(
-                    std::string(name) + ": 'lt_dlopen' failed");
+                    std::string(name) + ": " + lt_dlerror());
             }
         }
 
@@ -66,7 +66,7 @@ namespace ltdl
             int result = lt_dlclose(handle);
             if (result != 0) {
                 // Destructors cannot throw exceptions.
-                std::fprintf(stderr, "'lt_dlclose' failed\n");
+                std::fprintf(stderr, "%s\n", lt_dlerror());
             }
         }
     };
