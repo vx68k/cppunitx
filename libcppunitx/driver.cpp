@@ -87,3 +87,27 @@ void TestDriver::run(const char *const suiteName)
     auto registry = (*getRegistry)();
     registry->runTests();
 }
+
+void TestDriver::installTest(const Test *const)
+{
+}
+
+void TestDriver::uninstallTest(const Test *const)
+{
+}
+
+void TestDriver::installBefore(const Before *const)
+{
+}
+
+void TestDriver::uninstallBefore(const Before *const)
+{
+}
+
+void TestDriver::installAfter(const After *const)
+{
+}
+
+void TestDriver::uninstallAfter(const After *const)
+{
+}
