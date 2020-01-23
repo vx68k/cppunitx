@@ -49,6 +49,30 @@ TestContext::~TestContext()
 {
 }
 
+void TestContext::installTest(const Test *const)
+{
+}
+
+void TestContext::uninstallTest(const Test *const)
+{
+}
+
+void TestContext::installBefore(const Before *const)
+{
+}
+
+void TestContext::uninstallBefore(const Before *const)
+{
+}
+
+void TestContext::installAfter(const After *const)
+{
+}
+
+void TestContext::uninstallAfter(const After *const)
+{
+}
+
 // Class 'TestDriver' implementation.
 
 shared_ptr<TestDriver> TestDriver::getInstance()

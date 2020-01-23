@@ -33,6 +33,21 @@ namespace cppunitx
 
     public:
         virtual ~TestContext();
+
+    public:
+        // The terms install/uninstall might not fit well for these functions.
+
+        virtual void installTest(const Test *test);
+
+        virtual void uninstallTest(const Test *test);
+
+        virtual void installBefore(const Before *before);
+
+        virtual void uninstallBefore(const Before *before);
+
+        virtual void installAfter(const After *after);
+
+        virtual void uninstallAfter(const After *after);
     };
 
     /// Test driver.
