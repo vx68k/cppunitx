@@ -16,6 +16,9 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+// This header defines classes to specify test cases, before- and after-test
+// procedures in a test fixture.
+
 #ifndef _CPPUNITX_TEST_H
 #define _CPPUNITX_TEST_H 1
 
@@ -26,6 +29,8 @@
 namespace cppunitx
 {
     /// Object to specify a test case.
+    ///
+    /// This class is equivalent to the '@Test' annotation of JUnit.
     class _CPPUNITX_PUBLIC Test
     {
     private:
@@ -50,6 +55,8 @@ namespace cppunitx
     };
 
     /// Object to specify a before-test procedure.
+    ///
+    /// This class is equivalent to the '@Before' annotation of JUnit.
     class _CPPUNITX_PUBLIC Before
     {
     private:
@@ -67,6 +74,8 @@ namespace cppunitx
     };
 
     /// Object to specify an after-test procedure.
+    ///
+    /// This class is equivalent to the '@After' annotation of JUnit.
     class _CPPUNITX_PUBLIC After
     {
     private:
