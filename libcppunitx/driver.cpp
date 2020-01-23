@@ -39,6 +39,16 @@ using namespace ltdl;
 const int SKIP = 77;
 const int ERROR = 99;
 
+// Class 'TestContext' implementation.
+
+TestContext::TestContext()
+{
+}
+
+TestContext::~TestContext()
+{
+}
+
 // Class 'TestDriver' implementation.
 
 shared_ptr<TestDriver> TestDriver::getInstance()

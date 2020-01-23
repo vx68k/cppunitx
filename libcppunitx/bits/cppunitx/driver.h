@@ -25,6 +25,16 @@
 
 namespace cppunitx
 {
+    /// Test context.
+    class _CPPUNITX_PUBLIC TestContext
+    {
+    public:
+        TestContext();
+
+    public:
+        virtual ~TestContext();
+    };
+
     /// Test driver.
     class _CPPUNITX_PUBLIC TestDriver
     {
