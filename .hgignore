@@ -1,6 +1,6 @@
 syntax: regexp
-(^|/)examples/runtest$
-(^|/)examples/selftest\.la$
+(^|/)runtest$
+(^|/)example\.la$
 (^|/)libcppunitx\.la$
 (^|/)Makefile$
 (^|/)config\.status$
