@@ -23,6 +23,8 @@
 #define _CPPUNITX_FRAMEWORK_IMPLEMENTATION 1
 #include <bits/cppunitx/test.h>
 
+#include <cppunitx/driver>
+
 using std::string;
 using std::function;
 using namespace cppunitx;
@@ -32,11 +34,14 @@ using namespace cppunitx;
 Test::Test(const string &name, function<void ()> &&function)
     : _name(name), _function(function)
 {
-    // TODO: Implement this function.
+    auto driver = TestDriver::getInstance();
+    driver->installTest(this);
 }
 
 Test::~Test()
 {
+    auto driver = TestDriver::getInstance();
+    driver->uninstallTest(this);
 }
 
 // Class 'Before' implementation.
@@ -44,11 +49,14 @@ Test::~Test()
 Before::Before(function<void ()> &&function)
     : _function(function)
 {
-    // TODO: Implement this function.
+    auto driver = TestDriver::getInstance();
+    driver->installBefore(this);
 }
 
 Before::~Before()
 {
+    auto driver = TestDriver::getInstance();
+    driver->uninstallBefore(this);
 }
 
 // Class 'After' implementation.
@@ -56,9 +64,12 @@ Before::~Before()
 After::After(function<void ()> &&function)
     : _function(function)
 {
-    // TODO: Implement this function.
+    auto driver = TestDriver::getInstance();
+    driver->installAfter(this);
 }
 
 After::~After()
 {
+    auto driver = TestDriver::getInstance();
+    driver->uninstallAfter(this);
 }
