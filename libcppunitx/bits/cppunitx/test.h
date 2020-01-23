@@ -38,6 +38,8 @@ namespace cppunitx
         const std::function<void ()> _function;
 
     public:
+        Test(const std::string &name, const std::function<void ()> &function);
+
         Test(const std::string &name, std::function<void ()> &&function);
 
         // To suppress implicit definitions.
@@ -63,7 +65,9 @@ namespace cppunitx
         const std::function<void ()> _function;
 
     public:
-        Before(std::function<void ()> &&function);
+        explicit Before(const std::function<void ()> &function);
+
+        explicit Before(std::function<void ()> &&function);
 
         // To suppress implicit definitions.
         Before(const Before &) = delete;
@@ -82,7 +86,9 @@ namespace cppunitx
         const std::function<void ()> _function;
 
     public:
-        After(std::function<void ()> &&function);
+        explicit After(const std::function<void ()> &function);
+
+        explicit After(std::function<void ()> &&function);
 
         // To suppress implicit definitions.
         After(const After &) = delete;

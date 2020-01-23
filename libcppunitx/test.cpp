@@ -31,6 +31,13 @@ using namespace cppunitx;
 
 // Class 'Test' implementation.
 
+Test::Test(const string &name, const function<void ()> &function)
+    : _name(name), _function(function)
+{
+    auto driver = TestDriver::getInstance();
+    driver->installTest(this);
+}
+
 Test::Test(const string &name, function<void ()> &&function)
     : _name(name), _function(function)
 {
@@ -46,6 +53,13 @@ Test::~Test()
 
 // Class 'Before' implementation.
 
+Before::Before(const function<void ()> &function)
+    : _function(function)
+{
+    auto driver = TestDriver::getInstance();
+    driver->installBefore(this);
+}
+
 Before::Before(function<void ()> &&function)
     : _function(function)
 {
@@ -60,6 +74,13 @@ Before::~Before()
 }
 
 // Class 'After' implementation.
+
+After::After(const function<void ()> &function)
+    : _function(function)
+{
+    auto driver = TestDriver::getInstance();
+    driver->installAfter(this);
+}
 
 After::After(function<void ()> &&function)
     : _function(function)
