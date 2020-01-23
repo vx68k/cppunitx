@@ -24,6 +24,7 @@
 #include <bits/cppunitx/driver.h>
 
 #include <cppunitx/framework>
+#include <locale>
 #include <stdexcept>
 #include <cstdio>
 #include "ltdl_utility.h"
@@ -31,6 +32,7 @@
 using std::string;
 using std::exception;
 using std::runtime_error;
+using std::locale;
 using std::shared_ptr;
 using std::fprintf;
 using namespace cppunitx;
@@ -83,6 +85,8 @@ shared_ptr<TestDriver> TestDriver::getInstance()
 
 int TestDriver::main(const int argc, char **const argv)
 {
+    locale::global(locale(""));
+
     try {
         libltdl lib;
         // To search the current directory only.
