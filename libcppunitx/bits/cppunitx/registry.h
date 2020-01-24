@@ -44,6 +44,8 @@ namespace cppunitx
     public:
         explicit AbstractTestRegistrant(const std::string &name);
 
+        explicit AbstractTestRegistrant(std::string &&name) noexcept;
+
         // To suppress implicit definitions.
         AbstractTestRegistrant(const AbstractTestRegistrant &) = delete;
         void operator =(const AbstractTestRegistrant &) = delete;

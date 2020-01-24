@@ -35,6 +35,11 @@ AbstractTestRegistrant::AbstractTestRegistrant(const std::string &name)
 {
 }
 
+AbstractTestRegistrant::AbstractTestRegistrant(std::string &&name) noexcept
+    : name {name}
+{
+}
+
 AbstractTestRegistrant::~AbstractTestRegistrant()
 {
 }
