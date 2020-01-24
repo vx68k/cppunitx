@@ -35,19 +35,23 @@ namespace cppunitx
         virtual ~TestContext();
 
     public:
-        // The terms install/uninstall might not fit well for these functions.
+        /// Adds a test case to this context.
+        virtual void addTest(const Test *test);
 
-        virtual void installTest(const Test *test);
+        /// Removes a test case from this context.
+        virtual void removeTest(const Test *test);
 
-        virtual void uninstallTest(const Test *test);
+        /// Adds a before-test procedure to this context.
+        virtual void addBefore(const Before *before);
 
-        virtual void installBefore(const Before *before);
+        /// Removes a before-test procedure from this context.
+        virtual void removeBefore(const Before *before);
 
-        virtual void uninstallBefore(const Before *before);
+        /// Adds an after-test procedure to this context.
+        virtual void addAfter(const After *after);
 
-        virtual void installAfter(const After *after);
-
-        virtual void uninstallAfter(const After *after);
+        /// Removes an after-test procedure from this context.
+        virtual void removeAfter(const After *after);
     };
 
     /// Test driver.

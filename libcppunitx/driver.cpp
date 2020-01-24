@@ -51,27 +51,27 @@ TestContext::~TestContext()
 {
 }
 
-void TestContext::installTest(const Test *const)
+void TestContext::addTest(const Test *const)
 {
 }
 
-void TestContext::uninstallTest(const Test *const)
+void TestContext::removeTest(const Test *const)
 {
 }
 
-void TestContext::installBefore(const Before *const)
+void TestContext::addBefore(const Before *const)
 {
 }
 
-void TestContext::uninstallBefore(const Before *const)
+void TestContext::removeBefore(const Before *const)
 {
 }
 
-void TestContext::installAfter(const After *const)
+void TestContext::addAfter(const After *const)
 {
 }
 
-void TestContext::uninstallAfter(const After *const)
+void TestContext::removeAfter(const After *const)
 {
 }
 
