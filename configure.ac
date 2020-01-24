@@ -10,9 +10,7 @@ LT_INIT([dlopen])
 AM_INIT_AUTOMAKE([foreign no-define])
 AC_PROG_CC
 AC_PROG_CXX
-AH_CHECK_LIB([ltdl])dnl
-AC_CHECK_LIB([ltdl], [lt_dlopen], [AC_DEFINE([HAVE_LIBLTDL])
-  LIBLTDL=-lltdl], [LIBLTDL=])
+AC_CHECK_LIB([ltdl], [lt_dlopen], [LIBLTDL=-lltdl], [LIBLTDL=])
 AC_SUBST([LIBLTDL])dnl
 AC_CHECK_HEADERS([ltdl.h])
 AC_SUBST([LTLDFLAGS])dnl
