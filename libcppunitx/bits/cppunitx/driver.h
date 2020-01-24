@@ -62,6 +62,9 @@ namespace cppunitx
 
         static int main(int argc, char **argv);
 
+    private:
+        std::shared_ptr<TestContext> _currentContext;
+
     protected:
         TestDriver();
 
@@ -72,6 +75,12 @@ namespace cppunitx
         virtual ~TestDriver();
 
     public:
+        /// Returns the current test context.
+        std::shared_ptr<TestContext> getCurrentContext() const
+        {
+            return _currentContext;
+        }
+
         virtual void run(const char *suiteName);
 
         // The terms install/uninstall might not fit well for these functions.
