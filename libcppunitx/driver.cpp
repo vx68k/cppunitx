@@ -122,6 +122,7 @@ void TestDriver::run(const char *const suiteName)
         throw runtime_error(string(suiteName) + ": Not test suite module");
     }
 
+    _currentContext.reset(new TestContext()); // TODO: This must be per-fixture.
     auto registry = (*getRegistry)();
     registry->runTests();
 }
