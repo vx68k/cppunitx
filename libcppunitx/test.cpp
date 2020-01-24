@@ -32,14 +32,14 @@ using namespace cppunitx;
 // Class 'Test' implementation.
 
 Test::Test(const string &name, const function<void ()> &function)
-    : _name(name), _function(function)
+    : _name {name}, _function {function}
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addTest(this);
 }
 
 Test::Test(const string &name, function<void ()> &&function)
-    : _name(name), _function(function)
+    : _name {name}, _function {function}
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addTest(this);
@@ -54,14 +54,14 @@ Test::~Test()
 // Class 'Before' implementation.
 
 Before::Before(const function<void ()> &function)
-    : _function(function)
+    : _function {function}
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addBefore(this);
 }
 
 Before::Before(function<void ()> &&function)
-    : _function(function)
+    : _function {function}
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addBefore(this);
@@ -76,14 +76,14 @@ Before::~Before()
 // Class 'After' implementation.
 
 After::After(const function<void ()> &function)
-    : _function(function)
+    : _function {function}
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addAfter(this);
 }
 
 After::After(function<void ()> &&function)
-    : _function(function)
+    : _function {function}
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addAfter(this);

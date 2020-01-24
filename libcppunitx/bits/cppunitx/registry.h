@@ -110,7 +110,7 @@ namespace cppunitx
 
     public:
         explicit TestRegistrant(const std::string &name)
-            : inherited(name)
+            : inherited {name}
         {
             auto registry = getRegistry();
             registry->addRegistrant(this);
@@ -126,7 +126,7 @@ namespace cppunitx
     public:
         void runTests() const override
         {
-            std::unique_ptr<Fixture> fixture(new Fixture());
+            std::unique_ptr<Fixture> fixture {new Fixture()};
             // TODO: Run tests here.
         }
     };

@@ -79,7 +79,7 @@ void TestContext::removeAfter(const After *const)
 
 shared_ptr<TestDriver> TestDriver::getInstance()
 {
-    static shared_ptr<TestDriver> instance(new TestDriver());
+    static shared_ptr<TestDriver> instance {new TestDriver()};
     return instance;
 }
 
@@ -115,7 +115,7 @@ TestDriver::~TestDriver()
 void TestDriver::run(const char *const suiteName)
 {
     using GetRegistryFunction = TestRegistry *();
-    module suite(suiteName);
+    module suite {suiteName};
     auto getRegistry = reinterpret_cast<GetRegistryFunction *>(
         lt_dlsym(suite.handle, "cppunitx_registry"));
     if (getRegistry == nullptr) {

@@ -53,7 +53,7 @@ namespace ltdl
         lt_dlhandle handle;
 
         explicit module(const char *const name)
-            : handle(lt_dlopen(name))
+            : handle {lt_dlopen(name)}
         {
             if (handle == 0) {
                 throw std::runtime_error(

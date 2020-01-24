@@ -31,7 +31,7 @@ using namespace cppunitx;
 // Class 'AbstractTestRegistrant' implementation.
 
 AbstractTestRegistrant::AbstractTestRegistrant(const std::string &name)
-    : name(name)
+    : name {name}
 {
 }
 
