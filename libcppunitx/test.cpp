@@ -34,21 +34,21 @@ using namespace cppunitx;
 Test::Test(const string &name, const function<void ()> &function)
     : _name(name), _function(function)
 {
-    auto driver = TestDriver::getInstance();
-    driver->installTest(this);
+    auto context = TestDriver::getInstance()->getCurrentContext();
+    context->addTest(this);
 }
 
 Test::Test(const string &name, function<void ()> &&function)
     : _name(name), _function(function)
 {
-    auto driver = TestDriver::getInstance();
-    driver->installTest(this);
+    auto context = TestDriver::getInstance()->getCurrentContext();
+    context->addTest(this);
 }
 
 Test::~Test()
 {
-    auto driver = TestDriver::getInstance();
-    driver->uninstallTest(this);
+    auto context = TestDriver::getInstance()->getCurrentContext();
+    context->removeTest(this);
 }
 
 // Class 'Before' implementation.
@@ -56,21 +56,21 @@ Test::~Test()
 Before::Before(const function<void ()> &function)
     : _function(function)
 {
-    auto driver = TestDriver::getInstance();
-    driver->installBefore(this);
+    auto context = TestDriver::getInstance()->getCurrentContext();
+    context->addBefore(this);
 }
 
 Before::Before(function<void ()> &&function)
     : _function(function)
 {
-    auto driver = TestDriver::getInstance();
-    driver->installBefore(this);
+    auto context = TestDriver::getInstance()->getCurrentContext();
+    context->addBefore(this);
 }
 
 Before::~Before()
 {
-    auto driver = TestDriver::getInstance();
-    driver->uninstallBefore(this);
+    auto context = TestDriver::getInstance()->getCurrentContext();
+    context->removeBefore(this);
 }
 
 // Class 'After' implementation.
@@ -78,19 +78,19 @@ Before::~Before()
 After::After(const function<void ()> &function)
     : _function(function)
 {
-    auto driver = TestDriver::getInstance();
-    driver->installAfter(this);
+    auto context = TestDriver::getInstance()->getCurrentContext();
+    context->addAfter(this);
 }
 
 After::After(function<void ()> &&function)
     : _function(function)
 {
-    auto driver = TestDriver::getInstance();
-    driver->installAfter(this);
+    auto context = TestDriver::getInstance()->getCurrentContext();
+    context->addAfter(this);
 }
 
 After::~After()
 {
-    auto driver = TestDriver::getInstance();
-    driver->uninstallAfter(this);
+    auto context = TestDriver::getInstance()->getCurrentContext();
+    context->removeAfter(this);
 }
