@@ -54,6 +54,11 @@ namespace cppunitx
         {
             return _name;
         }
+
+    private:
+        void enable();
+
+        void disable();
     };
 
     /// Object to specify a before-test procedure.
@@ -75,6 +80,11 @@ namespace cppunitx
 
     public:
         ~Before();
+
+    private:
+        void enable();
+
+        void disable();
     };
 
     /// Object to specify an after-test procedure.
@@ -96,6 +106,11 @@ namespace cppunitx
 
     public:
         ~After();
+
+    private:
+        void enable();
+
+        void disable();
     };
 }
 

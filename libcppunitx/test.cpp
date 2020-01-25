@@ -34,18 +34,27 @@ using namespace cppunitx;
 Test::Test(const string &name, const function<void ()> &function)
     : _name {name}, _function {function}
 {
-    auto context = TestDriver::getInstance()->getCurrentContext();
-    context->addTest(this);
+    enable();
 }
 
 Test::Test(const string &name, function<void ()> &&function)
     : _name {name}, _function {function}
 {
+    enable();
+}
+
+Test::~Test()
+{
+    disable();
+}
+
+void Test::enable()
+{
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addTest(this);
 }
 
-Test::~Test()
+void Test::disable()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->removeTest(this);
@@ -56,18 +65,27 @@ Test::~Test()
 Before::Before(const function<void ()> &function)
     : _function {function}
 {
-    auto context = TestDriver::getInstance()->getCurrentContext();
-    context->addBefore(this);
+    enable();
 }
 
 Before::Before(function<void ()> &&function)
     : _function {function}
 {
+    enable();
+}
+
+Before::~Before()
+{
+    disable();
+}
+
+void Before::enable()
+{
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addBefore(this);
 }
 
-Before::~Before()
+void Before::disable()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->removeBefore(this);
@@ -78,18 +96,27 @@ Before::~Before()
 After::After(const function<void ()> &function)
     : _function {function}
 {
-    auto context = TestDriver::getInstance()->getCurrentContext();
-    context->addAfter(this);
+    enable();
 }
 
 After::After(function<void ()> &&function)
     : _function {function}
 {
+    enable();
+}
+
+After::~After()
+{
+    disable();
+}
+
+void After::enable()
+{
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addAfter(this);
 }
 
-After::~After()
+void After::disable()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->removeAfter(this);
