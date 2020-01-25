@@ -2,12 +2,13 @@
 
 lib_LTLIBRARIES = libcppunitx.la
 
-nobase_include_HEADERS = cppunitx/framework cppunitx/module cppunitx/driver \
+nobase_include_HEADERS = cppunitx/framework cppunitx/assert cppunitx/driver \
+cppunitx/module \
 bits/cppunitx.h bits/cppunitx/registry.h bits/cppunitx/test.h \
-bits/cppunitx/module.h bits/cppunitx/driver.h \
+bits/cppunitx/assert.h bits/cppunitx/driver.h bits/cppunitx/module.h \
 cppunitx/bits/test_runner.h
 
 noinst_HEADERS = ltdl_utility.h
 
 libcppunitx_la_LDFLAGS = -version-info 0:0:0 $(LTLDFLAGS)
-libcppunitx_la_SOURCES = registry.cpp test.cpp driver.cpp
+libcppunitx_la_SOURCES = registry.cpp test.cpp assert.cpp driver.cpp
