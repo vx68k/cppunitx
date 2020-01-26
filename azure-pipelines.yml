@@ -16,7 +16,7 @@ jobs:
     container: kazssym/cppunitx-builder:gcc
     steps:
       - bash: |
-          autoreconf
+          autoreconf --install
         displayName: Bootstrap
       - bash: |
           mkdir -p _build
