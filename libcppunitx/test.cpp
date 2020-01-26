@@ -31,23 +31,6 @@ using namespace cppunitx;
 
 // Class 'Test' implementation.
 
-Test::Test(const string &name, const function<void ()> &function)
-    : _name {name}, _function {function}
-{
-    enable();
-}
-
-Test::Test(const string &name, function<void ()> &&function)
-    : _name {name}, _function {function}
-{
-    enable();
-}
-
-Test::~Test()
-{
-    disable();
-}
-
 void Test::enable()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
@@ -62,23 +45,6 @@ void Test::disable()
 
 // Class 'Before' implementation.
 
-Before::Before(const function<void ()> &function)
-    : _function {function}
-{
-    enable();
-}
-
-Before::Before(function<void ()> &&function)
-    : _function {function}
-{
-    enable();
-}
-
-Before::~Before()
-{
-    disable();
-}
-
 void Before::enable()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
@@ -92,23 +58,6 @@ void Before::disable()
 }
 
 // Class 'After' implementation.
-
-After::After(const function<void ()> &function)
-    : _function {function}
-{
-    enable();
-}
-
-After::After(function<void ()> &&function)
-    : _function {function}
-{
-    enable();
-}
-
-After::~After()
-{
-    disable();
-}
 
 void After::enable()
 {

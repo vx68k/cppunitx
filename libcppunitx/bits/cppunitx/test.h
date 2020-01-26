@@ -38,16 +38,22 @@ namespace cppunitx
         const std::function<void ()> _function;
 
     public:
-        Test(const std::string &name, const std::function<void ()> &function);
-
-        Test(const std::string &name, std::function<void ()> &&function);
+        template<class Function>
+        Test(const std::string name, Function function)
+            : _name {name}, _function {std::forward<Function>(function)}
+        {
+            enable();
+        }
 
         // To suppress implicit definitions.
         Test(const Test &) = delete;
         Test &operator =(const Test &) = delete;
 
     public:
-        ~Test();
+        ~Test()
+        {
+            disable();
+        }
 
     public:
         const std::string &getName() const
@@ -70,16 +76,22 @@ namespace cppunitx
         const std::function<void ()> _function;
 
     public:
-        explicit Before(const std::function<void ()> &function);
-
-        explicit Before(std::function<void ()> &&function);
+        template<class Function>
+        explicit Before(Function function)
+            : _function {std::forward<Function>(function)}
+        {
+            enable();
+        }
 
         // To suppress implicit definitions.
         Before(const Before &) = delete;
         Before &operator =(const Before &) = delete;
 
     public:
-        ~Before();
+        ~Before()
+        {
+            disable();
+        }
 
     private:
         void enable();
@@ -96,16 +108,22 @@ namespace cppunitx
         const std::function<void ()> _function;
 
     public:
-        explicit After(const std::function<void ()> &function);
-
-        explicit After(std::function<void ()> &&function);
+        template<class Function>
+        explicit After(Function function)
+            : _function {std::forward<Function>(function)}
+        {
+            enable();
+        }
 
         // To suppress implicit definitions.
         After(const After &) = delete;
         After &operator =(const After &) = delete;
 
     public:
-        ~After();
+        ~After()
+        {
+            disable();
+        }
 
     private:
         void enable();
