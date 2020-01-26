@@ -5,3 +5,7 @@ ACLOCAL_AMFLAGS = -Im4
 EXTRA_DIST = README.md
 
 SUBDIRS = libcppunitx examples doc
+
+dist-hook:
+	cd $(distdir) && \
+	find . -type f ! -name \*SUMS -exec shasum -a 256 {} \; > SHA256SUMS
