@@ -4,7 +4,7 @@ ACLOCAL_AMFLAGS = -Im4
 
 EXTRA_DIST = README.md
 
-SUBDIRS = libcppunitx examples doc
+SUBDIRS = libcppunitx test doc
 
 dist-hook:
 	cd $(distdir) && \

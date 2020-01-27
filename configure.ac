@@ -13,6 +13,6 @@ AC_PROG_CXX
 AC_CHECK_LIB([ltdl], [lt_dlopen], [LIBLTDL=-lltdl], [LIBLTDL=])
 AC_SUBST([LIBLTDL])dnl
 AC_CHECK_HEADERS([ltdl.h])
-AC_CONFIG_FILES([Makefile libcppunitx/Makefile examples/Makefile doc/Makefile])
+AC_CONFIG_FILES([Makefile libcppunitx/Makefile test/Makefile doc/Makefile])
 AC_CONFIG_HEADERS([config.h])
 AC_OUTPUT
