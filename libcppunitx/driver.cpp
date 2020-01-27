@@ -51,28 +51,34 @@ TestContext::~TestContext()
 {
 }
 
-void TestContext::addTest(const Test *const)
+void TestContext::addTest(const Test *const test)
 {
+    _tests.insert(test);
 }
 
-void TestContext::removeTest(const Test *const)
+void TestContext::removeTest(const Test *const test)
 {
+    _tests.erase(test);
 }
 
-void TestContext::addBefore(const Before *const)
+void TestContext::addBefore(const Before *const before)
 {
+    _befores.insert(before);
 }
 
-void TestContext::removeBefore(const Before *const)
+void TestContext::removeBefore(const Before *const before)
 {
+    _befores.erase(before);
 }
 
-void TestContext::addAfter(const After *const)
+void TestContext::addAfter(const After *const after)
 {
+    _afters.insert(after);
 }
 
-void TestContext::removeAfter(const After *const)
+void TestContext::removeAfter(const After *const after)
 {
+    _afters.erase(after);
 }
 
 // Class 'TestDriver' implementation.

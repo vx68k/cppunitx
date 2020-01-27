@@ -19,15 +19,23 @@
 #ifndef _CPPUNITX_DRIVER_H
 #define _CPPUNITX_DRIVER_H 1
 
-#include <bits/cppunitx.h>
 #include <cppunitx/framework>
+#include <set>
 #include <memory>
+#include <bits/cppunitx.h>
 
 namespace cppunitx
 {
     /// Test context.
     class _CPPUNITX_PUBLIC TestContext
     {
+    private:
+        std::set<const Test *> _tests;
+
+        std::set<const Before *> _befores;
+
+        std::set<const After *> _afters;
+
     public:
         TestContext();
 
