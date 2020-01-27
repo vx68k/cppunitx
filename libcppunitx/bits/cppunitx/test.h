@@ -61,6 +61,12 @@ namespace cppunitx
             return _name;
         }
 
+        /// Runs this test case.
+        void run() const
+        {
+            _function();
+        }
+
     private:
         void enable();
 
@@ -93,6 +99,13 @@ namespace cppunitx
             disable();
         }
 
+    public:
+        /// Runs this before-test procedure.
+        void run() const
+        {
+            _function();
+        }
+
     private:
         void enable();
 
@@ -123,6 +136,13 @@ namespace cppunitx
         ~After()
         {
             disable();
+        }
+
+    public:
+        /// Runs this after-test procedure.
+        void run() const
+        {
+            _function();
         }
 
     private:
