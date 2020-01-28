@@ -27,7 +27,7 @@
 #if defined SUITE
 // This makes the suite name available as a type name.
 class SUITE;
-#define _CPPUNITX_DEFAULT_SUITE ::SUITE
+#define _CPPUNITX_DEFAULT_SUITE class ::SUITE
 #endif
 
 #ifndef _CPPUNITX_DEFAULT_SUITE

@@ -35,10 +35,11 @@ extern "C" cppunitx::TestRegistry *cppunitx_registry();
 
 #if MODULE_MAIN
 
+class SUITE;
+
 _CPPUNITX_PUBLIC cppunitx::TestRegistry *cppunitx_registry()
 {
-    using namespace cppunitx;
-    return TestRegistry::getInstance<SUITE>().get();
+    return cppunitx::TestRegistry::getInstance<class SUITE>().get();
 }
 
 #endif /* MODULE_MAIN */
