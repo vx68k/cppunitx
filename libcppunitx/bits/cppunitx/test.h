@@ -39,8 +39,17 @@ namespace cppunitx
         const std::function<void ()> _function;
 
     public:
+        /// Constructs this object.
         template<class Function>
-        Test(const std::string name, Function function)
+        Test(const char *name, Function function)
+            : _name {name}, _function {std::forward<Function>(function)}
+        {
+            enable();
+        }
+
+        /// Constructs this object.
+        template<class Function>
+        Test(const std::string &name, Function function)
             : _name {name}, _function {std::forward<Function>(function)}
         {
             enable();
