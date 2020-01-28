@@ -55,10 +55,6 @@ int TestDriver::main(const int argc, char **const argv)
     LTDL_SET_PRELOADED_SYMBOLS();
 
     try {
-        libltdl lib;
-        // To search the current directory only.
-        lt_dlsetsearchpath(".");
-
         auto driver = getInstance();
         for (int i = 1; i != argc; i += 1) {
             driver->run(argv[i]);
@@ -83,6 +79,7 @@ void TestDriver::run(const char *const suiteName)
 {
     using GetRegistryFunction = TestRegistry *();
 
+    library_path path {"."};
     module suite {suiteName};
     auto getRegistry = reinterpret_cast<GetRegistryFunction *>(
         lt_dlsym(suite.handle, "cppunitx_registry"));
