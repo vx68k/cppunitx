@@ -51,7 +51,6 @@ shared_ptr<TestDriver> TestDriver::getInstance()
 int TestDriver::main(const int argc, char **const argv)
 {
     locale::global(locale(""));
-    LTDL_SET_PRELOADED_SYMBOLS();
 
     try {
         auto driver = getInstance();

@@ -28,10 +28,21 @@ namespace ltdl
     /// Helper object for 'lt_dlinit' and 'lt_dlexit'.
     class libltdl
     {
+    private:
+        struct init
+        {
+            init()
+            {
+                LTDL_SET_PRELOADED_SYMBOLS();
+            }
+        };
+
     public:
         /// Initializes the libltdl.
         libltdl()
         {
+            static init once {};
+
             int result = lt_dlinit();
             if (result != 0) {
                 throw std::runtime_error(lt_dlerror());
