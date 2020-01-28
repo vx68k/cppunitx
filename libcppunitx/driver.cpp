@@ -36,7 +36,6 @@ using std::locale;
 using std::shared_ptr;
 using std::fprintf;
 using namespace cppunitx;
-using namespace ltdl;
 
 const int SKIP = 77;
 const int ERROR = 99;
@@ -79,10 +78,10 @@ void TestDriver::run(const char *const suiteName)
 {
     using GetRegistryFunction = TestRegistry *();
 
-    library_path path {"."};
-    module suite {suiteName};
+    ltdl::library_path path {"."};
+    ltdl::module suite {suiteName};
     auto getRegistry = reinterpret_cast<GetRegistryFunction *>(
-        lt_dlsym(suite.handle, "cppunitx_registry"));
+        lt_dlsym(suite, "cppunitx_registry"));
     if (getRegistry == nullptr) {
         throw runtime_error(string(suiteName) + ": Not test suite module");
     }
