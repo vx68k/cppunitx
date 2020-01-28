@@ -5,8 +5,7 @@ lib_LTLIBRARIES = libcppunitx.la
 nobase_include_HEADERS = cppunitx/framework cppunitx/assert cppunitx/driver \
 cppunitx/module \
 bits/cppunitx.h bits/cppunitx/registry.h bits/cppunitx/test.h \
-bits/cppunitx/assert.h bits/cppunitx/driver.h bits/cppunitx/module.h \
-cppunitx/bits/test_runner.h
+bits/cppunitx/assert.h bits/cppunitx/driver.h bits/cppunitx/module.h
 
 noinst_HEADERS = ltdl_utility.h
 
