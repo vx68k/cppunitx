@@ -41,46 +41,6 @@ using namespace ltdl;
 const int SKIP = 77;
 const int ERROR = 99;
 
-// Class 'TestContext' implementation.
-
-TestContext::TestContext()
-{
-}
-
-TestContext::~TestContext()
-{
-}
-
-void TestContext::addTest(const Test *const test)
-{
-    _tests.insert(test);
-}
-
-void TestContext::removeTest(const Test *const test)
-{
-    _tests.erase(test);
-}
-
-void TestContext::addBefore(const Before *const before)
-{
-    _befores.insert(before);
-}
-
-void TestContext::removeBefore(const Before *const before)
-{
-    _befores.erase(before);
-}
-
-void TestContext::addAfter(const After *const after)
-{
-    _afters.insert(after);
-}
-
-void TestContext::removeAfter(const After *const after)
-{
-    _afters.erase(after);
-}
-
 // Class 'TestDriver' implementation.
 
 shared_ptr<TestDriver> TestDriver::getInstance()
