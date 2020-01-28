@@ -1,5 +1,7 @@
 ## Process this file with automake to produce a Makefile.in.
 
+AM_CPPFLAGS = -D_CPPUNITX_IMPLEMENTATION
+
 lib_LTLIBRARIES = libcppunitx.la
 
 nobase_include_HEADERS = \
