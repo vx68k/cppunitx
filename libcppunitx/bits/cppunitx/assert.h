@@ -27,6 +27,9 @@ namespace cppunitx
 {
     namespace assertion
     {
+        _CPPUNITX_PUBLIC void assertNull(const volatile void *ptr,
+            const char *message = nullptr);
+
         _CPPUNITX_PUBLIC void assertEquals(std::intmax_t expected,
             std::intmax_t actual, const char *message);
 

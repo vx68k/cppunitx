@@ -26,3 +26,10 @@
 #include <cppunitx/exception>
 
 using namespace cppunitx;
+
+void assertion::assertNull(const volatile void *ptr, const char *message)
+{
+    if (ptr != nullptr) {
+        throw AssertionError("Pointer is not null");
+    }
+}
