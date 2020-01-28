@@ -20,7 +20,7 @@
 #define LTDL_UTILITY_H 1
 
 #include <stdexcept>
-#include <string>
+#include <cstring>
 #include <ltdl.h>
 
 namespace ltdl
@@ -43,6 +43,29 @@ namespace ltdl
                 // Destructors cannot throw exceptions.
                 std::fprintf(stderr, "'%s\n", lt_dlerror());
             }
+        }
+    };
+
+    struct library_path
+    {
+        libltdl lib;
+        const char *old_path;
+
+        explicit library_path(const char *const path)
+            : old_path {lt_dlgetsearchpath()}
+        {
+            if (old_path != nullptr) {
+                auto copy = new char [std::strlen(old_path) + 1];
+                std::strcpy(copy, old_path);
+                old_path = copy;
+            }
+            lt_dlsetsearchpath(path);
+        }
+
+        ~library_path()
+        {
+            lt_dlsetsearchpath(old_path);
+            delete [] old_path;
         }
     };
 
