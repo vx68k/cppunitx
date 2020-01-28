@@ -30,12 +30,12 @@ using namespace cppunitx;
 
 // Class 'AbstractTestRegistrant' implementation.
 
-AbstractTestRegistrant::AbstractTestRegistrant(const std::string &name)
+AbstractTestRegistrant::AbstractTestRegistrant(const char *name)
     : name {name}
 {
 }
 
-AbstractTestRegistrant::AbstractTestRegistrant(std::string &&name) noexcept
+AbstractTestRegistrant::AbstractTestRegistrant(const std::string &name)
     : name {name}
 {
 }

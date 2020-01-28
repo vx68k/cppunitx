@@ -42,9 +42,11 @@ namespace cppunitx
         std::string name;
 
     public:
-        explicit AbstractTestRegistrant(const std::string &name);
+        /// Constructs this object.
+        explicit AbstractTestRegistrant(const char *name);
 
-        explicit AbstractTestRegistrant(std::string &&name) noexcept;
+        /// Constructs this object.
+        explicit AbstractTestRegistrant(const std::string &name);
 
         // To suppress implicit definitions.
         AbstractTestRegistrant(const AbstractTestRegistrant &) = delete;
@@ -111,6 +113,15 @@ namespace cppunitx
         }
 
     public:
+        /// Constructs this object.
+        explicit TestRegistrant(const char *name)
+            : inherited {name}
+        {
+            auto registry = getRegistry();
+            registry->addRegistrant(this);
+        }
+
+        /// Constructs this object.
         explicit TestRegistrant(const std::string &name)
             : inherited {name}
         {
