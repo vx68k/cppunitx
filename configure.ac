@@ -6,7 +6,7 @@ AC_CONFIG_SRCDIR([libcppunitx/registry.cpp])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIRS([m4])
 LT_PREREQ([2.4.6])
-LT_INIT([dlopen])
+LT_INIT([dlopen win32-dll])
 AM_INIT_AUTOMAKE([foreign no-define])
 AC_PROG_CC
 AC_PROG_CXX
