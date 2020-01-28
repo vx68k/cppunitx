@@ -52,6 +52,7 @@ shared_ptr<TestDriver> TestDriver::getInstance()
 int TestDriver::main(const int argc, char **const argv)
 {
     locale::global(locale(""));
+    LTDL_SET_PRELOADED_SYMBOLS();
 
     try {
         libltdl lib;
@@ -81,6 +82,7 @@ TestDriver::~TestDriver()
 void TestDriver::run(const char *const suiteName)
 {
     using GetRegistryFunction = TestRegistry *();
+
     module suite {suiteName};
     auto getRegistry = reinterpret_cast<GetRegistryFunction *>(
         lt_dlsym(suite.handle, "cppunitx_registry"));
@@ -89,6 +91,6 @@ void TestDriver::run(const char *const suiteName)
     }
 
     _currentContext.reset(new TestContext()); // TODO: This must be per-fixture.
-    auto registry = (*getRegistry)();
+    auto registry = getRegistry();
     registry->runTests();
 }
