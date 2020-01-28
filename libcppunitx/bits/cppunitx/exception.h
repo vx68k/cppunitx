@@ -1,4 +1,4 @@
-// assert.cpp
+// <bits/cppunitx/exception.h>
 // Copyright (C) 2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
@@ -16,13 +16,30 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#if HAVE_CONFIG_H
-#include <config.h>
+#ifndef _CPPUNITX_EXCEPTION_H
+#define _CPPUNITX_EXCEPTION_H 1
+
+#include <stdexcept>
+#include <string>
+#include <bits/cppunitx.h>
+
+namespace cppunitx
+{
+    class _CPPUNITX_PUBLIC AssertionError : public std::runtime_error
+    {
+        using inherited = runtime_error;
+
+    public:
+        explicit AssertionError(const char *message)
+            : inherited {message}
+        {
+        }
+
+        explicit AssertionError(const std::string &message)
+            : inherited {message}
+        {
+        }
+    };
+}
+
 #endif
-
-#define _CPPUNITX_ASSERT_IMPLEMENTATION 1
-#include <bits/cppunitx/assert.h>
-
-#include <cppunitx/exception>
-
-using namespace cppunitx;
