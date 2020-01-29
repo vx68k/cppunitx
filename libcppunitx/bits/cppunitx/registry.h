@@ -39,26 +39,28 @@ namespace cppunitx
     class _CPPUNITX_PUBLIC AbstractTestRegistrant
     {
     private:
-        std::string name;
+        std::string _name;
 
     public:
-        /// Constructs this object.
+        /// Constructs this object with a null-terminated string value.
         explicit AbstractTestRegistrant(const char *name);
 
-        /// Constructs this object.
+        /// Constructs this object with a 'std::string' value.
         explicit AbstractTestRegistrant(const std::string &name);
 
         // To suppress implicit definitions.
         AbstractTestRegistrant(const AbstractTestRegistrant &) = delete;
+
         void operator =(const AbstractTestRegistrant &) = delete;
 
     public:
         virtual ~AbstractTestRegistrant() = 0;
 
     public:
+        /// Returns the name of this object.
         const std::string &getName() const noexcept
         {
-            return name;
+            return _name;
         }
 
         /// Runs tests.
@@ -78,7 +80,7 @@ namespace cppunitx
         }
 
     private:
-        std::unordered_set<const AbstractTestRegistrant *> registrants;
+        std::unordered_set<const AbstractTestRegistrant *> _registrants;
 
     public:
         TestRegistry();
@@ -101,7 +103,7 @@ namespace cppunitx
         template<class Function>
         void forEachRegistrant(Function function) const
         {
-            for (auto &&registrant : registrants) {
+            for (auto &&registrant : _registrants) {
                 function(registrant);
             }
         }

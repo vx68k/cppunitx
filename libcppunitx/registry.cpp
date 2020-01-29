@@ -28,12 +28,12 @@ using namespace cppunitx;
 // Class 'AbstractTestRegistrant' implementation.
 
 AbstractTestRegistrant::AbstractTestRegistrant(const char *name)
-    : name {name}
+    : _name {name}
 {
 }
 
 AbstractTestRegistrant::AbstractTestRegistrant(const std::string &name)
-    : name {name}
+    : _name {name}
 {
 }
 
@@ -51,12 +51,14 @@ TestRegistry::~TestRegistry()
 {
 }
 
-void TestRegistry::addRegistrant(const AbstractTestRegistrant *const registrant)
+void TestRegistry::addRegistrant(
+    const AbstractTestRegistrant *const registrant)
 {
-    registrants.insert(registrant); // TODO: Handle duplicates?
+    _registrants.insert(registrant);
 }
 
-void TestRegistry::removeRegistrant(const AbstractTestRegistrant *const registrant)
+void TestRegistry::removeRegistrant(
+    const AbstractTestRegistrant *const registrant)
 {
-    registrants.erase(registrant);
+    _registrants.erase(registrant);
 }
