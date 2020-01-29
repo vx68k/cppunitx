@@ -19,10 +19,10 @@
 #ifndef _CPPUNITX_REGISTRY_H
 #define _CPPUNITX_REGISTRY_H 1
 
-#include <bits/cppunitx.h>
 #include <unordered_set>
 #include <memory>
 #include <string>
+#include <bits/cppunitx.h>
 
 #if defined SUITE
 // This makes the suite name available as a type name.
@@ -65,10 +65,11 @@ namespace cppunitx
         virtual void runTests() const = 0;
     };
 
-    // Regitry for tests.
+    /// Test regitry.
     class _CPPUNITX_PUBLIC TestRegistry
     {
     public:
+        /// Returns the test registry for a test suite.
         template<class Suite = _CPPUNITX_DEFAULT_SUITE>
         static std::shared_ptr<TestRegistry> getInstance()
         {
@@ -96,8 +97,14 @@ namespace cppunitx
         /// Removes a registrant from this registry.
         void removeRegistrant(const AbstractTestRegistrant *registrant);
 
-        /// Runs tests for each registrant.
-        void runTests() const;
+        /// Invokes a function for each registrant.
+        template<class Function>
+        void forEachRegistrant(Function function) const
+        {
+            for (auto &&registrant : registrants) {
+                function(registrant);
+            }
+        }
     };
 
     /// Registrant for task registries.
