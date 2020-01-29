@@ -36,6 +36,7 @@ class SUITE;
 
 namespace cppunitx
 {
+    /// Base class for test registrants.
     class _CPPUNITX_PUBLIC AbstractTestRegistrant
     {
     private:
@@ -43,14 +44,21 @@ namespace cppunitx
 
     public:
         /// Constructs this object with a null-terminated string value.
-        explicit AbstractTestRegistrant(const char *name);
+        explicit AbstractTestRegistrant(const char *const name)
+            : _name {name}
+        {
+        }
 
         /// Constructs this object with a 'std::string' value.
-        explicit AbstractTestRegistrant(const std::string &name);
+        explicit AbstractTestRegistrant(const std::string &name)
+            : _name {name}
+        {
+        }
 
-        // To suppress implicit definitions.
+        // This class is not copy-constructible.
         AbstractTestRegistrant(const AbstractTestRegistrant &) = delete;
 
+        // This class is not copy-assignable.
         void operator =(const AbstractTestRegistrant &) = delete;
 
     public:

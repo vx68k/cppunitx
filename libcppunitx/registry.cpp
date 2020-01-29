@@ -27,16 +27,6 @@ using namespace cppunitx;
 
 // Class 'AbstractTestRegistrant' implementation.
 
-AbstractTestRegistrant::AbstractTestRegistrant(const char *name)
-    : _name {name}
-{
-}
-
-AbstractTestRegistrant::AbstractTestRegistrant(const std::string &name)
-    : _name {name}
-{
-}
-
 AbstractTestRegistrant::~AbstractTestRegistrant()
 {
 }
