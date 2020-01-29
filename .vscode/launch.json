@@ -6,12 +6,12 @@
             "request": "launch",
             "name": "(gdb) Launch",
             "preLaunchTask": "Build",
-            "program": "${workspaceFolder}/examples/runtest",
+            "program": "${workspaceFolder}/test/runtest",
             "args": [
                 "example.la"
             ],
             "environment": [],
-            "cwd": "${workspaceFolder}/examples",
+            "cwd": "${workspaceFolder}/test",
             "stopAtEntry": false,
             "externalConsole": false,
             "MIMode": "gdb",
