@@ -1,6 +1,8 @@
+# READ ME
+
 This file provides basic information about CppUnitX.
 
-# Description
+## Description
 
 CppUnitX is another xUnit-style testing framework for modern C++.
 
