@@ -1,18 +1,17 @@
 # READ ME
 
-This file provides basic information about CppUnitX.
-
 ## Description
 
-CppUnitX is another xUnit-style testing framework for modern C++.
+<dfn>CppUnitX</dfn> is another xUnit-style unit-testing framework for C++.
+It aims to reduce the need to use macros in test suites for C++ programs.
 
-See the [repository wiki][wiki] for more information.
+See the [home page][] for more information about CppUnitX.
 
-[![(Open Issues)](https://img.shields.io/bitbucket/issues/kazssym/cppunitx.svg)][open issues]
+[Home page]: https://www.vx68k.org/cppunitx
 
-[Wiki]: https://bitbucket.org/kazssym/cppunitx/wiki
+[![(Open issues)](https://img.shields.io/bitbucket/issues/kazssym/cppunitx.svg)][open issues]
+
 [Open issues]: https://bitbucket.org/kazssym/cppunitx/issues?status=new&status=open
-[Pipelines]: https://bitbucket.org/kazssym/cppunitx/addon/pipelines/home
 
 ## License
 
