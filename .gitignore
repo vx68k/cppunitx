@@ -1,4 +1,5 @@
 runtest
+assertion.la
 example.la
 libcppunitx.la
 Makefile
