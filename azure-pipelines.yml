@@ -8,31 +8,34 @@
 trigger:
   - master
   - "feature/**"
-jobs:
-  - job: build
+stages:
+  - stage: build
     displayName: Build
-    pool:
-      vmImage: ubuntu-16.04
-    container: kazssym/cppunitx-builder:gcc
-    steps:
-      - bash: |
-          autoreconf --install
-        displayName: Bootstrap
-      - bash: |
-          mkdir -p _build
-          cd _build
-          ../configure
-        displayName: Configure
-      - bash: |
-          cd _build
-          make check mostlyclean
+    jobs:
+      - job: build
         displayName: Build
-      - task: PublishTestResults@2
-        displayName: Publish test results
-        condition: succeededOrFailed()
-      - bash: |
-          cd _build
-          make dist VERSION="`sh ./config.status --version | sed -n '1s/^.* config\.status //p'`-$(Build.BuildNumber)"
-        displayName: Make source archive
-      - publish: _build
-        displayName: Publish artifacts
+        pool:
+          vmImage: ubuntu-16.04
+        container: kazssym/cppunitx-builder:gcc
+        steps:
+          - bash: |
+              autoreconf --install
+            displayName: Bootstrap
+          - bash: |
+              mkdir -p _build
+              cd _build
+              ../configure
+            displayName: Configure
+          - bash: |
+              cd _build
+              make check mostlyclean
+            displayName: Build
+          - task: PublishTestResults@2
+            displayName: Publish test results
+            condition: succeededOrFailed()
+          - bash: |
+              cd _build
+              make dist VERSION="`sh ./config.status --version | sed -n '1s/^.* config\.status //p'`-$(Build.BuildNumber)"
+            displayName: Make source archive
+          - publish: _build
+            displayName: Publish artifacts
