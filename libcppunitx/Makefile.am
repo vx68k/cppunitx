@@ -6,7 +6,7 @@ lib_LTLIBRARIES = libcppunitx.la
 
 nobase_include_HEADERS = \
 cppunitx/exception \
-cppunitx/assert \
+cppunitx/assertion \
 cppunitx/framework \
 cppunitx/driver \
 cppunitx/module \

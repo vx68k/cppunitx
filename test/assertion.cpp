@@ -26,7 +26,7 @@
 #include <cppunitx/module>
 
 #include <cppunitx/framework>
-#include <cppunitx/assert>
+#include <cppunitx/assertion>
 
 using namespace cppunitx;
 using namespace cppunitx::assertion;
