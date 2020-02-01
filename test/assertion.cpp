@@ -1,4 +1,4 @@
-// assert.cpp
+// assertion.cpp
 // Copyright (C) 2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
@@ -20,23 +20,34 @@
 #include <config.h>
 #endif
 
-#define _CPPUNITX_ASSERT_IMPLEMENTATION 1
-#include <bits/cppunitx/assert.h>
+#define SUITE assertion
 
-#include <cppunitx/exception>
+#define MODULE_MAIN 1
+#include <cppunitx/module>
+
+#include <cppunitx/framework>
+#include <cppunitx/assertion>
 
 using namespace cppunitx;
+using namespace cppunitx::assertion;
 
-void assertion::assertNull(const volatile void *ptr, const char *message)
+class AssertionTest
 {
-    if (ptr != nullptr) {
-        throw AssertionError("Pointer is not null");
-    }
-}
+private:
+    Before setUp {[this]() {
+        }};
 
-void assertion::assertNotNull(const volatile void *ptr, const char *message)
-{
-    if (ptr == nullptr) {
-        throw AssertionError("Pointer is null");
-    }
-}
+    After tearDown {[this]() {
+        }};
+
+    Test testAssertNull {"test 'assertNull'", [this]() {
+            assertNull(0);
+            // TODO: Add more assertions here.
+        }};
+
+    Test testAssertNotNull {"test 'assertNotNull'", [this]() {
+            assertNotNull(this);
+            // TODO: Add more assertions here.
+        }};
+};
+TestRegistrant<AssertionTest> test {"assertion"};

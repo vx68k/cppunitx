@@ -21,7 +21,7 @@
 
 #ifndef _CPPUNITX_PUBLIC
 #if _WIN32
-#if CPPUNITX_DLL
+#if CPPUNITX_DLL || _CPPUNITX_IMPLEMENTATION
 #define _CPPUNITX_PUBLIC __declspec(dllexport)
 #else
 #define _CPPUNITX_PUBLIC __declspec(dllimport)

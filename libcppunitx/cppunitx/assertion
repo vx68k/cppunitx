@@ -1,5 +1,5 @@
-// cppunitx/bits/test_runner.h
-// Copyright (C) 2018 Kaz Nishimura
+// <cppunitx/assertion>
+// Copyright (C) 2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -16,15 +16,9 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef _CPPUNITX_BITS_TEST_RUNNER_H
-#define _CPPUNITX_BITS_TEST_RUNNER_H 1
+#ifndef _CPPUNITX_ASSERTION
+#define _CPPUNITX_ASSERTION 1
 
-namespace cppunitx
-{
-    class test_runner
-    {
-    public:
-    };
-}
+#include <bits/cppunitx/assert.h>
 
 #endif

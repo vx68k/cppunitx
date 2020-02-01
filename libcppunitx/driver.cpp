@@ -36,7 +36,6 @@ using std::locale;
 using std::shared_ptr;
 using std::fprintf;
 using namespace cppunitx;
-using namespace ltdl;
 
 const int SKIP = 77;
 const int ERROR = 99;
@@ -54,10 +53,6 @@ int TestDriver::main(const int argc, char **const argv)
     locale::global(locale(""));
 
     try {
-        libltdl lib;
-        // To search the current directory only.
-        lt_dlsetsearchpath(".");
-
         auto driver = getInstance();
         for (int i = 1; i != argc; i += 1) {
             driver->run(argv[i]);
@@ -81,14 +76,18 @@ TestDriver::~TestDriver()
 void TestDriver::run(const char *const suiteName)
 {
     using GetRegistryFunction = TestRegistry *();
-    module suite {suiteName};
+
+    ltdl::library_path path {"."};
+    ltdl::module suite {suiteName};
     auto getRegistry = reinterpret_cast<GetRegistryFunction *>(
-        lt_dlsym(suite.handle, "cppunitx_registry"));
+        lt_dlsym(suite, "cppunitx_registry"));
     if (getRegistry == nullptr) {
         throw runtime_error(string(suiteName) + ": Not test suite module");
     }
 
     _currentContext.reset(new TestContext()); // TODO: This must be per-fixture.
-    auto registry = (*getRegistry)();
-    registry->runTests();
+    auto registry = getRegistry();
+    registry->forEachRegistrant(
+        [this](const AbstractTestRegistrant *const registrant) {
+        });
 }

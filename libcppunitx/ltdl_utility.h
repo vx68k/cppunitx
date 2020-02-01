@@ -20,54 +20,125 @@
 #define LTDL_UTILITY_H 1
 
 #include <stdexcept>
-#include <string>
+#include <cstring>
 #include <ltdl.h>
 
 namespace ltdl
 {
     /// Helper object for 'lt_dlinit' and 'lt_dlexit'.
-    struct libltdl
+    class libltdl
     {
+    private:
+        struct init
+        {
+            init()
+            {
+                LTDL_SET_PRELOADED_SYMBOLS();
+            }
+        };
+
+    public:
+        /// Initializes the libltdl.
         libltdl()
         {
+            static init once {};
+
             int result = lt_dlinit();
             if (result != 0) {
                 throw std::runtime_error(lt_dlerror());
             }
         }
 
+        libltdl(const libltdl &) = delete;
+
+        void operator =(const libltdl &) = delete;
+
+    public:
         ~libltdl()
         {
             int result = lt_dlexit();
             if (result != 0) {
-                // Destructors cannot throw exceptions.
-                std::fprintf(stderr, "'%s\n", lt_dlerror());
+                std::fprintf(stderr, "%s (ignored)\n", lt_dlerror());
             }
         }
     };
 
-    /// Helper object for 'lt_dlopen' and 'lt_dlclose'.
-    struct module
+    /// Helper object for 'lt_dlsetsearchpath'.
+    class library_path
     {
-        libltdl lib;
-        lt_dlhandle handle;
+    private:
+        libltdl _lib {};
+        const char *_saved_path {};
 
-        explicit module(const char *const name)
-            : handle {lt_dlopen(name)}
+    public:
+        explicit library_path(const char *const path)
+            : _saved_path {lt_dlgetsearchpath()}
         {
-            if (handle == 0) {
+            if (_saved_path != nullptr) {
+                auto copy = new char [std::strlen(_saved_path) + 1];
+                std::strcpy(copy, _saved_path);
+                _saved_path = copy;
+            }
+            int result = lt_dlsetsearchpath(path);
+            if (result != 0) {
+                throw std::runtime_error(lt_dlerror());
+            }
+        }
+
+        library_path(const library_path &) = delete;
+
+        void operator =(const library_path &) = delete;
+
+    public:
+        ~library_path()
+        {
+            int result = lt_dlsetsearchpath(_saved_path);
+            if (result != 0) {
+                std::fprintf(stderr, "%s (ignored)\n", lt_dlerror());
+            }
+            delete [] _saved_path;
+        }
+    };
+
+    /// Helper object for 'lt_dlopen' and 'lt_dlclose'.
+    class module
+    {
+    private:
+        libltdl _lib {};
+        lt_dlhandle _handle {};
+
+    public:
+        explicit module(const char *const name)
+            : _handle {lt_dlopen(name)}
+        {
+            if (_handle == 0) {
                 throw std::runtime_error(
                     std::string(name) + ": " + lt_dlerror());
             }
         }
 
+        module(const module &) = delete;
+
+        void operator =(const module &) = delete;
+
+    public:
         ~module()
         {
-            int result = lt_dlclose(handle);
+            int result = lt_dlclose(_handle);
             if (result != 0) {
-                // Destructors cannot throw exceptions.
-                std::fprintf(stderr, "%s\n", lt_dlerror());
+                std::fprintf(stderr, "%s (ignored)\n", lt_dlerror());
             }
+        }
+
+    public:
+        lt_dlhandle handle() const noexcept
+        {
+            return _handle;
+        }
+
+        operator lt_dlhandle() const noexcept
+        {
+            return handle();
         }
     };
 }

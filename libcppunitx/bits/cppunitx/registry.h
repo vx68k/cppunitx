@@ -19,10 +19,10 @@
 #ifndef _CPPUNITX_REGISTRY_H
 #define _CPPUNITX_REGISTRY_H 1
 
-#include <bits/cppunitx.h>
 #include <unordered_set>
 #include <memory>
 #include <string>
+#include <bits/cppunitx.h>
 
 #if defined SUITE
 // This makes the suite name available as a type name.
@@ -36,39 +36,50 @@ class SUITE;
 
 namespace cppunitx
 {
+    /// Base class for test registrants.
     class _CPPUNITX_PUBLIC AbstractTestRegistrant
     {
     private:
-        std::string name;
+        std::string _name;
 
     public:
-        /// Constructs this object.
-        explicit AbstractTestRegistrant(const char *name);
+        /// Constructs this object with a null-terminated string value.
+        explicit AbstractTestRegistrant(const char *const name)
+            : _name {name}
+        {
+        }
 
-        /// Constructs this object.
-        explicit AbstractTestRegistrant(const std::string &name);
+        /// Constructs this object with a 'std::string' value.
+        explicit AbstractTestRegistrant(const std::string &name)
+            : _name {name}
+        {
+        }
 
-        // To suppress implicit definitions.
+        // This class is not copy-constructible.
         AbstractTestRegistrant(const AbstractTestRegistrant &) = delete;
+
+        // This class is not copy-assignable.
         void operator =(const AbstractTestRegistrant &) = delete;
 
     public:
         virtual ~AbstractTestRegistrant() = 0;
 
     public:
+        /// Returns the name of this object.
         const std::string &getName() const noexcept
         {
-            return name;
+            return _name;
         }
 
         /// Runs tests.
         virtual void runTests() const = 0;
     };
 
-    // Regitry for tests.
+    /// Test regitry.
     class _CPPUNITX_PUBLIC TestRegistry
     {
     public:
+        /// Returns the test registry for a test suite.
         template<class Suite = _CPPUNITX_DEFAULT_SUITE>
         static std::shared_ptr<TestRegistry> getInstance()
         {
@@ -77,7 +88,7 @@ namespace cppunitx
         }
 
     private:
-        std::unordered_set<const AbstractTestRegistrant *> registrants;
+        std::unordered_set<const AbstractTestRegistrant *> _registrants;
 
     public:
         TestRegistry();
@@ -96,8 +107,14 @@ namespace cppunitx
         /// Removes a registrant from this registry.
         void removeRegistrant(const AbstractTestRegistrant *registrant);
 
-        /// Runs tests for each registrant.
-        void runTests() const;
+        /// Invokes a function for each registrant.
+        template<class Function>
+        void forEachRegistrant(Function function) const
+        {
+            for (auto &&registrant : _registrants) {
+                function(registrant);
+            }
+        }
     };
 
     /// Registrant for task registries.

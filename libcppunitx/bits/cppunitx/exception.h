@@ -1,5 +1,5 @@
-// cppunitx/test - public interface for unit tests
-// Copyright (C) 2018 Kaz Nishimura
+// <bits/cppunitx/exception.h>
+// Copyright (C) 2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -16,10 +16,30 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef _CPPUNITX_TEST
-#define _CPPUNITX_TEST 1
+#ifndef _CPPUNITX_EXCEPTION_H
+#define _CPPUNITX_EXCEPTION_H 1
 
-#include <cppunitx/bits/base.h>
-#include <cppunitx/bits/test_runner.h>
+#include <stdexcept>
+#include <string>
+#include <bits/cppunitx.h>
+
+namespace cppunitx
+{
+    class _CPPUNITX_PUBLIC AssertionError : public std::runtime_error
+    {
+        using inherited = runtime_error;
+
+    public:
+        explicit AssertionError(const char *message)
+            : inherited {message}
+        {
+        }
+
+        explicit AssertionError(const std::string &message)
+            : inherited {message}
+        {
+        }
+    };
+}
 
 #endif
