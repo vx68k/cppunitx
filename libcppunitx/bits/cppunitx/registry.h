@@ -20,6 +20,7 @@
 #define _CPPUNITX_REGISTRY_H 1
 
 #include <unordered_set>
+#include <functional>
 #include <memory>
 #include <string>
 #include <bits/cppunitx.h>
@@ -108,13 +109,9 @@ namespace cppunitx
         void removeRegistrant(const AbstractTestRegistrant *registrant);
 
         /// Invokes a function for each registrant.
-        template<class Function>
-        void forEachRegistrant(Function function) const
-        {
-            for (auto &&registrant : _registrants) {
-                function(registrant);
-            }
-        }
+        void forEachRegistrant(
+            const std::function<void (const AbstractTestRegistrant *)> &f
+        ) const;
     };
 
     /// Registrant for task registries.

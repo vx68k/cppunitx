@@ -23,6 +23,9 @@
 #define _CPPUNITX_FRAMEWORK_IMPLEMENTATION 1
 #include <bits/cppunitx/registry.h>
 
+#include <algorithm>
+
+using std::for_each;
 using namespace cppunitx;
 
 // Class 'AbstractTestRegistrant' implementation.
@@ -51,4 +54,11 @@ void TestRegistry::removeRegistrant(
     const AbstractTestRegistrant *const registrant)
 {
     _registrants.erase(registrant);
+}
+
+void TestRegistry::forEachRegistrant(
+    const std::function<void (const AbstractTestRegistrant *)> &f
+) const
+{
+    for_each(_registrants.begin(), _registrants.end(), f);
 }
