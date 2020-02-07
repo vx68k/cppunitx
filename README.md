@@ -2,10 +2,10 @@
 
 ## Description
 
-<dfn>CppUnitX</dfn> is another xUnit-style unit-testing framework for C++.
+<dfn>C++Unit­X</dfn> is another xUnit-style unit-testing framework for C++.
 It aims to reduce the need to use macros in test suites for C++ programs.
 
-See the [home page][] for more information about CppUnitX.
+See the [home page][] for more information about C++Unit­X.
 
 [Home page]: https://www.vx68k.org/cppunitx
 
