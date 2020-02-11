@@ -185,16 +185,16 @@ namespace cppunitx
         virtual void removeTest(const Test *test);
 
         /// Adds a before-test procedure to this context.
-        virtual void addBeforeTest(const BeforeTest *before);
+        virtual void addBeforeTest(const BeforeTest *beforeTest);
 
         /// Removes a before-test procedure from this context.
-        virtual void removeBeforeTest(const BeforeTest *before);
+        virtual void removeBeforeTest(const BeforeTest *beforeTest);
 
         /// Adds an after-test procedure to this context.
-        virtual void addAfterTest(const AfterTest *after);
+        virtual void addAfterTest(const AfterTest *afterTest);
 
         /// Removes an after-test procedure from this context.
-        virtual void removeAfterTest(const AfterTest *after);
+        virtual void removeAfterTest(const AfterTest *afterTest);
     };
 }
 
