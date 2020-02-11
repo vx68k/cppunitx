@@ -47,7 +47,7 @@ namespace cppunitx
         private:
             std::string _name;
 
-        public:
+        protected:
             /// Constructs this object with a null-terminated string value.
             explicit Registrant(const char *const name)
                 : _name {name}
@@ -73,7 +73,10 @@ namespace cppunitx
             void operator =(const Registrant &) = delete;
 
         public:
-            virtual ~Registrant() = 0;
+            /// Does nothing on destruction of this object.
+            virtual ~Registrant()
+            {
+            }
 
         public:
             /// Returns the name of this object.
@@ -121,10 +124,6 @@ namespace cppunitx
         ) const;
     };
 
-    /// Does nothing on destruction of this object.
-    inline TestRegistry::Registrant::~Registrant()
-    {
-    }
 
     /// Registrant for task registries.
     template<class Fixture, class Suite = _CPPUNITX_DEFAULT_SUITE>
