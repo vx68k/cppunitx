@@ -46,9 +46,11 @@ private:
         }
     };
 
-    After tearDown {[this]() {
-        example.reset();
-    }};
+    AfterTest tearDown {
+        [this]() {
+            example.reset();
+        }
+    };
 
     Test test1 {"test1", [this]() {
         // TODO: Add assertions here.

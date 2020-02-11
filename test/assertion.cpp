@@ -39,8 +39,10 @@ private:
         }
     };
 
-    After tearDown {[this]() {
-        }};
+    AfterTest tearDown {
+        [this]() {
+        }
+    };
 
     Test testAssertNull {"test 'assertNull'", [this]() {
             assertNull(0);

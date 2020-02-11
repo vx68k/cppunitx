@@ -57,16 +57,16 @@ void BeforeTest::disable()
     context->removeBeforeTest(this);
 }
 
-// Class 'After' implementation.
+// Class 'AfterTest' implementation.
 
-void After::enable()
+void AfterTest::enable()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
-    context->addAfter(this);
+    context->addAfterTest(this);
 }
 
-void After::disable()
+void AfterTest::disable()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
-    context->removeAfter(this);
+    context->removeAfterTest(this);
 }

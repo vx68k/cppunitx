@@ -55,12 +55,12 @@ void TestContext::removeBeforeTest(const BeforeTest *const beforeTest)
     _beforeTests.erase(beforeTest);
 }
 
-void TestContext::addAfter(const After *const after)
+void TestContext::addAfterTest(const AfterTest *const afterTest)
 {
-    _afters.insert(after);
+    _afterTests.insert(afterTest);
 }
 
-void TestContext::removeAfter(const After *const after)
+void TestContext::removeAfterTest(const AfterTest *const afterTest)
 {
-    _afters.erase(after);
+    _afterTests.erase(afterTest);
 }

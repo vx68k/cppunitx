@@ -125,25 +125,25 @@ namespace cppunitx
     /// Object to specify an after-test procedure.
     ///
     /// This class is equivalent to the '@After' annotation of JUnit.
-    class _CPPUNITX_PUBLIC After
+    class _CPPUNITX_PUBLIC AfterTest
     {
     private:
         const std::function<void ()> _function;
 
     public:
         template<class Function>
-        explicit After(Function function)
+        explicit AfterTest(Function function)
             : _function {std::forward<Function>(function)}
         {
             enable();
         }
 
         // To suppress implicit definitions.
-        After(const After &) = delete;
-        After &operator =(const After &) = delete;
+        AfterTest(const AfterTest &) = delete;
+        void operator =(const AfterTest &) = delete;
 
     public:
-        ~After()
+        ~AfterTest()
         {
             disable();
         }
@@ -169,7 +169,7 @@ namespace cppunitx
 
         std::set<const BeforeTest *> _beforeTests;
 
-        std::set<const After *> _afters;
+        std::set<const AfterTest *> _afterTests;
 
     public:
         TestContext();
@@ -191,10 +191,10 @@ namespace cppunitx
         virtual void removeBeforeTest(const BeforeTest *before);
 
         /// Adds an after-test procedure to this context.
-        virtual void addAfter(const After *after);
+        virtual void addAfterTest(const AfterTest *after);
 
         /// Removes an after-test procedure from this context.
-        virtual void removeAfter(const After *after);
+        virtual void removeAfterTest(const AfterTest *after);
     };
 }
 
