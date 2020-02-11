@@ -83,9 +83,10 @@ namespace cppunitx
         void disable();
     };
 
-    /// Object to specify a before-test procedure.
+    /// Object to specify a before-test (or set-up) procedure.
+    /// Before-test procedures will run once before each test case.
     ///
-    /// This class is equivalent to the '@Before' annotation of JUnit.
+    /// This class is equivalent to the '@Before' annotation of JUnit 4.
     class _CPPUNITX_PUBLIC BeforeTest
     {
     private:
@@ -99,8 +100,10 @@ namespace cppunitx
             enable();
         }
 
-        // To suppress implicit definitions.
+        // Deleted: this class is not copy-constructible.
         BeforeTest(const BeforeTest &) = delete;
+
+        // Deleted: this class is not copy-assignable.
         void operator =(const BeforeTest &) = delete;
 
     public:
@@ -122,9 +125,10 @@ namespace cppunitx
         void disable();
     };
 
-    /// Object to specify an after-test procedure.
+    /// Object to specify an after-test (or tear-down) procedure.
+    /// After-test procedures will run once after each test case.
     ///
-    /// This class is equivalent to the '@After' annotation of JUnit.
+    /// This class is equivalent to the '@After' annotation of JUnit 4.
     class _CPPUNITX_PUBLIC AfterTest
     {
     private:
@@ -138,8 +142,10 @@ namespace cppunitx
             enable();
         }
 
-        // To suppress implicit definitions.
+        // Deleted: this class is not copy-constructible.
         AfterTest(const AfterTest &) = delete;
+
+        // Deleted: this class is not copy-assignable.
         void operator =(const AfterTest &) = delete;
 
     public:
