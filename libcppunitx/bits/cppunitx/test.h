@@ -55,6 +55,14 @@ namespace cppunitx
             enable();
         }
 
+        /// Constructs this object.
+        template<class Function>
+        Test(std::string &&name, Function function)
+            : _name {name}, _function {std::forward<Function>(function)}
+        {
+            enable();
+        }
+
         // To suppress implicit definitions.
         Test(const Test &) = delete;
         Test &operator =(const Test &) = delete;
