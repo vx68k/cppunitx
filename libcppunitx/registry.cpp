@@ -28,12 +28,6 @@
 using std::for_each;
 using namespace cppunitx;
 
-// Class 'AbstractTestRegistrant' implementation.
-
-AbstractTestRegistrant::~AbstractTestRegistrant()
-{
-}
-
 // Class 'TestRegistry' implementation.
 
 TestRegistry::TestRegistry()
@@ -45,19 +39,19 @@ TestRegistry::~TestRegistry()
 }
 
 void TestRegistry::addRegistrant(
-    const AbstractTestRegistrant *const registrant)
+    const Registrant *const registrant)
 {
     _registrants.insert(registrant);
 }
 
 void TestRegistry::removeRegistrant(
-    const AbstractTestRegistrant *const registrant)
+    const Registrant *const registrant)
 {
     _registrants.erase(registrant);
 }
 
 void TestRegistry::forEachRegistrant(
-    const std::function<void (const AbstractTestRegistrant *)> &f
+    const std::function<void (const Registrant *)> &f
 ) const
 {
     for_each(_registrants.begin(), _registrants.end(), f);

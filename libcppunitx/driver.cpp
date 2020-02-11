@@ -88,6 +88,7 @@ void TestDriver::run(const char *const suiteName)
     _currentContext.reset(new TestContext()); // TODO: This must be per-fixture.
     auto registry = getRegistry();
     registry->forEachRegistrant(
-        [this](const AbstractTestRegistrant *const registrant) {
+        [this](const TestRegistry::Registrant *const registrant) {
+            registrant->runTests();
         });
 }
