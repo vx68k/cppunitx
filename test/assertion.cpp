@@ -34,8 +34,10 @@ using namespace cppunitx::assertion;
 class AssertionTest
 {
 private:
-    Before setUp {[this]() {
-        }};
+    BeforeTest setUp {
+        [this]() {
+        }
+    };
 
     After tearDown {[this]() {
         }};

@@ -45,14 +45,14 @@ void TestContext::removeTest(const Test *const test)
     _tests.erase(test);
 }
 
-void TestContext::addBefore(const Before *const before)
+void TestContext::addBeforeTest(const BeforeTest *const beforeTest)
 {
-    _befores.insert(before);
+    _beforeTests.insert(beforeTest);
 }
 
-void TestContext::removeBefore(const Before *const before)
+void TestContext::removeBeforeTest(const BeforeTest *const beforeTest)
 {
-    _befores.erase(before);
+    _beforeTests.erase(beforeTest);
 }
 
 void TestContext::addAfter(const After *const after)

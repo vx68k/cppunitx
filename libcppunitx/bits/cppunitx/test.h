@@ -86,25 +86,25 @@ namespace cppunitx
     /// Object to specify a before-test procedure.
     ///
     /// This class is equivalent to the '@Before' annotation of JUnit.
-    class _CPPUNITX_PUBLIC Before
+    class _CPPUNITX_PUBLIC BeforeTest
     {
     private:
         const std::function<void ()> _function;
 
     public:
         template<class Function>
-        explicit Before(Function function)
+        explicit BeforeTest(Function function)
             : _function {std::forward<Function>(function)}
         {
             enable();
         }
 
         // To suppress implicit definitions.
-        Before(const Before &) = delete;
-        Before &operator =(const Before &) = delete;
+        BeforeTest(const BeforeTest &) = delete;
+        void operator =(const BeforeTest &) = delete;
 
     public:
-        ~Before()
+        ~BeforeTest()
         {
             disable();
         }
@@ -167,7 +167,7 @@ namespace cppunitx
     private:
         std::set<const Test *> _tests;
 
-        std::set<const Before *> _befores;
+        std::set<const BeforeTest *> _beforeTests;
 
         std::set<const After *> _afters;
 
@@ -185,10 +185,10 @@ namespace cppunitx
         virtual void removeTest(const Test *test);
 
         /// Adds a before-test procedure to this context.
-        virtual void addBefore(const Before *before);
+        virtual void addBeforeTest(const BeforeTest *before);
 
         /// Removes a before-test procedure from this context.
-        virtual void removeBefore(const Before *before);
+        virtual void removeBeforeTest(const BeforeTest *before);
 
         /// Adds an after-test procedure to this context.
         virtual void addAfter(const After *after);

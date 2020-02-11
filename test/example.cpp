@@ -40,9 +40,11 @@ private:
     std::unique_ptr<Example> example;
 
 private:
-    Before setUp {[this]() {
-        example.reset(new Example());
-    }};
+    BeforeTest setUp {
+        [this]() {
+            example.reset(new Example());
+        }
+    };
 
     After tearDown {[this]() {
         example.reset();
