@@ -140,25 +140,29 @@ namespace cppunitx
     public:
         /// Constructs this object.
         explicit TestRegistrant(const char *name)
-            : inherited {name}
+            : inherited(name)
         {
-            auto registry = getRegistry();
-            registry->addRegistrant(this);
+            getRegistry()->addRegistrant(this);
         }
 
         /// Constructs this object.
         explicit TestRegistrant(const std::string &name)
-            : inherited {name}
+            : inherited(name)
         {
-            auto registry = getRegistry();
-            registry->addRegistrant(this);
+            getRegistry()->addRegistrant(this);
+        }
+
+        /// Constructs this object.
+        explicit TestRegistrant(std::string &&name)
+            : inherited(name)
+        {
+            getRegistry()->addRegistrant(this);
         }
 
     public:
         ~TestRegistrant()
         {
-            auto registry = getRegistry();
-            registry->removeRegistrant(this);
+            getRegistry()->removeRegistrant(this);
         }
 
     public:
