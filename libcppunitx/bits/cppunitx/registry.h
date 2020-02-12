@@ -91,7 +91,7 @@ namespace cppunitx
 
     public:
         /// Returns the test registry for a test suite.
-        template<class Suite = _CPPUNITX_DEFAULT_SUITE>
+        template<class Suite>
         static std::shared_ptr<TestRegistry> getInstance()
         {
             static auto instance = std::make_shared<TestRegistry>();
@@ -126,7 +126,7 @@ namespace cppunitx
 
 
     /// Registrant for task registries.
-    template<class Fixture, class Suite = _CPPUNITX_DEFAULT_SUITE>
+    template<class Fixture>
     class _CPPUNITX_PUBLIC TestRegistrant : public TestRegistry::Registrant
     {
         using inherited = TestRegistry::Registrant;
@@ -134,7 +134,7 @@ namespace cppunitx
     protected:
         static std::shared_ptr<TestRegistry> getRegistry()
         {
-            return TestRegistry::getInstance<Suite>();
+            return TestRegistry::getInstance<_CPPUNITX_DEFAULT_SUITE>();
         }
 
     public:
