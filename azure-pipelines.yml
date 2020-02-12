@@ -9,8 +9,7 @@ trigger:
   - master
   - "feature/**"
 stages:
-  - stage: build
-    displayName: Build
+  - stage: Default
     jobs:
       - job: build
         displayName: Build
