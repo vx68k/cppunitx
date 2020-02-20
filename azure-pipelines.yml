@@ -27,14 +27,28 @@ stages:
             displayName: Configure
           - bash: |
               cd _build
-              make check mostlyclean
+              make check
             displayName: Build
           - task: PublishTestResults@2
-            displayName: Publish test results
             condition: succeededOrFailed()
           - bash: |
               cd _build
               make dist VERSION="`sh ./config.status --version | sed -n '1s/^.* config\.status //p'`-$(Build.BuildNumber)"
+              mkdir -p ../dist
+              mv cppunitx-*.tar.* ../dist
             displayName: Make source archive
-          - publish: _build
-            displayName: Publish artifacts
+          - publish: dist
+            artifact: dist
+  - stage: TestUpload
+    displayName: Test Upload
+    dependsOn: Default
+    condition: >-
+      and(succeeded(),
+          eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    jobs:
+      - job: Upload
+        pool:
+          vmImage: ubuntu-16.04
+        steps:
+          - download: current
+            artifact: dist
