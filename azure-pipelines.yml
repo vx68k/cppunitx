@@ -56,7 +56,7 @@ stages:
             artifact: dist
           - bash: |
               $CXX --version
-            displayName: ShowVersions
+            displayName: Show versions
           - bash: |
               gzip -dc $(Pipeline.Workspace)/dist/cppunitx-*.tar.gz | tar -x
             displayName: Unpack
