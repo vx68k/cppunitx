@@ -70,16 +70,22 @@ stages:
               cd cppunitx-*
               make check
             displayName: Build
-  - stage: TestUpload
-    displayName: Test Upload
+  - stage: Publish
     dependsOn: Default
     condition: >-
       and(succeeded(),
           eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     jobs:
-      - job: Upload
+      - job: Publish
         pool:
           vmImage: ubuntu-16.04
         steps:
           - download: current
             artifact: dist
+          - task: UniversalPackages@0
+            inputs:
+              command: publish
+              publishDirectory: $(Pipeline.Workspace)/dist
+              vstsFeedPublish: $(System.TeamProject)/cppunitx
+              vstsFeedPackagePublish: cppunitx
+              versionOption: patch
