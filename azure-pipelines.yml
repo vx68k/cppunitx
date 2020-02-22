@@ -11,8 +11,7 @@ trigger:
 stages:
   - stage: Default
     jobs:
-      - job: build
-        displayName: Build
+      - job: Build
         pool:
           vmImage: ubuntu-16.04
         container: kazssym/cppunitx-builder:gcc
@@ -39,6 +38,36 @@ stages:
             displayName: Make source archive
           - publish: dist
             artifact: dist
+      - job: Test
+        dependsOn: Build
+        strategy:
+          matrix:
+            Ubuntu:
+              VM_IMAGE: ubuntu-latest
+              CXX: g++
+            macOS:
+              VM_IMAGE: macOS-latest
+              CXX: clang++ -std=c++11
+        continueOnError: true
+        pool:
+          vmImage: $(VM_IMAGE)
+        steps:
+          - download: current
+            artifact: dist
+          - bash: |
+              $CXX --version
+            displayName: ShowVersions
+          - bash: |
+              gzip -dc $(Pipeline.Workspace)/dist/cppunitx-*.tar.gz | tar -x
+            displayName: Unpack
+          - bash: |
+              cd cppunitx-*
+              ./configure
+            displayName: Configure
+          - bash: |
+              cd cppunitx-*
+              make check
+            displayName: Build
   - stage: TestUpload
     displayName: Test Upload
     dependsOn: Default
