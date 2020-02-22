@@ -44,9 +44,11 @@ stages:
           matrix:
             Ubuntu:
               VM_IMAGE: ubuntu-latest
+              CC: gcc
               CXX: g++
             macOS:
               VM_IMAGE: macOS-latest
+              CC: clang
               CXX: clang++ -std=c++11
         continueOnError: true
         pool:
