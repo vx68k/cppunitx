@@ -54,6 +54,7 @@ stages:
         pool:
           vmImage: $(VM_IMAGE)
         steps:
+          - checkout: none
           - download: current
             artifact: dist
           - bash: |
@@ -80,6 +81,7 @@ stages:
         pool:
           vmImage: ubuntu-16.04
         steps:
+          - checkout: none
           - download: current
             artifact: dist
           - task: UniversalPackages@0
