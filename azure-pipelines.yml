@@ -38,8 +38,10 @@ stages:
             displayName: Make source archive
           - publish: dist
             artifact: dist
+  - stage: Test
+    dependsOn: Default
+    jobs:
       - job: Test
-        dependsOn: Build
         strategy:
           matrix:
             Ubuntu:
