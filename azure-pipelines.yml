@@ -89,3 +89,6 @@ stages:
               vstsFeedPublish: $(System.TeamProject)/cppunitx
               vstsFeedPackagePublish: cppunitx
               versionOption: patch
+              packagePublishDescription: >
+                C++UnitX is a lambda-based xUnit-style unit-testing framework
+                for C++.
