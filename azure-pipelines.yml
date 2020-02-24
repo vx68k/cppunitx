@@ -33,9 +33,9 @@ stages:
             condition: succeededOrFailed()
           - bash: |
               cd _build
-              make dist VERSION="`sh ./config.status --version | sed -n '1s/^.* config\.status //p'`-$(Build.BuildNumber)"
+              make dist
               mkdir -p ../dist
-              mv cppunitx-*.tar.* ../dist
+              mv -f cppunitx-*.tar.* ../dist
             displayName: Make source archive
           - publish: dist
             artifact: dist
