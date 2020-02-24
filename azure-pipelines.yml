@@ -40,7 +40,6 @@ stages:
           - publish: dist
             artifact: dist
   - stage: Test
-    dependsOn: Default
     jobs:
       - job: Test
         strategy:
