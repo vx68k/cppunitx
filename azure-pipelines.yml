@@ -24,12 +24,8 @@ stages:
             inputs:
               secureFile: keys.asc
           - bash: |
-              mkdir -p -m 0700 $HOME/.gnupg
-              echo allow-preset-passphrase >> $HOME/.gnupg/gpg-agent.conf
-              gpg --import --batch $(gpgKeys.secureFilePath) || exit $?
-              keygrip=`gpg -k --with-keygrip --with-colons '$(GPG_USERNAME)' | awk -F : '$1 == "grp" { print $10 }'`
               echo '$(GPG_PASSPHRASE)' | \
-              /usr/lib/gnupg/gpg-preset-passphrase --preset "$keygrip"
+              sh ./setupkeys.sh '$(gpgKeys.secureFilePath)'
             displayName: Set up signing keys
           - bash: |
               autoreconf --install
