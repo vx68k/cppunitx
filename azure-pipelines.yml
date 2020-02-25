@@ -17,6 +17,9 @@ stages:
           vmImage: ubuntu-16.04
         container: kazssym/cppunitx-builder:gcc
         steps:
+          - task: DownloadSecureFile@1
+            inputs:
+              secureFile: keys.asc
           - bash: |
               autoreconf --install
             displayName: Bootstrap
