@@ -20,8 +20,17 @@ stages:
         container: kazssym/cppunitx-builder:gcc
         steps:
           - task: DownloadSecureFile@1
+            name: gpgKeys
             inputs:
               secureFile: keys.asc
+          - bash: |
+              mkdir -p -m 0700 $HOME/.gnupg
+              echo allow-preset-passphrase >> $HOME/.gnupg/gpg-agent.conf
+              gpg --import --batch $(gpgKeys.secureFilePath) || exit $?
+              keygrip=`gpg -k --with-keygrip --with-colons '$(GPG_USERNAME)' | awk -F : '$1 == "grp" { print $10 }'`
+              echo '$(GPG_PASSPHRASE)' | \
+              /usr/lib/gnupg/gpg-preset-passphrase --preset "$keygrip"
+            displayName: Set up signing keys
           - bash: |
               autoreconf --install
             displayName: Bootstrap
@@ -38,7 +47,7 @@ stages:
             condition: succeededOrFailed()
           - bash: |
               cd _build
-              make dist
+              make dist || exit $?
               mkdir -p ../dist
               mv -f cppunitx-*.tar.* ../dist
             displayName: Make source archive
