@@ -6,6 +6,11 @@ EXTRA_DIST = README.md
 
 SUBDIRS = libcppunitx test doc
 
-dist-hook:
+dist-hook: $(distdir)/SHA256SUMS
+	if test -n "$$GPG_USERNAME"; then \
+	    gpg -ba -u "$$GPG_USERNAME" --batch $(distdir)/SHA256SUMS; \
+	fi
+
+$(distdir)/SHA256SUMS:
 	cd $(distdir) && \
-	find . -type f ! -name \*SUMS -exec shasum -a 256 {} \; > SHA256SUMS
+	find . -type f ! -name \*SUMS -exec sha256sum {} \; > SHA256SUMS
