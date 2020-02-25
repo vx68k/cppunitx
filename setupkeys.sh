@@ -2,7 +2,7 @@
 
 export GNUPGHOME=${GNUPGHOME:-$HOME/.gnupg}
 
-mkdir -p -m 0700 "$GNUPGHOME"
+mkdir -p -m go-rwx "$GNUPGHOME"
 echo allow-preset-passphrase >> "$GNUPGHOME"/gpg-agent.conf || exit $?
 
 gpg --import --batch "$1" || exit $?
