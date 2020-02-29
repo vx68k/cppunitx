@@ -77,7 +77,7 @@ stages:
             displayName: Unpack
           - bash: |
               cd cppunitx-*
-              ./configure
+              ./configure --prefix=$(Build.BinariesDirectory)
             displayName: Configure
           - bash: |
               cd cppunitx-*
