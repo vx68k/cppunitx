@@ -83,6 +83,10 @@ stages:
               cd cppunitx-*
               make check
             displayName: Build
+          - bash: |
+              cd cppunitx-*
+              make install installcheck
+            displayName: Install
   - stage: Publish
     dependsOn: Default
     condition: >-
