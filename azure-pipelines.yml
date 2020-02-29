@@ -17,7 +17,6 @@ stages:
       - job: Build
         pool:
           vmImage: ubuntu-16.04
-        container: kazssym/cppunitx-builder:gcc
         steps:
           - task: DownloadSecureFile@1
             name: gpgKeys
@@ -27,6 +26,10 @@ stages:
               echo '$(GPG_PASSPHRASE)' | \
               sh ./setupkeys.sh '$(gpgKeys.secureFilePath)'
             displayName: Set up signing keys
+          - bash: |
+              sudo apt-get install -q --no-install-recommends \
+                  texinfo
+            displayName: Install build dependencies
           - bash: |
               autoreconf --install
             displayName: Bootstrap
