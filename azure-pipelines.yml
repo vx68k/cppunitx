@@ -5,8 +5,6 @@
 # permitted in any medium without royalty provided the copyright notice and
 # this notice are preserved.  This file is offered as-is, without any warranty.
 ---
-variables:
-  - group: gpg
 trigger:
   - master
   - release/**
@@ -17,6 +15,8 @@ stages:
       - job: Build
         pool:
           vmImage: ubuntu-latest
+        variables:
+          - group: gpg
         steps:
           - task: DownloadSecureFile@1
             name: gpgKeys
