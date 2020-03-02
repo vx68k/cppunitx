@@ -34,6 +34,11 @@ stages:
               autoreconf --install
             displayName: Bootstrap
           - bash: |
+              version=`./configure --version | awk 'NR == 1 { print $NF }'`
+              echo "##vso[task.setvariable variable=version;isOutput=true]$version"
+            displayName: Get package information
+            name: packageInfo
+          - bash: |
               mkdir -p _build
               cd _build
               ../configure --disable-static
