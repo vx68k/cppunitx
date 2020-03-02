@@ -58,6 +58,8 @@ stages:
           - publish: dist
             artifact: dist
   - stage: Test
+    variables:
+      version: $[dependencies.Default.outputs['packageInfo']]
     jobs:
       - job: Test
         strategy:
