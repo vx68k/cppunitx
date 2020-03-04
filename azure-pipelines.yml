@@ -95,12 +95,32 @@ stages:
             displayName: Install
   - stage: Publish
     dependsOn: Default
-    condition: >-
-      and(succeeded(),
-        or(eq(variables['Build.SourceBranch'], 'refs/heads/master'),
-          startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')))
     jobs:
+      - job: UploadToBitbucket
+        displayName: Upload snapshot to Bitbucket
+        condition: >-
+          and(succeeded(),
+            in(variables['Build.SourceBranch'], 'refs/heads/master'))
+        pool:
+          vmImage: ubuntu-latest
+        variables:
+          - group: bitbucket
+          - name: repository
+            value: kazssym/cppunitx
+        steps:
+          - checkout: none
+          - download: current
+            artifact: dist
+          - bash: |
+              curl --user $(BITBUCKET_USERNAME):$(BITBUCKET_PASSWORD) \
+                  --form "files=@$(Pipeline.Workspace)/dist/cppunitx-$(version).tar.gz;\
+                  filename=cppunitx-$(version)-snapshot$(Build.BuildNumber).tar.gz" \
+                  https://api.bitbucket.org/2.0/repositories/$(repository)/downloads
+            displayName: Upload
       - job: Publish
+        condition: >-
+          and(succeeded(),
+            startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
         pool:
           vmImage: ubuntu-latest
         steps:
