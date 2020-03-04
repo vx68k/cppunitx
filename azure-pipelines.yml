@@ -95,12 +95,14 @@ stages:
             displayName: Install
   - stage: Publish
     dependsOn: Default
+    condition: >-
+      and(succeeded(),
+        startsWith(variables['Build.SourceBranch'], 'refs/heads/'))
     jobs:
       - job: UploadToBitbucket
         displayName: Upload snapshot to Bitbucket
         condition: >-
-          and(succeeded(),
-            in(variables['Build.SourceBranch'], 'refs/heads/master'))
+          in(variables['Build.SourceBranch'], 'refs/heads/master')
         pool:
           vmImage: ubuntu-latest
         variables:
@@ -119,8 +121,7 @@ stages:
             displayName: Upload
       - job: Publish
         condition: >-
-          and(succeeded(),
-            startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
+          startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')
         pool:
           vmImage: ubuntu-latest
         steps:
