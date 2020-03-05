@@ -114,9 +114,9 @@ stages:
           - download: current
             artifact: dist
           - bash: |
-              curl --user $(BITBUCKET_USERNAME):$(BITBUCKET_PASSWORD) \
-                  --form "files=@$(Pipeline.Workspace)/dist/cppunitx-$(version).tar.gz;\
-                  filename=cppunitx-$(version)-snapshot$(Build.BuildNumber).tar.gz" \
+              curl --fail --user '$(BITBUCKET_USERNAME):$(BITBUCKET_PASSWORD)' \
+                  --form 'files=@$(Pipeline.Workspace)/dist/cppunitx-$(version).tar.gz;
+              filename=cppunitx-$(version)-snapshot$(Build.BuildNumber).tar.gz' \
                   https://api.bitbucket.org/2.0/repositories/$(repository)/downloads
             displayName: Upload
       - job: Publish
