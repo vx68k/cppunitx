@@ -36,22 +36,18 @@ stages:
               autoreconf --install
             displayName: Bootstrap
           - bash: |
-              mkdir -p _build
-              cd _build
-              ../configure --disable-static
+              ./configure --disable-static
             displayName: Configure
           - bash: |
               make check
             displayName: Build
-            workingDirectory: _build
           - task: PublishTestResults@2
             condition: succeededOrFailed()
           - bash: |
               make VERSION='$(package.version)' dist || exit $?
-              mkdir -p ../dist
-              mv -f 'cppunitx-$(package.version)'.* ../dist
+              mkdir -p dist
+              mv -f 'cppunitx-$(package.version)'.* dist/
             displayName: Make source archive
-            workingDirectory: _build
           - publish: dist
             artifact: dist
   - stage: Test
