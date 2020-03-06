@@ -41,17 +41,17 @@ stages:
               ../configure --disable-static
             displayName: Configure
           - bash: |
-              cd _build
               make check
             displayName: Build
+            workingDirectory: _build
           - task: PublishTestResults@2
             condition: succeededOrFailed()
           - bash: |
-              cd _build
-              make VERSION=$(package.version) dist || exit $?
+              make VERSION='$(package.version)' dist || exit $?
               mkdir -p ../dist
-              mv -f cppunitx-$(package.version).tar.* ../dist
+              mv -f 'cppunitx-$(package.version)'.* ../dist
             displayName: Make source archive
+            workingDirectory: _build
           - publish: dist
             artifact: dist
   - stage: Test
@@ -78,21 +78,21 @@ stages:
               $CXX --version
             displayName: Show versions
           - bash: |
-              gzip -dc $(Pipeline.Workspace)/dist/cppunitx-$(package.version).tar.gz | \
+              gzip -dc '$(Pipeline.Workspace)/dist/cppunitx-$(package.version).tar.gz' | \
               tar -x
             displayName: Unpack
           - bash: |
-              cd cppunitx-$(package.version)
-              ./configure --prefix=$(Build.BinariesDirectory)
+              ./configure --prefix='$(Build.BinariesDirectory)'
             displayName: Configure
+            workingDirectory: cppunitx-$(package.version)
           - bash: |
-              cd cppunitx-$(package.version)
               make check
             displayName: Build
+            workingDirectory: cppunitx-$(package.version)
           - bash: |
-              cd cppunitx-$(package.version)
               make install installcheck
             displayName: Install
+            workingDirectory: cppunitx-$(package.version)
   - stage: Publish
     dependsOn: Default
     condition: >-
@@ -115,8 +115,8 @@ stages:
             artifact: dist
           - bash: |
               curl --fail --user '$(BITBUCKET_USERNAME):$(BITBUCKET_PASSWORD)' \
-                  --form 'files=@$(Pipeline.Workspace)/dist/cppunitx-$(package.version).tar.gz;
-              filename=cppunitx-$(package.version)-snapshot$(Build.BuildNumber).tar.gz' \
+                  --form 'files=@"$(Pipeline.Workspace)/dist/cppunitx-$(package.version).tar.gz";
+              filename="cppunitx-$(package.version)-snapshot$(Build.BuildNumber).tar.gz"' \
                   https://api.bitbucket.org/2.0/repositories/$(repository)/downloads
             displayName: Upload
       - job: Publish
