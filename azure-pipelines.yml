@@ -114,22 +114,3 @@ stages:
               filename="cppunitx-$(package.version)-snapshot$(Build.BuildNumber).tar.gz"' \
                   'https://api.bitbucket.org/2.0/repositories/$(repository)/downloads'
             displayName: Upload
-      - job: Publish
-        condition: >-
-          startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')
-        pool:
-          vmImage: ubuntu-latest
-        steps:
-          - checkout: none
-          - download: current
-            artifact: dist
-          - task: UniversalPackages@0
-            inputs:
-              command: publish
-              publishDirectory: $(Pipeline.Workspace)/dist
-              vstsFeedPublish: $(System.TeamProject)/cppunitx
-              vstsFeedPackagePublish: cppunitx-$(package.version)
-              versionOption: patch
-              packagePublishDescription: >
-                C++UnitX is a lambda-based xUnit-style unit-testing framework
-                for C++.
