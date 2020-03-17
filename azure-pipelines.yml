@@ -88,16 +88,14 @@ stages:
               make install installcheck
             displayName: Install
             workingDirectory: cppunitx-$(package.version)
-  - stage: Publish
+  - stage: Release
     dependsOn: Default
     condition: >-
       and(succeeded(),
-        startsWith(variables['Build.SourceBranch'], 'refs/heads/'))
+        startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
     jobs:
       - job: UploadToBitbucket
-        displayName: Upload snapshot to Bitbucket
-        condition: >-
-          in(variables['Build.SourceBranch'], 'refs/heads/master')
+        displayName: Upload to Bitbucket
         pool:
           vmImage: ubuntu-latest
         variables:
@@ -110,7 +108,6 @@ stages:
             artifact: dist
           - bash: |
               curl --fail --user '$(bitbucket.username):$(bitbucket.password)' \
-                  --form 'files=@"$(Pipeline.Workspace)/dist/cppunitx-$(package.version).tar.gz";
-              filename="cppunitx-$(package.version)-snapshot$(Build.BuildNumber).tar.gz"' \
+                  --form 'files=@"$(Pipeline.Workspace)/dist/cppunitx-$(package.version).tar.gz"' \
                   'https://api.bitbucket.org/2.0/repositories/$(repository)/downloads'
             displayName: Upload
