@@ -6,7 +6,7 @@
 # this notice are preserved.  This file is offered as-is, without any warranty.
 ---
 variables:
-  package.version: "1.0"
+  package.version: "1-alpha.1"
 trigger:
   - master
   - release/**
