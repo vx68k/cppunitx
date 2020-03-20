@@ -103,7 +103,6 @@ stages:
           - name: repository
             value: kazssym/cppunitx
         steps:
-          - checkout: none
           - download: current
             artifact: dist
           - bash: |
