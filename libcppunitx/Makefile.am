@@ -21,6 +21,7 @@ noinst_HEADERS = ltdl_utility.h
 
 libcppunitx_la_LDFLAGS = -version-info 0:0:0 $(LTLDFLAGS)
 libcppunitx_la_SOURCES = \
+exception.cpp \
 assert.cpp \
 registry.cpp \
 test.cpp \
