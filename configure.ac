@@ -5,7 +5,7 @@ AC_INIT([C++UnitX], [1-alpha.2],
 [https://www.vx68k.org/cppunitx])
 AC_CONFIG_SRCDIR([libcppunitx/registry.cpp])
 AC_CONFIG_AUX_DIR([build-aux])
-AC_CONFIG_MACRO_DIRS([m4])
+AC_CONFIG_MACRO_DIR([m4])
 LT_PREREQ([2.4.6])
 LT_INIT([dlopen])
 AM_INIT_AUTOMAKE([foreign no-define tar-ustar])
