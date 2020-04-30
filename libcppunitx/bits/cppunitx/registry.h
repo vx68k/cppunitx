@@ -20,6 +20,7 @@
 #define _CPPUNITX_REGISTRY_H 1
 
 #include <unordered_set>
+#include <functional>
 #include <memory>
 #include <string>
 #include <bits/cppunitx.h>
@@ -36,51 +37,61 @@ class SUITE;
 
 namespace cppunitx
 {
-    /// Base class for test registrants.
-    class _CPPUNITX_PUBLIC AbstractTestRegistrant
-    {
-    private:
-        std::string _name;
-
-    public:
-        /// Constructs this object with a null-terminated string value.
-        explicit AbstractTestRegistrant(const char *const name)
-            : _name {name}
-        {
-        }
-
-        /// Constructs this object with a 'std::string' value.
-        explicit AbstractTestRegistrant(const std::string &name)
-            : _name {name}
-        {
-        }
-
-        // This class is not copy-constructible.
-        AbstractTestRegistrant(const AbstractTestRegistrant &) = delete;
-
-        // This class is not copy-assignable.
-        void operator =(const AbstractTestRegistrant &) = delete;
-
-    public:
-        virtual ~AbstractTestRegistrant() = 0;
-
-    public:
-        /// Returns the name of this object.
-        const std::string &getName() const noexcept
-        {
-            return _name;
-        }
-
-        /// Runs tests.
-        virtual void runTests() const = 0;
-    };
-
     /// Test regitry.
     class _CPPUNITX_PUBLIC TestRegistry
     {
     public:
+        /// Base class for test registrants.
+        class _CPPUNITX_PUBLIC Registrant
+        {
+        private:
+            std::string _name;
+
+        protected:
+            /// Constructs this object with a null-terminated string value.
+            explicit Registrant(const char *const name)
+                : _name {name}
+            {
+            }
+
+            /// Constructs this object with a 'std::string' value.
+            explicit Registrant(const std::string &name)
+                : _name {name}
+            {
+            }
+
+            /// Constructs this object with a 'std::string' value.
+            explicit Registrant(std::string &&name)
+                : _name {name}
+            {
+            }
+
+            // Deleted: this class is not copy-constructible.
+            Registrant(const Registrant &) = delete;
+
+            // Deleted: this class is not copy-assignable.
+            void operator =(const Registrant &) = delete;
+
+        public:
+            /// Does nothing on destruction of this object.
+            virtual ~Registrant()
+            {
+            }
+
+        public:
+            /// Returns the name of this object.
+            const std::string &getName() const noexcept
+            {
+                return _name;
+            }
+
+            /// Runs tests.
+            virtual void runTests() const = 0;
+        };
+
+    public:
         /// Returns the test registry for a test suite.
-        template<class Suite = _CPPUNITX_DEFAULT_SUITE>
+        template<class Suite>
         static std::shared_ptr<TestRegistry> getInstance()
         {
             static auto instance = std::make_shared<TestRegistry>();
@@ -88,7 +99,7 @@ namespace cppunitx
         }
 
     private:
-        std::unordered_set<const AbstractTestRegistrant *> _registrants;
+        std::unordered_set<const Registrant *> _registrants;
 
     public:
         TestRegistry();
@@ -102,55 +113,56 @@ namespace cppunitx
 
     public:
         /// Adds a registrant to this registry.
-        void addRegistrant(const AbstractTestRegistrant *registrant);
+        void addRegistrant(const Registrant *registrant);
 
         /// Removes a registrant from this registry.
-        void removeRegistrant(const AbstractTestRegistrant *registrant);
+        void removeRegistrant(const Registrant *registrant);
 
         /// Invokes a function for each registrant.
-        template<class Function>
-        void forEachRegistrant(Function function) const
-        {
-            for (auto &&registrant : _registrants) {
-                function(registrant);
-            }
-        }
+        void forEachRegistrant(
+            const std::function<void (const Registrant *)> &f
+        ) const;
     };
 
+
     /// Registrant for task registries.
-    template<class Fixture, class Suite = _CPPUNITX_DEFAULT_SUITE>
-    class _CPPUNITX_PUBLIC TestRegistrant : public AbstractTestRegistrant
+    template<class Fixture>
+    class _CPPUNITX_PUBLIC TestRegistrant : public TestRegistry::Registrant
     {
-        using inherited = AbstractTestRegistrant;
+        using inherited = TestRegistry::Registrant;
 
     protected:
         static std::shared_ptr<TestRegistry> getRegistry()
         {
-            return TestRegistry::getInstance<Suite>();
+            return TestRegistry::getInstance<_CPPUNITX_DEFAULT_SUITE>();
         }
 
     public:
         /// Constructs this object.
         explicit TestRegistrant(const char *name)
-            : inherited {name}
+            : inherited(name)
         {
-            auto registry = getRegistry();
-            registry->addRegistrant(this);
+            getRegistry()->addRegistrant(this);
         }
 
         /// Constructs this object.
         explicit TestRegistrant(const std::string &name)
-            : inherited {name}
+            : inherited(name)
         {
-            auto registry = getRegistry();
-            registry->addRegistrant(this);
+            getRegistry()->addRegistrant(this);
+        }
+
+        /// Constructs this object.
+        explicit TestRegistrant(std::string &&name)
+            : inherited(name)
+        {
+            getRegistry()->addRegistrant(this);
         }
 
     public:
         ~TestRegistrant()
         {
-            auto registry = getRegistry();
-            registry->removeRegistrant(this);
+            getRegistry()->removeRegistrant(this);
         }
 
     public:

@@ -21,6 +21,7 @@
 
 #include <bits/cppunitx.h>
 
+#include <memory>
 #include <cstdint>
 
 namespace cppunitx
@@ -30,8 +31,36 @@ namespace cppunitx
         _CPPUNITX_PUBLIC void assertNull(const volatile void *ptr,
             const char *message = nullptr);
 
+        template<class T>
+        inline void assertNull(const std::unique_ptr<T> &ptr,
+            const char *message = nullptr)
+        {
+            assertNull(ptr.get(), message);
+        }
+
+        template<class T>
+        inline void assertNull(const std::shared_ptr<T> &ptr,
+            const char *message = nullptr)
+        {
+            assertNull(ptr.get(), message);
+        }
+
         _CPPUNITX_PUBLIC void assertNotNull(const volatile void *ptr,
             const char *message = nullptr);
+
+        template<class T>
+        inline void assertNotNull(const std::unique_ptr<T> &ptr,
+            const char *message = nullptr)
+        {
+            assertNotNull(ptr.get(), message);
+        }
+
+        template<class T>
+        inline void assertNotNull(const std::shared_ptr<T> &ptr,
+            const char *message = nullptr)
+        {
+            assertNotNull(ptr.get(), message);
+        }
 
         _CPPUNITX_PUBLIC void assertEquals(std::intmax_t expected,
             std::intmax_t actual, const char *message);

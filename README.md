@@ -1,11 +1,9 @@
-# READ ME
+# Introduction
 
-## Description
+<dfn>C++Unit­X</dfn> is a lambda-based xUnit-style unit-testing framework for C++.
+It aims to reduce the need to use macros in test suites for C++ (and C) programs.
 
-<dfn>CppUnitX</dfn> is another xUnit-style unit-testing framework for C++.
-It aims to reduce the need to use macros in test suites for C++ programs.
-
-See the [home page][] for more information about CppUnitX.
+See the [home page][] for more information about C++Unit­X.
 
 [Home page]: https://www.vx68k.org/cppunitx
 
@@ -13,7 +11,7 @@ See the [home page][] for more information about CppUnitX.
 
 [Open issues]: https://bitbucket.org/kazssym/cppunitx/issues?status=new&status=open
 
-## License
+# License
 
 This program is provided under the terms and conditions of the [GNU General
 Public License, version 3][GPL-3.0] or any later version.

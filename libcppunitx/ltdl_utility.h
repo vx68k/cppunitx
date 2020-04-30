@@ -19,6 +19,7 @@
 #ifndef LTDL_UTILITY_H
 #define LTDL_UTILITY_H 1
 
+#include <iostream>
 #include <stdexcept>
 #include <cstring>
 #include <ltdl.h>
@@ -58,7 +59,7 @@ namespace ltdl
         {
             int result = lt_dlexit();
             if (result != 0) {
-                std::fprintf(stderr, "%s (ignored)\n", lt_dlerror());
+                std::cerr << lt_dlerror() << " (ignored)\n";
             }
         }
     };
@@ -94,7 +95,7 @@ namespace ltdl
         {
             int result = lt_dlsetsearchpath(_saved_path);
             if (result != 0) {
-                std::fprintf(stderr, "%s (ignored)\n", lt_dlerror());
+                std::cerr << lt_dlerror() << " (ignored)\n";
             }
             delete [] _saved_path;
         }
@@ -126,7 +127,7 @@ namespace ltdl
         {
             int result = lt_dlclose(_handle);
             if (result != 0) {
-                std::fprintf(stderr, "%s (ignored)\n", lt_dlerror());
+                std::cerr << lt_dlerror() << " (ignored)\n";
             }
         }
 

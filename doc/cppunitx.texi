@@ -1,15 +1,15 @@
 \input texinfo
 @c %**start of header
 @setfilename cppunitx.info
-@settitle CppUnitX Reference Manual
+@settitle C++Unit@-X Reference Manual
 @c %**end of header
 
 @copying
-Copyright @copyright{} 2018 Kaz Nishimura
+Copyright @copyright{} 2018-2020 Kaz Nishimura
 @end copying
 
 @titlepage
-@title CppUnitX Reference Manual
+@title C++Unit@-X Reference Manual
 @author Kaz Nishimura
 @page
 @vskip 0pt plus 1filll
@@ -20,13 +20,13 @@ Copyright @copyright{} 2018 Kaz Nishimura
 
 @ifnottex
 @node Top
-@top CppUnitX
+@top C++Unit@-X
 @end ifnottex
 
 @node Introduction
 @chapter Introduction
 
-CppUnitX is another @var{x}Unit-style testing framework for modern C++.
+C++Unit@-X is an xUnit-style lambda-based unit-testing framework for C++.
 
 @node Writing tests
 @chapter Writing tests

@@ -1,13 +1,14 @@
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.69])
-AC_INIT([CppUnitX], [1.0], [https://bitbucket.org/vx68k/cppunitx/issues/new],
-[cppunitx], [https://www.vx68k.org/cppunitx])
+AC_INIT([C++UnitX], [1-alpha.2],
+[https://bitbucket.org/kazssym/cppunitx/issues/new], [cppunitx],
+[https://www.vx68k.org/cppunitx])
 AC_CONFIG_SRCDIR([libcppunitx/registry.cpp])
 AC_CONFIG_AUX_DIR([build-aux])
-AC_CONFIG_MACRO_DIRS([m4])
+AC_CONFIG_MACRO_DIR([m4])
 LT_PREREQ([2.4.6])
 LT_INIT([dlopen win32-dll])
-AM_INIT_AUTOMAKE([foreign no-define])
+AM_INIT_AUTOMAKE([foreign no-define tar-ustar])
 AC_PROG_CC
 AC_PROG_CXX
 AC_CHECK_LIB([ltdl], [lt_dlopen], [LIBLTDL=-lltdl], [LIBLTDL=])

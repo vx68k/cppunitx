@@ -55,6 +55,14 @@ namespace cppunitx
             enable();
         }
 
+        /// Constructs this object.
+        template<class Function>
+        Test(std::string &&name, Function function)
+            : _name {name}, _function {std::forward<Function>(function)}
+        {
+            enable();
+        }
+
         // To suppress implicit definitions.
         Test(const Test &) = delete;
         Test &operator =(const Test &) = delete;
@@ -83,28 +91,31 @@ namespace cppunitx
         void disable();
     };
 
-    /// Object to specify a before-test procedure.
+    /// Object to specify a before-test (or set-up) procedure.
+    /// Before-test procedures will run once before each test case.
     ///
-    /// This class is equivalent to the '@Before' annotation of JUnit.
-    class _CPPUNITX_PUBLIC Before
+    /// This class is equivalent to the '@Before' annotation of JUnit 4.
+    class _CPPUNITX_PUBLIC BeforeTest
     {
     private:
         const std::function<void ()> _function;
 
     public:
         template<class Function>
-        explicit Before(Function function)
+        explicit BeforeTest(Function function)
             : _function {std::forward<Function>(function)}
         {
             enable();
         }
 
-        // To suppress implicit definitions.
-        Before(const Before &) = delete;
-        Before &operator =(const Before &) = delete;
+        // Deleted: this class is not copy-constructible.
+        BeforeTest(const BeforeTest &) = delete;
+
+        // Deleted: this class is not copy-assignable.
+        void operator =(const BeforeTest &) = delete;
 
     public:
-        ~Before()
+        ~BeforeTest()
         {
             disable();
         }
@@ -122,28 +133,31 @@ namespace cppunitx
         void disable();
     };
 
-    /// Object to specify an after-test procedure.
+    /// Object to specify an after-test (or tear-down) procedure.
+    /// After-test procedures will run once after each test case.
     ///
-    /// This class is equivalent to the '@After' annotation of JUnit.
-    class _CPPUNITX_PUBLIC After
+    /// This class is equivalent to the '@After' annotation of JUnit 4.
+    class _CPPUNITX_PUBLIC AfterTest
     {
     private:
         const std::function<void ()> _function;
 
     public:
         template<class Function>
-        explicit After(Function function)
+        explicit AfterTest(Function function)
             : _function {std::forward<Function>(function)}
         {
             enable();
         }
 
-        // To suppress implicit definitions.
-        After(const After &) = delete;
-        After &operator =(const After &) = delete;
+        // Deleted: this class is not copy-constructible.
+        AfterTest(const AfterTest &) = delete;
+
+        // Deleted: this class is not copy-assignable.
+        void operator =(const AfterTest &) = delete;
 
     public:
-        ~After()
+        ~AfterTest()
         {
             disable();
         }
@@ -167,9 +181,9 @@ namespace cppunitx
     private:
         std::set<const Test *> _tests;
 
-        std::set<const Before *> _befores;
+        std::set<const BeforeTest *> _beforeTests;
 
-        std::set<const After *> _afters;
+        std::set<const AfterTest *> _afterTests;
 
     public:
         TestContext();
@@ -185,16 +199,16 @@ namespace cppunitx
         virtual void removeTest(const Test *test);
 
         /// Adds a before-test procedure to this context.
-        virtual void addBefore(const Before *before);
+        virtual void addBeforeTest(const BeforeTest *beforeTest);
 
         /// Removes a before-test procedure from this context.
-        virtual void removeBefore(const Before *before);
+        virtual void removeBeforeTest(const BeforeTest *beforeTest);
 
         /// Adds an after-test procedure to this context.
-        virtual void addAfter(const After *after);
+        virtual void addAfterTest(const AfterTest *afterTest);
 
         /// Removes an after-test procedure from this context.
-        virtual void removeAfter(const After *after);
+        virtual void removeAfterTest(const AfterTest *afterTest);
     };
 }
 
