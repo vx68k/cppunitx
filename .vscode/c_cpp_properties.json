@@ -1,8 +1,8 @@
 {
     "configurations": [
         {
-            "name": "POSIX",
-            "intelliSenseMode": "clang-x64",
+            "name": "POSIX (GCC)",
+            "compilerPath": "/usr/bin/gcc",
             "includePath": [
                 "${workspaceFolder}",
                 "${workspaceFolder}/libcppunitx"
