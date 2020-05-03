@@ -8,12 +8,18 @@ AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_PREREQ([2.4.6])
 LT_INIT([dlopen])
-AM_INIT_AUTOMAKE([foreign no-define tar-ustar])
+LT_CONFIG_LTDL_DIR([libltdl])
+LTDL_INIT([recursive])
+AM_INIT_AUTOMAKE([foreign no-define subdir-objects tar-ustar])
+# Checks for programs.
 AC_PROG_CC
 AC_PROG_CXX
-AC_CHECK_LIB([ltdl], [lt_dlopen], [LIBLTDL=-lltdl], [LIBLTDL=])
-AC_SUBST([LIBLTDL])dnl
-AC_CHECK_HEADERS([ltdl.h])
-AC_CONFIG_FILES([Makefile libcppunitx/Makefile test/Makefile doc/Makefile])
+# Checks for libraries.
+# Checks for header files.
+# Checks for typedefs, structures, and compiler characteristics.
+# Checks for library functions.
+# Configuration actions.
+AC_CONFIG_FILES([Makefile libltdl/Makefile libcppunitx/Makefile test/Makefile
+doc/Makefile])
 AC_CONFIG_HEADERS([config.h])
 AC_OUTPUT
