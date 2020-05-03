@@ -20,7 +20,7 @@ bits/cppunitx/driver.h \
 bits/cppunitx/module.h
 noinst_HEADERS = ltdl_utility.h
 
-libcppunitx_la_LDFLAGS = -version-info 0:0:0 $(LTLDFLAGS)
+libcppunitx_la_LDFLAGS = -version-info 0:0:0
 libcppunitx_la_LIBADD = $(LIBLTDL)
 libcppunitx_la_SOURCES = \
 exception.cpp \
