@@ -24,12 +24,12 @@
 
 using namespace cppunitx;
 
-AssertionError::AssertionError(const char *message) noexcept
+AssertionError::AssertionError(const char *message)
     : inherited {message}
 {
 }
 
-AssertionError::AssertionError(const std::string &message) noexcept
+AssertionError::AssertionError(const std::string &message)
     : inherited {message}
 {
 }

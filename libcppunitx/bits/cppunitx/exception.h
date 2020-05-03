@@ -30,9 +30,9 @@ namespace cppunitx
         using inherited = runtime_error;
 
     public:
-        explicit AssertionError(const char *message) noexcept;
+        explicit AssertionError(const char *message);
 
-        explicit AssertionError(const std::string &message) noexcept;
+        explicit AssertionError(const std::string &message);
 
     public:
         /// Destructs an `AssertionError` object.
