@@ -1,6 +1,7 @@
 ## Process this file with automake to produce a Makefile.in.
 
-AM_CPPFLAGS = -I$(top_srcdir)/libcppunitx -I$(top_builddir)/libcppunitx
+AM_CPPFLAGS = -I$(top_srcdir)/libcppunitx -I$(top_builddir)/libcppunitx \
+$(LTDLINCL)
 
 check_PROGRAMS = runtest
 check_LTLIBRARIES = assertion.la example.la

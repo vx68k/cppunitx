@@ -1,4 +1,4 @@
-// <bits/cppunitx/exception.h>
+// exception.cpp
 // Copyright (C) 2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
@@ -16,24 +16,20 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef _CPPUNITX_EXCEPTION_H
-#define _CPPUNITX_EXCEPTION_H 1
+#if HAVE_CONFIG_H
+#include <config.h>
+#endif
 
-#include <stdexcept>
-#include <string>
-#include <bits/cppunitx.h>
+#include <bits/cppunitx/exception.h>
 
-namespace cppunitx
+using namespace cppunitx;
+
+AssertionError::AssertionError(const char *message) noexcept
+    : inherited {message}
 {
-    class _CPPUNITX_PUBLIC AssertionError : public std::runtime_error
-    {
-        using inherited = runtime_error;
-
-    public:
-        explicit AssertionError(const char *message) noexcept;
-
-        explicit AssertionError(const std::string &message) noexcept;
-    };
 }
 
-#endif
+AssertionError::AssertionError(const std::string &message) noexcept
+    : inherited {message}
+{
+}
