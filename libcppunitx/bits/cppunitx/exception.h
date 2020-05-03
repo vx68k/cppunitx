@@ -33,6 +33,13 @@ namespace cppunitx
         explicit AssertionError(const char *message) noexcept;
 
         explicit AssertionError(const std::string &message) noexcept;
+
+    public:
+        /// Destructs an `AssertionError` object.
+        ///
+        /// This destructor is defined out of line so that this class can be
+        /// provided by a shared library.
+        virtual ~AssertionError() noexcept;
     };
 }
 

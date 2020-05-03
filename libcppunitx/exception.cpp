@@ -33,3 +33,7 @@ AssertionError::AssertionError(const std::string &message) noexcept
     : inherited {message}
 {
 }
+
+AssertionError::~AssertionError() noexcept
+{
+}
