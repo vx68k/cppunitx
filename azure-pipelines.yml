@@ -33,7 +33,7 @@ stages:
                   texinfo
             displayName: Install build dependencies
           - bash: |
-              autoreconf --install
+              autoreconf
             displayName: Bootstrap
           - bash: |
               ./configure --disable-static
