@@ -4,7 +4,9 @@ AM_CPPFLAGS = -I$(top_srcdir)/libcppunitx -I$(top_builddir)/libcppunitx \
 $(LTDLINCL)
 
 check_PROGRAMS = runtest
-check_LTLIBRARIES = test_assertion.la test_example.la
+check_LTLIBRARIES = \
+test_assertion.la \
+test_example.la
 
 TESTS = $(check_LTLIBRARIES)
 
@@ -14,8 +16,8 @@ LA_LOG_COMPILER = ./runtest
 runtest_LDFLAGS = -no-install
 runtest_SOURCES = runtest.cpp
 runtest_LDADD = \
--dlopen assertion.la \
--dlopen example.la \
+-dlopen test_assertion.la \
+-dlopen test_example.la \
 $(top_builddir)/libcppunitx/libcppunitx.la $(LIBLTDL)
 
 # A '-rpath' option is required to produce a loadable module.
