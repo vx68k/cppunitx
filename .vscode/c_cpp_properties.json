@@ -5,7 +5,8 @@
             "compilerPath": "/usr/bin/gcc",
             "includePath": [
                 "${workspaceFolder}",
-                "${workspaceFolder}/libcppunitx"
+                "${workspaceFolder}/libcppunitx",
+                "${workspaceFolder}/libltdl"
             ],
             "defines": [
                 "HAVE_CONFIG_H"
