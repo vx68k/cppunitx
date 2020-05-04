@@ -1,7 +1,4 @@
 runtest
-assertion.la
-example.la
-libcppunitx.la
 Makefile
 config.status
 config.h
@@ -11,11 +8,14 @@ config.h.in
 configure
 aclocal.m4
 stamp-*
+.dirstamp
 .libs
 .deps
 .env
 *.trs
 *.log
+*.la
+*.a
 *.lo
 *.o
 *.cache

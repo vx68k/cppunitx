@@ -20,7 +20,7 @@
 #include <config.h>
 #endif
 
-#define SUITE example
+#define SUITE test_example
 
 #define MODULE_MAIN 1
 #include <cppunitx/module>
