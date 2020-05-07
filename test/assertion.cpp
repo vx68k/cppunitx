@@ -20,7 +20,7 @@
 #include <config.h>
 #endif
 
-#define SUITE assertion
+#define SUITE test_assertion
 
 #define MODULE_MAIN 1
 #include <cppunitx/module>

@@ -6,11 +6,11 @@
 # this notice are preserved.  This file is offered as-is, without any warranty.
 ---
 variables:
-  package.version: "1.0"
+  package.distName: cppunitx-1-alpha.2
 trigger:
   - master
-  - release/**
-  - feature/**
+  - release/*
+  - feature/*
 stages:
   - stage: Default
     jobs:
@@ -21,19 +21,19 @@ stages:
           - group: gpg
         steps:
           - task: DownloadSecureFile@1
-            name: gpgKeys
+            name: Keys
             inputs:
               secureFile: keys.asc
           - bash: |
               echo '$(gpg.passphrase)' | \
-              sh ./setupkeys.sh '$(gpgKeys.secureFilePath)'
+              sh ./setupkeys.sh '$(Keys.secureFilePath)'
             displayName: Set up signing keys
           - bash: |
               sudo apt-get install -q --no-install-recommends \
                   texinfo
             displayName: Install build dependencies
           - bash: |
-              autoreconf --install
+              autoreconf
             displayName: Bootstrap
           - bash: |
               ./configure --disable-static
@@ -44,9 +44,9 @@ stages:
           - task: PublishTestResults@2
             condition: succeededOrFailed()
           - bash: |
-              make VERSION='$(package.version)' dist || exit $?
+              make dist || exit $?
               mkdir -p dist
-              mv -f 'cppunitx-$(package.version)'.* dist/
+              mv -f '$(package.distName)'.* dist/
             displayName: Make source archive
           - publish: dist
             artifact: dist
@@ -71,7 +71,7 @@ stages:
           - download: current
             artifact: dist
           - bash: |
-              gzip -dc '$(Pipeline.Workspace)/dist/cppunitx-$(package.version).tar.gz' | \
+              gzip -dc '$(Pipeline.Workspace)/dist/$(package.distName).tar.gz' | \
               tar -x
             displayName: Unpack
           - bash: |
@@ -79,25 +79,23 @@ stages:
               $CXX --version
               ./configure --prefix='$(Build.BinariesDirectory)'
             displayName: Configure
-            workingDirectory: cppunitx-$(package.version)
+            workingDirectory: $(package.distName)
           - bash: |
               make check
             displayName: Build
-            workingDirectory: cppunitx-$(package.version)
+            workingDirectory: $(package.distName)
           - bash: |
               make install installcheck
             displayName: Install
-            workingDirectory: cppunitx-$(package.version)
-  - stage: Publish
+            workingDirectory: $(package.distName)
+  - stage: Release
     dependsOn: Default
     condition: >-
       and(succeeded(),
-        startsWith(variables['Build.SourceBranch'], 'refs/heads/'))
+        startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
     jobs:
       - job: UploadToBitbucket
-        displayName: Upload snapshot to Bitbucket
-        condition: >-
-          in(variables['Build.SourceBranch'], 'refs/heads/master')
+        displayName: Upload to Bitbucket
         pool:
           vmImage: ubuntu-latest
         variables:
@@ -105,31 +103,9 @@ stages:
           - name: repository
             value: kazssym/cppunitx
         steps:
-          - checkout: none
           - download: current
             artifact: dist
           - bash: |
-              curl --fail --user '$(bitbucket.username):$(bitbucket.password)' \
-                  --form 'files=@"$(Pipeline.Workspace)/dist/cppunitx-$(package.version).tar.gz";
-              filename="cppunitx-$(package.version)-snapshot$(Build.BuildNumber).tar.gz"' \
-                  'https://api.bitbucket.org/2.0/repositories/$(repository)/downloads'
+              sh ./upload.sh -u '$(bitbucket.username):$(bitbucket.password)' \
+                  -r '$(repository)' '$(Pipeline.Workspace)'/dist/*
             displayName: Upload
-      - job: Publish
-        condition: >-
-          startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')
-        pool:
-          vmImage: ubuntu-latest
-        steps:
-          - checkout: none
-          - download: current
-            artifact: dist
-          - task: UniversalPackages@0
-            inputs:
-              command: publish
-              publishDirectory: $(Pipeline.Workspace)/dist
-              vstsFeedPublish: $(System.TeamProject)/cppunitx
-              vstsFeedPackagePublish: cppunitx-$(package.version)
-              versionOption: patch
-              packagePublishDescription: >
-                C++UnitX is a lambda-based xUnit-style unit-testing framework
-                for C++.
