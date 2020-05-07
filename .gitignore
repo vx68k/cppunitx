@@ -11,7 +11,7 @@ stamp-*
 .dirstamp
 .libs
 .deps
-.env
+_build
 *.trs
 *.log
 *.la
