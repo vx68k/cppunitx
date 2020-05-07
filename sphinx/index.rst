@@ -10,6 +10,7 @@ Welcome to cppunitx's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   intro
    exception
 
 Indices and tables
