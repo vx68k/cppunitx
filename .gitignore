@@ -11,10 +11,11 @@ stamp-*
 .dirstamp
 Debug
 Release
-.libs
-.deps
 LibrarySupport
 _build
+.vs
+.libs
+.deps
 *.trs
 *.log
 *.pc
@@ -24,6 +25,7 @@ _build
 *.o
 *.tvsconfig
 *.local
+*.user
 *.cache
 *.rej
 *.orig
