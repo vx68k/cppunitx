@@ -69,16 +69,16 @@ namespace ltdl
     {
     private:
         libltdl _lib {};
-        const char *_saved_path {};
+        const char *_original_path {};
 
     public:
         explicit library_path(const char *const path)
-            : _saved_path {lt_dlgetsearchpath()}
+            : _original_path {lt_dlgetsearchpath()}
         {
-            if (_saved_path != nullptr) {
-                auto copy = new char [std::strlen(_saved_path) + 1];
-                std::strcpy(copy, _saved_path);
-                _saved_path = copy;
+            if (_original_path != nullptr) {
+                auto n = std::strlen(_original_path) + 1;
+                auto copy = new char [n];
+                _original_path = std::strncpy(copy, _original_path, n);
             }
             int result = lt_dlsetsearchpath(path);
             if (result != 0) {
@@ -93,11 +93,11 @@ namespace ltdl
     public:
         ~library_path()
         {
-            int result = lt_dlsetsearchpath(_saved_path);
+            int result = lt_dlsetsearchpath(_original_path);
             if (result != 0) {
                 std::cerr << lt_dlerror() << " (ignored)\n";
             }
-            delete [] _saved_path;
+            delete [] _original_path;
         }
     };
 
