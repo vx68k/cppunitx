@@ -19,7 +19,7 @@ AC_PROG_CXX
 # Checks for typedefs, structures, and compiler characteristics.
 # Checks for library functions.
 # Configuration actions.
-AC_CONFIG_FILES([Makefile libltdl/Makefile libcppunitx/Makefile test/Makefile
-doc/Makefile])
+AC_CONFIG_FILES([Makefile libcppunitx/Makefile
+libltdl/Makefile test/Makefile doc/Makefile])
 AC_CONFIG_HEADERS([config.h])
 AC_OUTPUT
