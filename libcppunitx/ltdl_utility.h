@@ -21,6 +21,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <memory>
 #include <cstring>
 #include <ltdl.h>
 
@@ -69,16 +70,16 @@ namespace ltdl
     {
     private:
         libltdl _lib {};
-        const char *_original_path {};
+        std::unique_ptr<char []> _original_path;
 
     public:
         explicit library_path(const char *const path)
-            : _original_path {lt_dlgetsearchpath()}
         {
-            if (_original_path != nullptr) {
-                auto n = std::strlen(_original_path) + 1;
-                auto copy = new char [n];
-                _original_path = std::strncpy(copy, _original_path, n);
+            auto current_path = lt_dlgetsearchpath();
+            if (current_path != nullptr) {
+                auto n = std::strlen(current_path) + 1;
+                _original_path.reset(new char [n]);
+                std::memcpy(_original_path.get(), current_path, n);
             }
             int result = lt_dlsetsearchpath(path);
             if (result != 0) {
@@ -93,11 +94,10 @@ namespace ltdl
     public:
         ~library_path()
         {
-            int result = lt_dlsetsearchpath(_original_path);
+            int result = lt_dlsetsearchpath(_original_path.get());
             if (result != 0) {
                 std::cerr << lt_dlerror() << " (ignored)\n";
             }
-            delete [] _original_path;
         }
     };
 
