@@ -1,8 +1,5 @@
 syntax: regexp
 (^|/)runtest$
-(^|/)assertion\.la$
-(^|/)example\.la$
-(^|/)libcppunitx\.la$
 (^|/)Makefile$
 (^|/)config\.status$
 (^|/)config\.h$
@@ -12,13 +9,24 @@ syntax: regexp
 (^|/)configure$
 (^|/)aclocal\.m4$
 (^|/)stamp-[^/]*$
+(^|/)\.dirstamp$
+(^|/)Debug$
+(^|/)Release$
+(^|/)LibrarySupport$
+(^|/)_build$
+(^|/)\.vs$
 (^|/)\.libs$
 (^|/)\.deps$
-(^|/)\.env$
 \.trs$
 \.log$
+\.pc$
+\.la$
+\.a$
 \.lo$
 \.o$
+\.tvsconfig$
+\.local$
+\.user$
 \.cache$
 \.rej$
 \.orig$

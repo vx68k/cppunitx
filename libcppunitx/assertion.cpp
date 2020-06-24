@@ -1,5 +1,5 @@
-// example.cpp
-// Copyright (C) 2018-2020 Kaz Nishimura
+// assertion.cpp
+// Copyright (C) 2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -20,40 +20,23 @@
 #include <config.h>
 #endif
 
-#define SUITE test_example
+#define _CPPUNITX_ASSERT_IMPLEMENTATION 1
+#include <bits/cppunitx/assert.h>
 
-#define MODULE_MAIN 1
-#include <cppunitx/module>
-
-#include <cppunitx/framework>
-#include <memory>
+#include <cppunitx/exception>
 
 using namespace cppunitx;
 
-class Example
+void assertion::assertNull(const volatile void *ptr, const char *message)
 {
-};
+    if (ptr != nullptr) {
+        throw AssertionError("Pointer is not null");
+    }
+}
 
-class ExampleTest
+void assertion::assertNotNull(const volatile void *ptr, const char *message)
 {
-private:
-    std::unique_ptr<Example> example;
-
-private:
-    BeforeTest setUp {
-        [this]() {
-            example.reset(new Example());
-        }
-    };
-
-    AfterTest tearDown {
-        [this]() {
-            example.reset();
-        }
-    };
-
-    Test test1 {"test1", [this]() {
-        // TODO: Add assertions here.
-    }};
-};
-TestRegistrant<ExampleTest> example {"example"};
+    if (ptr == nullptr) {
+        throw AssertionError("Pointer is null");
+    }
+}

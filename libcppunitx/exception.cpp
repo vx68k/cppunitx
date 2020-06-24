@@ -1,4 +1,4 @@
-// assert.cpp
+// exception.cpp
 // Copyright (C) 2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
@@ -20,23 +20,20 @@
 #include <config.h>
 #endif
 
-#define _CPPUNITX_ASSERT_IMPLEMENTATION 1
-#include <bits/cppunitx/assert.h>
-
-#include <cppunitx/exception>
+#include <bits/cppunitx/exception.h>
 
 using namespace cppunitx;
 
-void assertion::assertNull(const volatile void *ptr, const char *message)
+AssertionError::AssertionError(const char *message)
+    : inherited {message}
 {
-    if (ptr != nullptr) {
-        throw AssertionError("Pointer is not null");
-    }
 }
 
-void assertion::assertNotNull(const volatile void *ptr, const char *message)
+AssertionError::AssertionError(const std::string &message)
+    : inherited {message}
 {
-    if (ptr == nullptr) {
-        throw AssertionError("Pointer is null");
-    }
+}
+
+AssertionError::~AssertionError() noexcept
+{
 }

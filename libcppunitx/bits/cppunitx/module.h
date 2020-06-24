@@ -37,7 +37,7 @@ extern "C" cppunitx::TestRegistry *cppunitx_registry();
 
 class SUITE;
 
-_CPPUNITX_PUBLIC cppunitx::TestRegistry *cppunitx_registry()
+cppunitx::TestRegistry *cppunitx_registry()
 {
     return cppunitx::TestRegistry::getInstance<class SUITE>().get();
 }

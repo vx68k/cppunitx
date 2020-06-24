@@ -30,15 +30,16 @@ namespace cppunitx
         using inherited = runtime_error;
 
     public:
-        explicit AssertionError(const char *message)
-            : inherited {message}
-        {
-        }
+        explicit AssertionError(const char *message);
 
-        explicit AssertionError(const std::string &message)
-            : inherited {message}
-        {
-        }
+        explicit AssertionError(const std::string &message);
+
+    public:
+        /// Destructs an `AssertionError` object.
+        ///
+        /// This destructor is defined out of line so that this class can be
+        /// provided by a shared library.
+        virtual ~AssertionError() noexcept;
     };
 }
 

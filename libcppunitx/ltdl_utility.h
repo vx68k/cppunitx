@@ -19,8 +19,8 @@
 #ifndef LTDL_UTILITY_H
 #define LTDL_UTILITY_H 1
 
-#include <iostream>
 #include <stdexcept>
+#include <memory>
 #include <cstring>
 #include <ltdl.h>
 
@@ -59,7 +59,8 @@ namespace ltdl
         {
             int result = lt_dlexit();
             if (result != 0) {
-                std::cerr << lt_dlerror() << " (ignored)\n";
+                // This shall not happen.
+                std::terminate();
             }
         }
     };
@@ -69,16 +70,16 @@ namespace ltdl
     {
     private:
         libltdl _lib {};
-        const char *_saved_path {};
+        std::unique_ptr<char []> _original_path;
 
     public:
         explicit library_path(const char *const path)
-            : _saved_path {lt_dlgetsearchpath()}
         {
-            if (_saved_path != nullptr) {
-                auto copy = new char [std::strlen(_saved_path) + 1];
-                std::strcpy(copy, _saved_path);
-                _saved_path = copy;
+            auto current_path = lt_dlgetsearchpath();
+            if (current_path != nullptr) {
+                auto n = std::strlen(current_path) + 1;
+                _original_path.reset(new char [n]);
+                std::memcpy(_original_path.get(), current_path, n);
             }
             int result = lt_dlsetsearchpath(path);
             if (result != 0) {
@@ -93,11 +94,11 @@ namespace ltdl
     public:
         ~library_path()
         {
-            int result = lt_dlsetsearchpath(_saved_path);
+            int result = lt_dlsetsearchpath(_original_path.get());
             if (result != 0) {
-                std::cerr << lt_dlerror() << " (ignored)\n";
+                // This shall not happen.
+                std::terminate();
             }
-            delete [] _saved_path;
         }
     };
 
@@ -127,7 +128,8 @@ namespace ltdl
         {
             int result = lt_dlclose(_handle);
             if (result != 0) {
-                std::cerr << lt_dlerror() << " (ignored)\n";
+                // This shall not happen.
+                std::terminate();
             }
         }
 
