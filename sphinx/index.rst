@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-C++Unit­X Reference Manual
+C++Unit​X Reference Manual
 =========================
 
 .. toctree::
@@ -11,6 +11,7 @@ C++Unit­X Reference Manual
    :caption: Contents:
 
    intro
+   interface
    exception
 
 Indices and tables

@@ -6,7 +6,7 @@ EXTRA_DIST = README.md
 
 SUBDIRS = libltdl libcppunitx test doc
 
-dist-hook: $(distdir)/SHA256SUMS
+dist-hook:: $(distdir)/SHA256SUMS
 	if test -n "$$GPG_USERNAME"; then \
 	    gpg -ba -u "$$GPG_USERNAME" $(distdir)/SHA256SUMS; \
 	fi

@@ -6,7 +6,7 @@
 # this notice are preserved.  This file is offered as-is, without any warranty.
 ---
 variables:
-  package.distName: cppunitx-1-alpha.2
+  package.distName: cppunitx-1-alpha.3
 trigger:
   - master
   - release/*

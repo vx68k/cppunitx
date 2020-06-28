@@ -78,9 +78,10 @@ void TestDriver::run(const char *const suiteName)
     using GetRegistryFunction = TestRegistry *();
 
     ltdl::library_path path {"."};
-    ltdl::module suite {suiteName};
+    auto suite = ltdl::module::open(suiteName);
+
     auto getRegistry = reinterpret_cast<GetRegistryFunction *>(
-        lt_dlsym(suite, "cppunitx_registry"));
+        lt_dlsym(*suite, "cppunitx_registry"));
     if (getRegistry == nullptr) {
         throw runtime_error(string(suiteName) + ": Not test suite module");
     }

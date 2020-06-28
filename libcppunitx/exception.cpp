@@ -24,16 +24,35 @@
 
 using namespace cppunitx;
 
-AssertionError::AssertionError(const char *message)
-    : inherited {message}
+AssertionFailedException::AssertionFailedException(const char *message)
+:
+    inherited(message)
 {
+    // Nothing to do.
 }
 
-AssertionError::AssertionError(const std::string &message)
-    : inherited {message}
+AssertionFailedException::AssertionFailedException(const std::string &message)
+:
+    inherited(message)
 {
+    // Nothing to do.
 }
 
-AssertionError::~AssertionError() noexcept
+AssertionFailedException::AssertionFailedException(
+    const AssertionFailedException &other)
+:
+    inherited(other)
+{
+    // Nothing to do.
+}
+
+auto AssertionFailedException::operator =(const AssertionFailedException &other)
+    -> AssertionFailedException &
+{
+    *(inherited *)this = other;
+    return *this;
+}
+
+AssertionFailedException::~AssertionFailedException() noexcept
 {
 }

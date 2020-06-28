@@ -1,6 +1,6 @@
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.69])
-AC_INIT([C++UnitX], [1-alpha.2],
+AC_INIT([C++UnitX], [1-alpha.3],
 [https://bitbucket.org/kazssym/cppunitx/issues/new], [cppunitx],
 [https://www.vx68k.org/cppunitx])
 AC_CONFIG_SRCDIR([libcppunitx/registry.cpp])
@@ -19,7 +19,7 @@ AC_PROG_CXX
 # Checks for typedefs, structures, and compiler characteristics.
 # Checks for library functions.
 # Configuration actions.
-AC_CONFIG_FILES([Makefile libltdl/Makefile libcppunitx/Makefile test/Makefile
-doc/Makefile])
+AC_CONFIG_FILES([Makefile libcppunitx/Makefile
+libltdl/Makefile test/Makefile doc/Makefile])
 AC_CONFIG_HEADERS([config.h])
 AC_OUTPUT
