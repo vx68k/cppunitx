@@ -22,6 +22,7 @@
 #include <bits/cppunitx.h>
 
 #include <memory>
+#include <string>
 #include <cstdint>
 
 namespace cppunitx
@@ -43,6 +44,44 @@ namespace cppunitx
         inline void fail(const std::string &message)
         {
             return fail(message.c_str());
+        }
+
+        template<class T, class U>
+        void assertEqual(T x, U y, const char *message = nullptr)
+        {
+            if (x != y) {
+                std::string description = "Values must be equal";
+                if (message != nullptr) {
+                    description.append(": ");
+                    description.append(message);
+                }
+                fail(description);
+            }
+        }
+
+        template<class T, class U>
+        inline void assertEqual(T x, U y, const std::string &message)
+        {
+            assertEqual(x, y, message.c_str());
+        }
+
+        template<class T, class U>
+        void assertNotEqual(T x, U y, const char *message = nullptr)
+        {
+            if (x == y) {
+                std::string description = "Values must not be equal";
+                if (message != nullptr) {
+                    description.append(": ");
+                    description.append(message);
+                }
+                fail(description);
+            }
+        }
+
+        template<class T, class U>
+        inline void assertNotEqual(T x, U y, const std::string &message)
+        {
+            assertNotEqual(x, y, message.c_str());
         }
 
         _CPPUNITX_PUBLIC void assertNull(const volatile void *ptr,
