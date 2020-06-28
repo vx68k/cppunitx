@@ -11,6 +11,7 @@ C++Unit­X Reference Manual
    :caption: Contents:
 
    intro
+   interface
    exception
 
 Indices and tables
