@@ -30,13 +30,13 @@ using namespace cppunitx;
 void assertion::assertNull(const volatile void *ptr, const char *message)
 {
     if (ptr != nullptr) {
-        throw AssertionError("Pointer is not null");
+        throw AssertionFailedException("Pointer is not null");
     }
 }
 
 void assertion::assertNotNull(const volatile void *ptr, const char *message)
 {
     if (ptr == nullptr) {
-        throw AssertionError("Pointer is null");
+        throw AssertionFailedException("Pointer is null");
     }
 }
