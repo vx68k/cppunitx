@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in.
 
-AM_CPPFLAGS = -D_CPPUNITX_IMPLEMENTATION \
+AM_CPPFLAGS = -D_LIBCPPUNITX \
 $(LTDLINCL)
 
 pkgconfigdir = $(libdir)/pkgconfig
