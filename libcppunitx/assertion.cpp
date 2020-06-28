@@ -29,12 +29,12 @@ using namespace cppunitx;
 
 void assertion::fail(const char *message)
 {
-    std::string what = "Assertion failed";
+    std::string description = "Assertion failed";
     if (message != nullptr) {
-        what.append(": ");
-        what.append(message);
+        description.append(": ");
+        description.append(message);
     }
-    throw AssertionFailedException(what);
+    throw AssertionFailedException(description);
 }
 
 void assertion::assertNull(const volatile void *ptr, const char *message)
