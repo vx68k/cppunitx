@@ -110,6 +110,12 @@ namespace ltdl
         lt_dlhandle _handle {};
 
     public:
+        static std::unique_ptr<module> open(const char *const name)
+        {
+            return std::unique_ptr<module>(new module(name));
+        }
+
+    public:
         explicit module(const char *const name)
             : _handle {lt_dlopen(name)}
         {
