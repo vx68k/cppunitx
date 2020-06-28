@@ -28,6 +28,23 @@ namespace cppunitx
 {
     namespace assertion
     {
+        /**
+         * Throws an `AssertionFailedException` object.
+         *
+         * @param message a message string to be given to the exception
+         */
+        _CPPUNITX_PUBLIC void fail(const char *message = nullptr);
+
+        /**
+         * Throws an `AssertionFailedException` object.
+         *
+         * @param message a message string to be given to the exception
+         */
+        inline void fail(const std::string &message)
+        {
+            return fail(message.c_str());
+        }
+
         _CPPUNITX_PUBLIC void assertNull(const volatile void *ptr,
             const char *message = nullptr);
 
