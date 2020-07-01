@@ -84,4 +84,40 @@ public:
     void *sym(const char *symbol);
 };
 
+class ltmodule: public module
+{
+public:
+    ltmodule() noexcept = default;
+
+    ltmodule(const ltmodule &) = delete;
+
+    ltmodule(ltmodule &&other) noexcept
+    {
+        swap(other);
+    }
+
+    ltmodule(const char *const name)
+    {
+        open(name);
+    }
+
+public:
+    void operator =(const ltmodule &) = delete;
+
+    ltmodule &operator =(ltmodule &&other) noexcept
+    {
+        swap(other);
+        return *this;
+    }
+
+public:
+    void swap(ltmodule &other) noexcept
+    {
+        module::swap(other);
+    }
+
+public:
+    void open(const char *name);
+};
+
 #endif
