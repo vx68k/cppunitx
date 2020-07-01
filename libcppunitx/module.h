@@ -21,6 +21,9 @@
 
 #include <utility>
 
+/**
+ * Simple wrapper class for the dynamic loading functions.
+ */
 class module
 {
 public:
