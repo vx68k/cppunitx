@@ -15,6 +15,7 @@ AM_INIT_AUTOMAKE([foreign no-define subdir-objects tar-ustar])
 AC_PROG_CC
 AC_PROG_CXX
 # Checks for libraries.
+AC_SEARCH_LIBS([dlopen], [dl])
 # Checks for header files.
 AC_CHECK_HEADERS([dlfcn.h])
 # Checks for typedefs, structures, and compiler characteristics.
