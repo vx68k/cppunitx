@@ -39,7 +39,19 @@ namespace
         static const std::regex DLNAME;
 
     private:
+        static const std::regex INSTALLED;
+
+    private:
         std::string _dlname;
+
+    private:
+        std::string _installed;
+
+    public:
+        const std::string &dlname() const
+        {
+            return _dlname;
+        }
 
     public:
         void load(const char *const name)
@@ -47,40 +59,54 @@ namespace
             auto &&length = std::strlen(name);
             if (length >= 3 && std::strcmp(name + length - 3, ".la") == 0) {
                 std::ifstream input {name};
-                if (input) {
-                    std::string line;
-                    while (std::getline(input, line)) {
-                        std::smatch match;
-                        if (std::regex_match(line, match, DLNAME)) {
-                            _dlname = match.str(1);
-                        }
+                load(input);
+
+                if (not(_dlname.empty())) {
+                    std::string pathname = name;
+
+                    auto &&sep = pathname.rfind('/');
+                    if (sep == std::string::npos) {
+                        pathname.assign("./");
                     }
+                    else {
+                        pathname.resize(sep + 1);
+                    }
+                    if (_installed == "no") {
+                        pathname.append(LT_OBJDIR);
+                    }
+                    pathname.append(_dlname);
+
+                    _dlname = std::move(pathname);
                 }
             }
         }
 
-    public:
-        const std::string &dlname() const
+    protected:
+        void load(std::istream &input)
         {
-            return _dlname;
+            if (input) {
+                std::string line;
+                while (std::getline(input, line)) {
+                    std::smatch match;
+                    if (std::regex_match(line, match, DLNAME)) {
+                        _dlname = match.str(1);
+                    }
+                    else if (std::regex_match(line, match, INSTALLED)) {
+                        _installed = match.str(1);
+                    }
+                }
+            }
         }
     };
 
     const std::regex ltlibrary_loader::DLNAME {"^dlname='(.*)'"};
+    const std::regex ltlibrary_loader::INSTALLED {"^installed=([^ ]*)"};
 }
 
 void module::open(const char *const name)
 {
     close();
-
-    ltlibrary_loader la;
-    la.load(name);
-
-    std::string dlname = la.dlname();
-    if (dlname.empty()) {
-        dlname.assign(name);
-    }
-    _native_handle = dlopen(dlname.c_str(), RTLD_LAZY);
+    _native_handle = dlopen(name, RTLD_LAZY);
 }
 
 void module::close()
@@ -95,4 +121,16 @@ void module::close()
 void *module::sym(const char *symbol)
 {
     return dlsym(_native_handle, symbol);
+}
+
+void ltmodule::open(const char *const name)
+{
+    ltlibrary_loader loader;
+    loader.load(name);
+
+    std::string dlname = loader.dlname();
+    if (dlname.empty()) {
+        dlname.assign(name);
+    }
+    module::open(dlname.c_str());
 }
