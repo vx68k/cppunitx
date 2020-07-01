@@ -19,10 +19,10 @@ $(top_builddir)/libcppunitx/libcppunitx.la
 
 # A '-rpath' option is required to produce a loadable module.
 
-test_assertion_la_LDFLAGS = -module -avoid-version -rpath $(libdir)
+test_assertion_la_LDFLAGS = -module -no-undefined -avoid-version -rpath $(libdir)
 test_assertion_la_SOURCES = assertion.cpp
 test_assertion_la_LIBADD = $(top_builddir)/libcppunitx/libcppunitx.la
 
-test_example_la_LDFLAGS = -module -avoid-version -rpath $(libdir)
+test_example_la_LDFLAGS = -module -no-undefined -avoid-version -rpath $(libdir)
 test_example_la_SOURCES = example.cpp
 test_example_la_LIBADD = $(top_builddir)/libcppunitx/libcppunitx.la
