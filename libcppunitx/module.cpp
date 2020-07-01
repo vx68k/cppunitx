@@ -30,7 +30,7 @@ void module::open(const char *const name)
 {
     close();
     // TODO: Handle the '.la' file.
-    _native_handle = dlopen(name, 0);
+    _native_handle = dlopen(name, RTLD_LAZY);
 }
 
 void module::close()
