@@ -79,7 +79,7 @@ void TestDriver::run(const char *const suiteName)
 
     std::unique_ptr<module> suite {new module(suiteName)};
     if (not(*suite)) {
-        throw runtime_error(string(suiteName) + ": Module not loadable");
+        throw runtime_error(string(suiteName) + ": File not loadable");
     }
 
     auto getRegistry = reinterpret_cast<GetRegistryFunction *>(
