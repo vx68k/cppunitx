@@ -1,7 +1,6 @@
 ## Process this file with automake to produce Makefile.in.
 
-AM_CPPFLAGS = -D_LIBCPPUNITX \
-$(LTDLINCL)
+AM_CPPFLAGS = -D_LIBCPPUNITX
 
 pkgconfigdir = $(libdir)/pkgconfig
 
@@ -28,7 +27,6 @@ noinst_HEADERS = \
 module.h
 
 libcppunitx_la_LDFLAGS = -version-info 0:0:0
-libcppunitx_la_LIBADD = $(LIBLTDL)
 libcppunitx_la_SOURCES = \
 exception.cpp \
 assertion.cpp \

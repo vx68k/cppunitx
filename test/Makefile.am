@@ -1,7 +1,6 @@
 ## Process this file with automake to produce Makefile.in.
 
-AM_CPPFLAGS = -I$(top_srcdir)/libcppunitx -I$(top_builddir)/libcppunitx \
-$(LTDLINCL)
+AM_CPPFLAGS = -I$(top_srcdir)/libcppunitx
 
 check_PROGRAMS = runtest
 check_LTLIBRARIES = \
@@ -16,9 +15,7 @@ LA_LOG_COMPILER = ./runtest
 runtest_LDFLAGS = -no-install
 runtest_SOURCES = runtest.cpp
 runtest_LDADD = \
--dlopen test_assertion.la \
--dlopen test_example.la \
-$(top_builddir)/libcppunitx/libcppunitx.la $(LIBLTDL)
+$(top_builddir)/libcppunitx/libcppunitx.la
 
 # A '-rpath' option is required to produce a loadable module.
 
