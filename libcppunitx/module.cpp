@@ -26,11 +26,61 @@
 #include <dlfcn.h>
 #endif
 
+#include <fstream>
+#include <regex>
+#include <string>
+#include <cstring>
+
+namespace
+{
+    class ltlibrary_loader
+    {
+    private:
+        static const std::regex DLNAME;
+
+    private:
+        std::string _dlname;
+
+    public:
+        void load(const char *const name)
+        {
+            auto &&length = std::strlen(name);
+            if (length >= 3 && std::strcmp(name + length - 3, ".la") == 0) {
+                std::ifstream input {name};
+                if (input) {
+                    std::string line;
+                    while (std::getline(input, line)) {
+                        std::smatch match;
+                        if (std::regex_match(line, match, DLNAME)) {
+                            _dlname = match.str(1);
+                        }
+                    }
+                }
+            }
+        }
+
+    public:
+        const std::string &dlname() const
+        {
+            return _dlname;
+        }
+    };
+
+    const std::regex ltlibrary_loader::DLNAME {"^dlname='(.*)'"};
+}
+
 void module::open(const char *const name)
 {
     close();
-    // TODO: Handle the '.la' file.
-    _native_handle = dlopen(name, RTLD_LAZY);
+
+    ltlibrary_loader la;
+    la.load(name);
+
+    std::string dlname = la.dlname();
+    if (dlname.empty()) {
+        dlname.assign(name);
+    }
+    _native_handle = dlopen(dlname.c_str(), RTLD_LAZY);
 }
 
 void module::close()
