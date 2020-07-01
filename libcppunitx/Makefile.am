@@ -24,7 +24,7 @@ bits/cppunitx/registry.h \
 bits/cppunitx/test.h \
 bits/cppunitx/driver.h \
 bits/cppunitx/module.h
-noinst_HEADERS = ltdl_utility.h \
+noinst_HEADERS = \
 module.h
 
 libcppunitx_la_LDFLAGS = -version-info 0:0:0
