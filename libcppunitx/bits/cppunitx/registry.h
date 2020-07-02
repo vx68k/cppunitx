@@ -25,10 +25,10 @@
 #include <string>
 #include <bits/cppunitx.h>
 
-#if defined SUITE
+#if defined MODULE
 // This makes the suite name available as a type name.
-class SUITE;
-#define _CPPUNITX_DEFAULT_SUITE class ::SUITE
+class MODULE;
+#define _CPPUNITX_DEFAULT_SUITE class ::MODULE
 #endif
 
 #ifndef _CPPUNITX_DEFAULT_SUITE

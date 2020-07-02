@@ -19,8 +19,8 @@
 #ifndef _CPPUNITX_MODULE_H
 #define _CPPUNITX_MODULE_H 1
 
-#if !defined SUITE
-#error "The required macro 'SUITE' not defined"
+#if !defined MODULE
+#error "Macro 'MODULE' not defined"
 #endif
 
 #include <cppunitx/framework>
@@ -29,17 +29,17 @@
 #define _CPPUNITX_LT_NAME(M, F) __CPPUNITX_LT_NAME(M, F)
 #define __CPPUNITX_LT_NAME(M, F) F
 
-#define cppunitx_registry _CPPUNITX_LT_NAME(SUITE, cppunitx_registry)
+#define cppunitx_registry _CPPUNITX_LT_NAME(MODULE, cppunitx_registry)
 
 extern "C" cppunitx::TestRegistry *cppunitx_registry();
 
 #if MODULE_MAIN
 
-class SUITE;
+class MODULE;
 
 cppunitx::TestRegistry *cppunitx_registry()
 {
-    return cppunitx::TestRegistry::getInstance<class SUITE>().get();
+    return cppunitx::TestRegistry::getInstance<MODULE>().get();
 }
 
 #endif /* MODULE_MAIN */
