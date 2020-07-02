@@ -27,7 +27,7 @@
 #include <locale>
 #include <stdexcept>
 #include <cstdio>
-#include "ltdl_utility.h"
+#include "module_loader.h"
 
 using std::string;
 using std::exception;
@@ -77,10 +77,13 @@ void TestDriver::run(const char *const suiteName)
 {
     using GetRegistryFunction = TestRegistry *();
 
-    ltdl::library_path path {"."};
-    ltdl::module suite {suiteName};
+    std::unique_ptr<ltmodule> suite {new ltmodule(suiteName)};
+    if (not(*suite)) {
+        throw runtime_error(string(suiteName) + ": File not loadable");
+    }
+
     auto getRegistry = reinterpret_cast<GetRegistryFunction *>(
-        lt_dlsym(suite, "cppunitx_registry"));
+        suite->sym("cppunitx_registry"));
     if (getRegistry == nullptr) {
         throw runtime_error(string(suiteName) + ": Not test suite module");
     }

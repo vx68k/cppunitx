@@ -27,16 +27,26 @@
 
 using namespace cppunitx;
 
+void assertion::fail(const char *message)
+{
+    std::string description = "Assertion failed";
+    if (message != nullptr) {
+        description.append(": ");
+        description.append(message);
+    }
+    throw AssertionFailedException(description);
+}
+
 void assertion::assertNull(const volatile void *ptr, const char *message)
 {
     if (ptr != nullptr) {
-        throw AssertionError("Pointer is not null");
+        fail("Pointer is not null");
     }
 }
 
 void assertion::assertNotNull(const volatile void *ptr, const char *message)
 {
     if (ptr == nullptr) {
-        throw AssertionError("Pointer is null");
+        fail("Pointer is null");
     }
 }
