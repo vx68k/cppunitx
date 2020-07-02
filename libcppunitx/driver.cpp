@@ -48,7 +48,7 @@ shared_ptr<TestDriver> TestDriver::getInstance()
     return instance;
 }
 
-int TestDriver::main(const int argc, char **const argv)
+int TestDriver::main(const int argc, char *const *const argv)
 {
     locale::global(locale(""));
 
