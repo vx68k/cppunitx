@@ -84,8 +84,16 @@ public:
     void *sym(const char *symbol);
 };
 
-class ltmodule: public module
+/**
+ * Module class for Libtool libraries.
+ */
+class ltmodule: private module
 {
+public:
+    using module::close;
+    using module::sym;
+    using module::operator bool;
+
 public:
     ltmodule() noexcept = default;
 
