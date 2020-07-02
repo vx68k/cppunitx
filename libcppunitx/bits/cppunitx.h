@@ -19,21 +19,19 @@
 #ifndef _CPPUNITX_H
 #define _CPPUNITX_H 1
 
-#ifndef _CPPUNITX_PUBLIC
 #if _WIN32
-#if CPPUNITX_DLL || _CPPUNITX_IMPLEMENTATION
+#if _LIBCPPUNITX && DLL_EXPORT
 #define _CPPUNITX_PUBLIC __declspec(dllexport)
 #else
 #define _CPPUNITX_PUBLIC __declspec(dllimport)
 #endif
-#else /* !_WIN32 */
+#else /* not _WIN32 */
 #if defined __has_attribute
 #if __has_attribute(visibility)
 #define _CPPUNITX_PUBLIC __attribute__((visibility("default")))
 #endif
 #endif /* defined __has_attribute */
-#endif /* !_WIN32 */
-#endif
+#endif /* not _WIN32 */
 
 #ifndef _CPPUNITX_PUBLIC
 #define _CPPUNITX_PUBLIC

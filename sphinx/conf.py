@@ -74,7 +74,7 @@ pygments_style = None
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'pyramid'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -129,7 +129,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'cppunitx.tex', 'cppunitx Documentation',
+    (master_doc, 'cppunitx.tex', 'C++Unit​X Reference Manual',
      'Kaz Nishimura', 'manual'),
 ]
 
@@ -172,3 +172,9 @@ epub_title = project
 
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
+
+
+# -- Customization
+
+#
+cpp_index_common_prefix = ["cppunitx::"]
