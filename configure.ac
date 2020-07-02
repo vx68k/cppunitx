@@ -20,7 +20,7 @@ AC_CHECK_HEADERS([dlfcn.h])
 # Checks for library functions.
 AC_CHECK_FUNCS([dlopen])
 # Configuration actions.
-AC_CONFIG_FILES([Makefile libcppunitx/Makefile
+AC_CONFIG_FILES([Makefile cppunitx/Makefile libcppunitx/Makefile
 test/Makefile doc/Makefile])
 AC_CONFIG_HEADERS([config.h])
 AC_OUTPUT
