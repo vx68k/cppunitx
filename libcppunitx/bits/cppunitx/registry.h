@@ -28,11 +28,11 @@
 #if defined MODULE
 // This makes the suite name available as a type name.
 class MODULE;
-#define _CPPUNITX_DEFAULT_SUITE class ::MODULE
+#define _CPPUNITX_TEST_SUITE class ::MODULE
 #endif
 
-#ifndef _CPPUNITX_DEFAULT_SUITE
-#define _CPPUNITX_DEFAULT_SUITE void
+#ifndef _CPPUNITX_TEST_SUITE
+#define _CPPUNITX_TEST_SUITE void
 #endif
 
 namespace cppunitx
@@ -134,7 +134,7 @@ namespace cppunitx
     protected:
         static std::shared_ptr<TestRegistry> getRegistry()
         {
-            return TestRegistry::getInstance<_CPPUNITX_DEFAULT_SUITE>();
+            return TestRegistry::getInstance<_CPPUNITX_TEST_SUITE>();
         }
 
     public:
