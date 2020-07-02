@@ -27,7 +27,7 @@
 #include <bits/cppunitx.h>
 
 #define _CPPUNITX_LT_NAME(M, F) __CPPUNITX_LT_NAME(M, F)
-#define __CPPUNITX_LT_NAME(M, F) M ## _LTX_ ## F
+#define __CPPUNITX_LT_NAME(M, F) F
 
 #define cppunitx_registry _CPPUNITX_LT_NAME(SUITE, cppunitx_registry)
 
