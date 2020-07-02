@@ -1,4 +1,4 @@
-// module.h
+// module_loader.h
 // Copyright (C) 2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
@@ -16,8 +16,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef MODULE_H
-#define MODULE_H 1
+#ifndef MODULE_LOADER_H
+#define MODULE_LOADER_H 1
 
 #include <utility>
 

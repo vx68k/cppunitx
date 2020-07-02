@@ -27,7 +27,7 @@
 #include <locale>
 #include <stdexcept>
 #include <cstdio>
-#include "module.h"
+#include "module_loader.h"
 
 using std::string;
 using std::exception;

@@ -24,7 +24,7 @@ bits/cppunitx/test.h \
 bits/cppunitx/driver.h \
 bits/cppunitx/module.h
 noinst_HEADERS = \
-module.h
+module_loader.h
 
 libcppunitx_la_LDFLAGS = -version-info 0:0:0
 libcppunitx_la_SOURCES = \
@@ -34,7 +34,7 @@ registry.cpp \
 test.cpp \
 context.cpp \
 driver.cpp \
-module.cpp
+module_loader.cpp
 
 CLEANFILES = $(pkgconfig_DATA)
 

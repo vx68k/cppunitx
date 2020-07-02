@@ -1,4 +1,4 @@
-// module.cpp
+// module_loader.cpp
 // Copyright (C) 2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
@@ -20,7 +20,7 @@
 #include <config.h>
 #endif
 
-#include "module.h"
+#include "module_loader.h"
 
 #if HAVE_DLFCN_H
 #include <dlfcn.h>
