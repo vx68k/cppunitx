@@ -4,7 +4,7 @@ ACLOCAL_AMFLAGS = -Im4
 
 EXTRA_DIST = README.md
 
-SUBDIRS = libcppunitx test doc
+SUBDIRS = libcppunitx cppunitx test doc
 
 dist-hook:: $(distdir)/SHA256SUMS
 	if test -n "$$GPG_USERNAME"; then \
