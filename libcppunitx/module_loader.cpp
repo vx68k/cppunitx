@@ -106,21 +106,29 @@ namespace
 void module::open(const char *const name)
 {
     close();
+#if HAVE_DLFCN_H
     _native_handle = dlopen(name, RTLD_LAZY);
+#endif
 }
 
 void module::close()
 {
+#if HAVE_DLFCN_H
     native_handle_type handle = nullptr;
     std::swap(_native_handle, handle);
     if (handle != nullptr) {
         dlclose(handle);
     }
+#endif
 }
 
 void *module::sym(const char *symbol)
 {
+#if HAVE_DLFCN_H
     return dlsym(_native_handle, symbol);
+#else
+    return nullptr;
+#endif
 }
 
 void ltmodule::open(const char *const name)
