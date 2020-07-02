@@ -5,8 +5,7 @@
             "compilerPath": "/usr/bin/gcc",
             "includePath": [
                 "${workspaceFolder}",
-                "${workspaceFolder}/libcppunitx",
-                "${workspaceFolder}/libltdl"
+                "${workspaceFolder}/libcppunitx"
             ],
             "defines": [
                 "HAVE_CONFIG_H"
@@ -25,8 +24,7 @@
             "intelliSenseMode": "msvc-x64",
             "includePath": [
                 "${workspaceFolder}",
-                "${workspaceFolder}/libcppunitx",
-                "${workspaceFolder}/libltdl"
+                "${workspaceFolder}/libcppunitx"
             ],
             "defines": [
             ],
