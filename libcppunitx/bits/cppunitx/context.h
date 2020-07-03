@@ -33,12 +33,19 @@ namespace cppunitx
     private:
         std::set<const Test *> _tests;
 
+    private:
         std::set<const BeforeTest *> _beforeTests;
 
+    private:
         std::set<const AfterTest *> _afterTests;
 
     public:
         TestContext();
+
+        TestContext(const TestContext &other) = delete;
+
+    public:
+        void operator =(const TestContext &other) = delete;
 
     public:
         virtual ~TestContext();
@@ -47,20 +54,28 @@ namespace cppunitx
         /// Adds a test case to this context.
         virtual void addTest(const Test *test);
 
+    public:
         /// Removes a test case from this context.
         virtual void removeTest(const Test *test);
 
+    public:
         /// Adds a before-test procedure to this context.
         virtual void addBeforeTest(const BeforeTest *beforeTest);
 
+    public:
         /// Removes a before-test procedure from this context.
         virtual void removeBeforeTest(const BeforeTest *beforeTest);
 
+    public:
         /// Adds an after-test procedure to this context.
         virtual void addAfterTest(const AfterTest *afterTest);
 
+    public:
         /// Removes an after-test procedure from this context.
         virtual void removeAfterTest(const AfterTest *afterTest);
+
+    public:
+        virtual void runTests() const;
     };
 }
 

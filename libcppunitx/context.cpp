@@ -21,17 +21,49 @@
 #endif
 
 #include <bits/cppunitx/context.h>
+#include <bits/cppunitx/exception.h>
+#include <algorithm>
+#include <functional>
+#include <stdexcept>
 
+using std::for_each;
+using std::function;
 using namespace cppunitx;
+
+namespace
+{
+    class defered
+    {
+    private:
+        function<void ()> _function;
+
+    public:
+        template<class Function>
+        defered(Function f)
+        :
+            _function {f}
+        {
+            // Nothing to do.
+        }
+
+    public:
+        ~defered()
+        {
+            _function();
+        }
+    };
+}
 
 // Class 'TestContext' implementation.
 
 TestContext::TestContext()
 {
+    // Nothing to do.
 }
 
 TestContext::~TestContext()
 {
+    // Nothing to do.
 }
 
 void TestContext::addTest(const Test *const test)
@@ -62,4 +94,29 @@ void TestContext::addAfterTest(const AfterTest *const afterTest)
 void TestContext::removeAfterTest(const AfterTest *const afterTest)
 {
     _afterTests.erase(afterTest);
+}
+
+void TestContext::runTests() const
+{
+    for_each(_tests.begin(), _tests.end(), [&](const Test *test) {
+        for_each(_beforeTests.begin(), _beforeTests.end(),
+            [&](const BeforeTest *before) {
+                before->run();
+            });
+
+        defered runAfterTests([&]() {
+            for_each(_afterTests.begin(), _afterTests.end(),
+                [&](const AfterTest *after) {
+                    after->run();
+                });
+        });
+
+        try {
+            test->run();
+        }
+        catch (const AssertionFailedException &e)
+        {
+            // TODO: Handle failures.
+        }
+    });
 }
