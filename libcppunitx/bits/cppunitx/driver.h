@@ -19,9 +19,8 @@
 #ifndef _CPPUNITX_DRIVER_H
 #define _CPPUNITX_DRIVER_H 1
 
-#include <cppunitx/framework>
+#include <bits/cppunitx/context.h>
 #include <memory>
-#include <bits/cppunitx.h>
 
 namespace cppunitx
 {

@@ -19,6 +19,7 @@
 #ifndef _CPPUNITX_DRIVER
 #define _CPPUNITX_DRIVER 1
 
+#include <bits/cppunitx/context.h>
 #include <bits/cppunitx/driver.h>
 
 #endif

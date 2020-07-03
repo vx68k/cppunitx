@@ -20,8 +20,7 @@
 #include <config.h>
 #endif
 
-#define _CPPUNITX_FRAMEWORK_IMPLEMENTATION 1
-#include <bits/cppunitx/test.h>
+#include <bits/cppunitx/context.h>
 
 using namespace cppunitx;
 
