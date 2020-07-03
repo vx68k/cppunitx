@@ -2,9 +2,9 @@
 
 ACLOCAL_AMFLAGS = -Im4
 
-EXTRA_DIST = README.md
+EXTRA_DIST = README.md m4/gnulib-cache.m4
 
-SUBDIRS = libcppunitx cppunitx test doc
+SUBDIRS = libgnu libcppunitx cppunitx test doc
 
 dist-hook:: $(distdir)/SHA256SUMS
 	if test -n "$$GPG_USERNAME"; then \
