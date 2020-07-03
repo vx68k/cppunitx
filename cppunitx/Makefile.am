@@ -7,4 +7,5 @@ bin_PROGRAMS = cppunitx
 
 cppunitx_SOURCES = cppunitx.cpp
 cppunitx_LDADD = \
-$(top_builddir)/libcppunitx/libcppunitx.la
+$(top_builddir)/libcppunitx/libcppunitx.la \
+$(top_builddir)/libgnu/libgnu.a
