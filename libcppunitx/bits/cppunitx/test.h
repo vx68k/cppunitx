@@ -24,6 +24,7 @@
 
 #include <bits/cppunitx.h>
 #include <functional>
+#include <string>
 
 namespace cppunitx
 {
