@@ -1,6 +1,7 @@
 ## Process this file with automake to produce Makefile.in.
 
-AM_CPPFLAGS = -I$(top_srcdir)/libcppunitx
+AM_CPPFLAGS = -I$(top_srcdir)/libcppunitx \
+-I$(top_builddir)/libgnu -I$(top_srcdir)/libgnu
 
 bin_PROGRAMS = cppunitx
 
