@@ -38,6 +38,7 @@ using namespace cppunitx;
 
 static int process_options(int argc, char *const *argv,
     const shared_ptr<TestDriver> &driver);
+static void print_usage(const char *arg0);
 
 int main(const int argc, char *const *const argv)
 {
@@ -70,6 +71,7 @@ int process_options(const int argc, char *const *const argv,
         HELP,
     };
     static const struct option options[] = {
+        {"help", false, nullptr, HELP},
         {"version", false, nullptr, VERSION},
         {}
     };
@@ -78,6 +80,9 @@ int process_options(const int argc, char *const *const argv,
     do {
         opt = getopt_long(argc, argv, "", options, nullptr);
         switch (opt) {
+        case HELP:
+            print_usage(argv[0]);
+            exit(0);
         case VERSION:
             printf("%s %s %s\n", PACKAGE_NAME, "cppunitx", PACKAGE_VERSION);
             exit(0);
@@ -88,4 +93,13 @@ int process_options(const int argc, char *const *const argv,
     while (opt != -1);
 
     return optind;
+}
+
+void print_usage(const char *const arg0)
+{
+    printf("Usage: %s [OPTION]... [TEST-MODULE]...\n", arg0);
+    printf("Run tests in test modules.\n");
+    printf("\n");
+    printf("      --help            %s\n", "display this help and exit");
+    printf("      --version         %s\n", "output version information and exit");
 }
