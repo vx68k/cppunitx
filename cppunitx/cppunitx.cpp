@@ -22,6 +22,7 @@
 
 #include <cppunitx/driver>
 #include <getopt.h>
+#include <sysexits.h>
 #include <locale>
 #include <memory>
 #include <stdexcept>
@@ -30,6 +31,7 @@
 using std::exception;
 using std::fprintf;
 using std::locale;
+using std::printf;
 using std::runtime_error;
 using std::shared_ptr;
 using namespace cppunitx;
@@ -61,8 +63,29 @@ int main(const int argc, char *const *const argv)
 }
 
 int process_options(const int argc, char *const *const argv,
-    const shared_ptr<TestDriver> &driver)
+    [[maybe_unused]] const shared_ptr<TestDriver> &driver)
 {
-    // TODO: Process options.
-    return 1;
+    enum {
+        VERSION = -128,
+        HELP,
+    };
+    static const struct option options[] = {
+        {"version", false, nullptr, VERSION},
+        {}
+    };
+
+    int opt = -1;
+    do {
+        opt = getopt_long(argc, argv, "", options, nullptr);
+        switch (opt) {
+        case VERSION:
+            printf("%s %s %s\n", PACKAGE_NAME, "cppunitx", PACKAGE_VERSION);
+            exit(0);
+        case '?':
+            exit(EX_USAGE);
+        }
+    }
+    while (opt != -1);
+
+    return optind;
 }
