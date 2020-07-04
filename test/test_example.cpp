@@ -26,8 +26,11 @@
 #include <cppunitx/module>
 
 #include <cppunitx/framework>
+#include <iostream>
 #include <memory>
 
+using std::clog;
+using std::endl;
 using namespace cppunitx;
 
 class Example
@@ -40,19 +43,18 @@ private:
     std::unique_ptr<Example> example;
 
 private:
-    BeforeTest setUp {
-        [this]() {
-            example.reset(new Example());
-        }
-    };
+    BeforeTest setUp {[&]() {
+        clog << "setUp!\n";
+        example.reset(new Example());
+    }};
 
-    AfterTest tearDown {
-        [this]() {
-            example.reset();
-        }
-    };
+    AfterTest tearDown {[&]() {
+        clog << "tearDown!\n";
+        example.reset();
+    }};
 
     Test test1 {"test1", [this]() {
+        clog << "test1!\n";
         // TODO: Add assertions here.
     }};
 };
