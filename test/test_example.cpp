@@ -26,15 +26,32 @@
 #include <cppunitx/module>
 
 #include <cppunitx/framework>
+#include <cppunitx/assertion>
 #include <iostream>
 #include <memory>
 
 using std::clog;
 using std::endl;
 using namespace cppunitx;
+using namespace cppunitx::assertion;
 
 class Example
 {
+private:
+    int _sum = 0;
+
+public:
+    int getSum() const
+    {
+        return _sum;
+    }
+
+public:
+    Example &add(int x)
+    {
+        _sum += x;
+        return *this;
+    }
 };
 
 class ExampleTest
@@ -55,7 +72,13 @@ private:
 
     Test test1 {"test1", [this]() {
         clog << "test1!\n";
-        // TODO: Add assertions here.
+        assertEqual(0, example->getSum());
+    }};
+
+    Test test2 {"test2", [this]() {
+        clog << "test2!\n";
+        example->add(1).add(1);
+        assertEqual(2, example->getSum());
     }};
 };
 TestSuite<ExampleTest> example {"example"};
