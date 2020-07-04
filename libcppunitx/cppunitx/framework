@@ -19,7 +19,7 @@
 #ifndef _CPPUNITX_FRAMEWORK
 #define _CPPUNITX_FRAMEWORK 1
 
-#include <bits/cppunitx/registry.h>
+#include <bits/cppunitx/suite.h>
 #include <bits/cppunitx/test.h>
 
 #endif

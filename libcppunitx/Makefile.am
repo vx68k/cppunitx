@@ -19,8 +19,9 @@ cppunitx/module \
 bits/cppunitx.h \
 bits/cppunitx/exception.h \
 bits/cppunitx/assert.h \
-bits/cppunitx/registry.h \
 bits/cppunitx/test.h \
+bits/cppunitx/registry.h \
+bits/cppunitx/suite.h \
 bits/cppunitx/context.h \
 bits/cppunitx/driver.h \
 bits/cppunitx/module.h

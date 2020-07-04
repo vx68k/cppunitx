@@ -19,21 +19,11 @@
 #ifndef _CPPUNITX_REGISTRY_H
 #define _CPPUNITX_REGISTRY_H 1
 
-#include <bits/cppunitx/driver.h>
+#include <bits/cppunitx.h>
 #include <unordered_set>
 #include <functional>
 #include <memory>
 #include <string>
-
-#if defined MODULE
-// This makes the module name available as a type name.
-class MODULE;
-#define _CPPUNITX_TEST_MODULE typename ::MODULE
-#endif
-
-#ifndef _CPPUNITX_TEST_MODULE
-#define _CPPUNITX_TEST_MODULE void
-#endif
 
 namespace cppunitx
 {
@@ -122,57 +112,6 @@ namespace cppunitx
         void forEachRegistrant(
             const std::function<void (const Registrant *)> &f
         ) const;
-    };
-
-
-    /// Registrant for task registries.
-    template<class Fixture>
-    class _CPPUNITX_PUBLIC TestSuite: public TestRegistry::Registrant
-    {
-        using inherited = TestRegistry::Registrant;
-
-    protected:
-        static std::shared_ptr<TestRegistry> getRegistry()
-        {
-            return TestRegistry::getInstance<_CPPUNITX_TEST_MODULE>();
-        }
-
-    public:
-        /// Constructs this object.
-        explicit TestSuite(const char *name)
-            : inherited(name)
-        {
-            getRegistry()->addRegistrant(this);
-        }
-
-        /// Constructs this object.
-        explicit TestSuite(const std::string &name)
-            : inherited(name)
-        {
-            getRegistry()->addRegistrant(this);
-        }
-
-        /// Constructs this object.
-        explicit TestSuite(std::string &&name)
-            : inherited(name)
-        {
-            getRegistry()->addRegistrant(this);
-        }
-
-    public:
-        ~TestSuite()
-        {
-            getRegistry()->removeRegistrant(this);
-        }
-
-    public:
-        void runTests() const override
-        {
-            std::unique_ptr<Fixture> fixture {new Fixture()};
-
-            auto &&driver = TestDriver::getInstance();
-            driver->getCurrentContext()->runTests();
-        }
     };
 }
 
