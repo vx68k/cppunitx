@@ -8,7 +8,7 @@
             "preLaunchTask": "Build",
             "program": "${workspaceFolder}/test/runtest",
             "args": [
-                "example.la"
+                "test_example.la"
             ],
             "environment": [],
             "cwd": "${workspaceFolder}/test",
