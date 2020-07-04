@@ -19,11 +19,11 @@
 #ifndef _CPPUNITX_REGISTRY_H
 #define _CPPUNITX_REGISTRY_H 1
 
+#include <bits/cppunitx/driver.h>
 #include <unordered_set>
 #include <functional>
 #include <memory>
 #include <string>
-#include <bits/cppunitx.h>
 
 #if defined MODULE
 // This makes the suite name available as a type name.
@@ -169,7 +169,9 @@ namespace cppunitx
         void runTests() const override
         {
             std::unique_ptr<Fixture> fixture {new Fixture()};
-            // TODO: Run tests here.
+
+            auto &&driver = TestDriver::getInstance();
+            driver->getCurrentContext()->runTests();
         }
     };
 }
