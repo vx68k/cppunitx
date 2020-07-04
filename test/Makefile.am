@@ -25,6 +25,6 @@ test_assertion_la_LIBADD = \
 $(top_builddir)/libcppunitx/libcppunitx.la
 
 test_example_la_LDFLAGS = -module -no-undefined -shared -avoid-version -rpath $(libdir)
-test_example_la_SOURCES = example.cpp
+test_example_la_SOURCES = test_example.cpp
 test_example_la_LIBADD = \
 $(top_builddir)/libcppunitx/libcppunitx.la
