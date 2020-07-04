@@ -26,13 +26,13 @@
 #include <string>
 
 #if defined MODULE
-// This makes the suite name available as a type name.
+// This makes the module name available as a type name.
 class MODULE;
-#define _CPPUNITX_TEST_SUITE class ::MODULE
+#define _CPPUNITX_TEST_MODULE typename ::MODULE
 #endif
 
-#ifndef _CPPUNITX_TEST_SUITE
-#define _CPPUNITX_TEST_SUITE void
+#ifndef _CPPUNITX_TEST_MODULE
+#define _CPPUNITX_TEST_MODULE void
 #endif
 
 namespace cppunitx
@@ -90,8 +90,8 @@ namespace cppunitx
         };
 
     public:
-        /// Returns the test registry for a test suite.
-        template<class Suite>
+        /// Returns the test registry for a test module.
+        template<class Module>
         static std::shared_ptr<TestRegistry> getInstance()
         {
             static auto instance = std::make_shared<TestRegistry>();
@@ -134,7 +134,7 @@ namespace cppunitx
     protected:
         static std::shared_ptr<TestRegistry> getRegistry()
         {
-            return TestRegistry::getInstance<_CPPUNITX_TEST_SUITE>();
+            return TestRegistry::getInstance<_CPPUNITX_TEST_MODULE>();
         }
 
     public:
