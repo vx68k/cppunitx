@@ -127,7 +127,7 @@ namespace cppunitx
 
     /// Registrant for task registries.
     template<class Fixture>
-    class _CPPUNITX_PUBLIC TestRegistrant : public TestRegistry::Registrant
+    class _CPPUNITX_PUBLIC TestSuite: public TestRegistry::Registrant
     {
         using inherited = TestRegistry::Registrant;
 
@@ -139,28 +139,28 @@ namespace cppunitx
 
     public:
         /// Constructs this object.
-        explicit TestRegistrant(const char *name)
+        explicit TestSuite(const char *name)
             : inherited(name)
         {
             getRegistry()->addRegistrant(this);
         }
 
         /// Constructs this object.
-        explicit TestRegistrant(const std::string &name)
+        explicit TestSuite(const std::string &name)
             : inherited(name)
         {
             getRegistry()->addRegistrant(this);
         }
 
         /// Constructs this object.
-        explicit TestRegistrant(std::string &&name)
+        explicit TestSuite(std::string &&name)
             : inherited(name)
         {
             getRegistry()->addRegistrant(this);
         }
 
     public:
-        ~TestRegistrant()
+        ~TestSuite()
         {
             getRegistry()->removeRegistrant(this);
         }

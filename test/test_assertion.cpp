@@ -54,4 +54,4 @@ private:
             // TODO: Add more assertions here.
         }};
 };
-TestRegistrant<AssertionTest> test {"assertion"};
+TestSuite<AssertionTest> test {"assertion"};

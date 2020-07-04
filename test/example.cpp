@@ -56,4 +56,4 @@ private:
         // TODO: Add assertions here.
     }};
 };
-TestRegistrant<ExampleTest> example {"example"};
+TestSuite<ExampleTest> example {"example"};
