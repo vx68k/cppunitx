@@ -47,12 +47,15 @@ AC_DEFUN([gl_EARLY],
   # Code from module gettext-h:
   # Code from module include_next:
   # Code from module nocrash:
+  # Code from module snippet/_Noreturn:
   # Code from module snippet/arg-nonnull:
   # Code from module snippet/c++defs:
   # Code from module snippet/warn-on-use:
   # Code from module ssize_t:
   # Code from module stddef:
+  # Code from module stdlib:
   # Code from module sys_types:
+  # Code from module sysexits:
   # Code from module unistd:
 ])
 
@@ -96,8 +99,10 @@ AC_DEFUN([gl_INIT],
   AC_SUBST([LTLIBINTL])
   gt_TYPE_SSIZE_T
   gl_STDDEF_H
+  gl_STDLIB_H
   gl_SYS_TYPES_H
   AC_PROG_MKDIR_P
+  gl_SYSEXITS
   gl_UNISTD_H
   # End of code from modules
   m4_ifval(gl_LIBSOURCES_LIST, [
@@ -239,6 +244,7 @@ AC_DEFUN([gltests_LIBSOURCES], [
 # This macro records the list of files which have been installed by
 # gnulib-tool and may be removed by future gnulib-tool invocations.
 AC_DEFUN([gl_FILE_LIST], [
+  build-aux/snippet/_Noreturn.h
   build-aux/snippet/arg-nonnull.h
   build-aux/snippet/c++defs.h
   build-aux/snippet/warn-on-use.h
@@ -248,7 +254,9 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/getopt_int.h
   lib/gettext.h
   lib/stddef.in.h
+  lib/stdlib.in.h
   lib/sys_types.in.h
+  lib/sysexits.in.h
   lib/unistd.c
   lib/unistd.in.h
   m4/00gnulib.m4
@@ -262,7 +270,9 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/off_t.m4
   m4/ssize_t.m4
   m4/stddef_h.m4
+  m4/stdlib_h.m4
   m4/sys_types_h.m4
+  m4/sysexits.m4
   m4/unistd_h.m4
   m4/warn-on-use.m4
   m4/wchar_t.m4

@@ -2,6 +2,8 @@
 **/test/runtest
 **/libgnu/getopt.h
 **/libgnu/stddef.h
+**/libgnu/stdlib.h
+**/libgnu/sysexits.h
 **/libgnu/unistd.h
 **/libgnu/sys/types.h
 **/libgnu/arg-nonnull.h
