@@ -9,3 +9,7 @@ cppunitx_SOURCES = cppunitx.cpp
 cppunitx_LDADD = \
 $(top_builddir)/libcppunitx/libcppunitx.la \
 $(top_builddir)/libgnu/libgnu.a
+
+installcheck-local::
+	$(bindir)/cppunitx --version
+	$(bindir)/cppunitx --help
