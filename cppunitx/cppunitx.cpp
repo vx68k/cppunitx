@@ -20,9 +20,9 @@
 #include <config.h>
 #endif
 
+#include <cppunitx/driver>
 #include <getopt.h>
 #include <sysexits.h>
-#include <cppunitx/driver>
 #include <locale>
 #include <memory>
 #include <stdexcept>
