@@ -6,7 +6,7 @@
 # this notice are preserved.  This file is offered as-is, without any warranty.
 ---
 variables:
-  package.distName: cppunitx-1-alpha.3
+  package.distName: cppunitx-1-alpha.4
 trigger:
   - master
   - release/*
@@ -71,13 +71,14 @@ stages:
           - download: current
             artifact: dist
           - bash: |
-              gzip -dc '$(Pipeline.Workspace)/dist/$(package.distName).tar.gz' | \
+              gzip -dc '$(Agent.BuildDirectory)/dist/$(package.distName).tar.gz' | \
               tar -x
             displayName: Unpack
           - bash: |
               $CC --version
               $CXX --version
               ./configure --prefix='$(Build.BinariesDirectory)'
+              echo "##vso[task.uploadfile]`pwd`/config.log"
             displayName: Configure
             workingDirectory: $(package.distName)
           - bash: |
@@ -107,5 +108,5 @@ stages:
             artifact: dist
           - bash: |
               sh ./upload.sh -u '$(bitbucket.username):$(bitbucket.password)' \
-                  -r '$(repository)' '$(Pipeline.Workspace)'/dist/*
+                  -r '$(repository)' '$(Agent.BuildDirectory)'/dist/*
             displayName: Upload

@@ -1,9 +1,17 @@
 syntax: regexp
-(^|/)runtest$
-(^|/)Makefile$
-(^|/)config\.status$
-(^|/)config\.h$
+(^|/)cppunitx/cppunitx$
+(^|/)test/runtest$
+(^|/)libgnu/getopt\.h$
+(^|/)libgnu/stddef\.h$
+(^|/)libgnu/unistd\.h$
+(^|/)libgnu/sys/types\.h$
+(^|/)libgnu/arg-nonnull\.h$
+(^|/)libgnu/c\+\+defs\.h$
+(^|/)libgnu/warn-on-use\.h$
 (^|/)libtool$
+(^|/)Makefile$
+(^|/)config\.h$
+(^|/)config\.status$
 (^|/)Makefile\.in$
 (^|/)config\.h\.in$
 (^|/)configure$
@@ -24,10 +32,10 @@ syntax: regexp
 \.a$
 \.lo$
 \.o$
+\.cache$
 \.tvsconfig$
 \.local$
 \.user$
-\.cache$
 \.rej$
 \.orig$
 ~$

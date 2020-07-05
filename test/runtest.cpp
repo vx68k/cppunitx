@@ -24,7 +24,7 @@
 
 using namespace cppunitx;
 
-int main(const int argc, char **const argv)
+int main(const int argc, char *const *const argv)
 {
     return TestDriver::main(argc, argv);
 }

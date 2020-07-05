@@ -19,9 +19,8 @@
 #ifndef _CPPUNITX_DRIVER_H
 #define _CPPUNITX_DRIVER_H 1
 
-#include <cppunitx/framework>
+#include <bits/cppunitx/context.h>
 #include <memory>
-#include <bits/cppunitx.h>
 
 namespace cppunitx
 {
@@ -31,7 +30,7 @@ namespace cppunitx
     public:
         static std::shared_ptr<TestDriver> getInstance();
 
-        static int main(int argc, char **argv);
+        static int main(int argc, char *const *argv);
 
     private:
         std::shared_ptr<TestContext> _currentContext;
