@@ -78,6 +78,7 @@ stages:
               $CC --version
               $CXX --version
               ./configure --prefix='$(Build.BinariesDirectory)'
+              echo "##vso[task.uploadfile]`pwd`/config.log"
             displayName: Configure
             workingDirectory: $(package.distName)
           - bash: |
