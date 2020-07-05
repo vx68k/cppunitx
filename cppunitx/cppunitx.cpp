@@ -36,11 +36,11 @@ using std::runtime_error;
 using std::shared_ptr;
 using namespace cppunitx;
 
-static int process_options(int argc, char *const *argv,
+static int process_options(int argc, char **argv,
     const shared_ptr<TestDriver> &driver);
 static void print_usage(const char *arg0);
 
-int main(const int argc, char *const *const argv)
+int main(const int argc, char **const argv)
 {
     try {
         locale::global(locale(""));
@@ -63,7 +63,7 @@ int main(const int argc, char *const *const argv)
     return 0;
 }
 
-int process_options(const int argc, char *const *const argv,
+int process_options(const int argc, char **const argv,
     [[maybe_unused]] const shared_ptr<TestDriver> &driver)
 {
     enum {
