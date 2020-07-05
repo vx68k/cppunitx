@@ -70,12 +70,12 @@ private:
         example.reset();
     }};
 
-    Test test1 {"test1", [this]() {
+    Test test1 {"test1", [&]() {
         clog << "test1!\n";
         assertEqual(0, example->getSum());
     }};
 
-    Test test2 {"test2", [this]() {
+    Test test2 {"test2", [&]() {
         clog << "test2!\n";
         example->add(1).add(1);
         assertEqual(2, example->getSum());
