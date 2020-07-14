@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'cppunitx'
+project = 'C++Unit​X'
 copyright = '2020 Kaz Nishimura'
 author = 'Kaz Nishimura'
 
