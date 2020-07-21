@@ -7,6 +7,7 @@
 ---
 variables:
   package.distName: cppunitx-1-alpha.4
+  uploadRepository: kazssym/cppunitx
 trigger:
   - master
   - release/*
@@ -100,12 +101,10 @@ stages:
           vmImage: ubuntu-latest
         variables:
           - group: bitbucket
-          - name: repository
-            value: kazssym/cppunitx
         steps:
           - download: current
             artifact: dist
           - bash: |
               sh ./upload.sh -u '$(bitbucket.username):$(bitbucket.password)' \
-                  -r '$(repository)' '$(Agent.BuildDirectory)'/dist/*
+                  -r '$(uploadRepository)' '$(Agent.BuildDirectory)'/dist/*
             displayName: Upload
