@@ -6,11 +6,16 @@
             "request": "launch",
             "name": "(gdb) Launch",
             "preLaunchTask": "Build",
-            "program": "${workspaceFolder}/test/runtest",
+            "program": "${workspaceFolder}/cppunitx/.libs/cppunitx",
             "args": [
-                "example.la"
+                "test_example.la"
             ],
-            "environment": [],
+            "environment": [
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "${workspaceFolder}/libcppunitx/.libs"
+                }
+            ],
             "cwd": "${workspaceFolder}/test",
             "stopAtEntry": false,
             "externalConsole": false,

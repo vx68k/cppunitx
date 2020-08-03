@@ -1,4 +1,4 @@
-// <bits/cppunitx/assert.h>
+// <bits/cppunitx/assertion.h>
 // Copyright (C) 2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
@@ -16,8 +16,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef _CPPUNITX_ASSERT_H
-#define _CPPUNITX_ASSERT_H 1
+#ifndef _CPPUNITX_ASSERTION_H
+#define _CPPUNITX_ASSERTION_H 1
 
 #include <bits/cppunitx.h>
 

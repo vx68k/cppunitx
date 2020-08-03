@@ -6,11 +6,11 @@
 # this notice are preserved.  This file is offered as-is, without any warranty.
 ---
 variables:
-  package.distName: cppunitx-1-alpha.3
+  package.distName: cppunitx-1-alpha.4
+  uploadRepository: kazssym/cppunitx
 trigger:
   - master
   - release/*
-  - feature/*
 stages:
   - stage: Default
     jobs:
@@ -45,10 +45,10 @@ stages:
             condition: succeededOrFailed()
           - bash: |
               make dist || exit $?
-              mkdir -p dist
-              mv -f '$(package.distName)'.* dist/
+              mkdir -p _dist
+              mv -f '$(package.distName)'.* _dist/
             displayName: Make source archive
-          - publish: dist
+          - publish: _dist
             artifact: dist
   - stage: Test
     jobs:
@@ -71,13 +71,14 @@ stages:
           - download: current
             artifact: dist
           - bash: |
-              gzip -dc '$(Pipeline.Workspace)/dist/$(package.distName).tar.gz' | \
+              gzip -dc '$(Agent.BuildDirectory)/dist/$(package.distName).tar.gz' | \
               tar -x
             displayName: Unpack
           - bash: |
               $CC --version
               $CXX --version
               ./configure --prefix='$(Build.BinariesDirectory)'
+              echo "##vso[task.uploadfile]`pwd`/config.log"
             displayName: Configure
             workingDirectory: $(package.distName)
           - bash: |
@@ -90,7 +91,7 @@ stages:
             workingDirectory: $(package.distName)
   - stage: Release
     dependsOn: Default
-    condition: >-
+    condition:
       and(succeeded(),
         startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
     jobs:
@@ -100,12 +101,10 @@ stages:
           vmImage: ubuntu-latest
         variables:
           - group: bitbucket
-          - name: repository
-            value: kazssym/cppunitx
         steps:
           - download: current
             artifact: dist
           - bash: |
               sh ./upload.sh -u '$(bitbucket.username):$(bitbucket.password)' \
-                  -r '$(repository)' '$(Pipeline.Workspace)'/dist/*
+                  -r '$(uploadRepository)' '$(Agent.BuildDirectory)'/dist/*
             displayName: Upload

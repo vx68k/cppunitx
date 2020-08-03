@@ -22,10 +22,9 @@
 #ifndef _CPPUNITX_TEST_H
 #define _CPPUNITX_TEST_H 1
 
-#include <set>
+#include <bits/cppunitx.h>
 #include <functional>
 #include <string>
-#include <bits/cppunitx.h>
 
 namespace cppunitx
 {
@@ -173,42 +172,6 @@ namespace cppunitx
         void enable();
 
         void disable();
-    };
-
-    /// Test context.
-    class _CPPUNITX_PUBLIC TestContext
-    {
-    private:
-        std::set<const Test *> _tests;
-
-        std::set<const BeforeTest *> _beforeTests;
-
-        std::set<const AfterTest *> _afterTests;
-
-    public:
-        TestContext();
-
-    public:
-        virtual ~TestContext();
-
-    public:
-        /// Adds a test case to this context.
-        virtual void addTest(const Test *test);
-
-        /// Removes a test case from this context.
-        virtual void removeTest(const Test *test);
-
-        /// Adds a before-test procedure to this context.
-        virtual void addBeforeTest(const BeforeTest *beforeTest);
-
-        /// Removes a before-test procedure from this context.
-        virtual void removeBeforeTest(const BeforeTest *beforeTest);
-
-        /// Adds an after-test procedure to this context.
-        virtual void addAfterTest(const AfterTest *afterTest);
-
-        /// Removes an after-test procedure from this context.
-        virtual void removeAfterTest(const AfterTest *afterTest);
     };
 }
 

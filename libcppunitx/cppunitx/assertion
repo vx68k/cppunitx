@@ -19,6 +19,6 @@
 #ifndef _CPPUNITX_ASSERTION
 #define _CPPUNITX_ASSERTION 1
 
-#include <bits/cppunitx/assert.h>
+#include <bits/cppunitx/assertion.h>
 
 #endif

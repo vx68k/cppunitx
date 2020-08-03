@@ -1,4 +1,4 @@
-// example.cpp
+// test_example.cpp
 // Copyright (C) 2018-2020 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
@@ -26,12 +26,32 @@
 #include <cppunitx/module>
 
 #include <cppunitx/framework>
+#include <cppunitx/assertion>
+#include <iostream>
 #include <memory>
 
+using std::clog;
+using std::endl;
 using namespace cppunitx;
+using namespace cppunitx::assertion;
 
 class Example
 {
+private:
+    int _sum = 0;
+
+public:
+    int getSum() const
+    {
+        return _sum;
+    }
+
+public:
+    Example &add(int x)
+    {
+        _sum += x;
+        return *this;
+    }
 };
 
 class ExampleTest
@@ -40,20 +60,25 @@ private:
     std::unique_ptr<Example> example;
 
 private:
-    BeforeTest setUp {
-        [this]() {
-            example.reset(new Example());
-        }
-    };
+    BeforeTest setUp {[&]() {
+        clog << "setUp!\n";
+        example.reset(new Example());
+    }};
 
-    AfterTest tearDown {
-        [this]() {
-            example.reset();
-        }
-    };
+    AfterTest tearDown {[&]() {
+        clog << "tearDown!\n";
+        example.reset();
+    }};
 
-    Test test1 {"test1", [this]() {
-        // TODO: Add assertions here.
+    Test test1 {"test1", [&]() {
+        clog << "test1!\n";
+        assertEqual(0, example->getSum());
+    }};
+
+    Test test2 {"test2", [&]() {
+        clog << "test2!\n";
+        example->add(1).add(1);
+        assertEqual(2, example->getSum());
     }};
 };
-TestRegistrant<ExampleTest> example {"example"};
+TestSuite<ExampleTest> example {"example"};
