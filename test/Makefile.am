@@ -2,7 +2,6 @@
 
 AM_CPPFLAGS = -I$(top_srcdir)/libcppunitx
 
-check_PROGRAMS = runtest
 check_LTLIBRARIES = \
 test_assertion.la \
 test_example.la
@@ -10,14 +9,10 @@ test_example.la
 TESTS = $(check_LTLIBRARIES)
 
 TEST_EXTENSIONS = .la
-LA_LOG_COMPILER = ./runtest
+LA_LOG_COMPILER = $(top_builddir)/cppunitx/cppunitx
 
-runtest_LDFLAGS = -no-install
-runtest_SOURCES = runtest.cpp
-runtest_LDADD = \
-$(top_builddir)/libcppunitx/libcppunitx.la
-
-# A '-rpath' option is required to produce a loadable module.
+# NOTE: A '-rpath' option is required to produce a loadable module even if not
+# to be installed.
 
 test_assertion_la_LDFLAGS = -module -no-undefined -shared -avoid-version -rpath $(libdir)
 test_assertion_la_SOURCES = test_assertion.cpp

@@ -69,17 +69,54 @@ int process_options(const int argc, char **const argv,
     enum {
         VERSION = -128,
         HELP,
+        TEST_NAME,
+        LOG_FILE,
+        TRS_FILE,
+        COLOR_TESTS,
+        EXPECT_FAILURE,
+        ENABLE_HARD_ERRORS,
+        DISABLE_HARD_ERRORS,
     };
     static const struct option options[] = {
-        {"help", false, nullptr, HELP},
-        {"version", false, nullptr, VERSION},
+        {"test-name", required_argument, nullptr, TEST_NAME},
+        {"log-file", required_argument, nullptr, LOG_FILE},
+        {"trs-file", required_argument, nullptr, TRS_FILE},
+        {"color-tests", optional_argument, nullptr, COLOR_TESTS},
+        {"expect-failure", optional_argument, nullptr, EXPECT_FAILURE},
+        {"enable-hard-errors", optional_argument, nullptr, ENABLE_HARD_ERRORS},
+        {"disable-hard-errors", no_argument, nullptr, DISABLE_HARD_ERRORS},
+        {"help", no_argument, nullptr, HELP},
+        {"version", no_argument, nullptr, VERSION},
         {}
     };
 
     int opt = -1;
     do {
-        opt = getopt_long(argc, argv, "", options, nullptr);
+        opt = getopt_long(argc, argv, "n:o:", options, nullptr);
         switch (opt) {
+        case 'n':
+        case TEST_NAME:
+            // TODO: Test name.
+            break;
+        case 'o':
+        case LOG_FILE:
+            // TODO: Log file.
+            break;
+        case TRS_FILE:
+            // TODO: Trs file.
+            break;
+        case COLOR_TESTS:
+            // TODO: Color tests.
+            break;
+        case EXPECT_FAILURE:
+            // TODO: Expect failure.
+            break;
+        case ENABLE_HARD_ERRORS:
+            // TODO: Enable hard errors.
+            break;
+        case DISABLE_HARD_ERRORS:
+            // TODO: Enable hard errors.
+            break;
         case HELP:
             print_usage(argv[0]);
             exit(0);

@@ -20,11 +20,13 @@
 #define _CPPUNITX_H 1
 
 #if _WIN32
-#if _LIBCPPUNITX && DLL_EXPORT
+#if _LIBCPPUNITX
+#if DLL_EXPORT
 #define _CPPUNITX_PUBLIC __declspec(dllexport)
-#else
-#define _CPPUNITX_PUBLIC __declspec(dllimport)
 #endif
+#else /* not _LIBCPPUNITX */
+#define _CPPUNITX_PUBLIC __declspec(dllimport)
+#endif /* not _LIBCPPUNITX */
 #else /* not _WIN32 */
 #if defined __has_attribute
 #if __has_attribute(visibility)

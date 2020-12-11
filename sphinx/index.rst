@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 C++Unit​X Reference Manual
-=========================
+==========================
 
 .. toctree::
    :maxdepth: 2
