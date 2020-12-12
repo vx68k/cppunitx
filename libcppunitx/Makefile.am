@@ -28,7 +28,7 @@ bits/cppunitx/module.h
 noinst_HEADERS = \
 module_loader.h
 
-libcppunitx_la_LDFLAGS = -version-info 0:0:0
+libcppunitx_la_LDFLAGS = -no-undefined -version-info 0:0:0
 libcppunitx_la_SOURCES = \
 exception.cpp \
 assertion.cpp \

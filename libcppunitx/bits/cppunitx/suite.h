@@ -38,7 +38,7 @@ namespace cppunitx
 {
     /// Test suite.
     template<class Fixture>
-    class _CPPUNITX_PUBLIC TestSuite: public TestRegistry::Registrant
+    class TestSuite: public TestRegistry::Registrant
     {
         using inherited = TestRegistry::Registrant;
 
