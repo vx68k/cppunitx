@@ -2,7 +2,7 @@
     "configurations": [
         {
             "name": "POSIX (GCC)",
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "gcc",
             "includePath": [
                 "${workspaceFolder}",
                 "${workspaceFolder}/libcppunitx"
