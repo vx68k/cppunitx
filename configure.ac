@@ -17,7 +17,6 @@ AC_SEARCH_LIBS([dlopen], [dl])
 AC_CHECK_HEADERS([dlfcn.h])
 # Checks for typedefs, structures, and compiler characteristics.
 # Checks for library functions.
-AC_CHECK_FUNCS([dlopen])
 # Checks for other features.
 LT_PREREQ([2.4.6])
 LT_INIT
