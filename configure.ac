@@ -6,7 +6,7 @@ AC_INIT([C++UnitX], [1-alpha.5],
 AC_CONFIG_SRCDIR([libcppunitx/registry.cpp])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
-AM_INIT_AUTOMAKE([foreign no-define subdir-objects tar-ustar])
+AM_INIT_AUTOMAKE([foreign no-define tar-ustar parallel-tests subdir-objects])
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_CXX
