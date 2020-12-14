@@ -2,7 +2,26 @@
     "configurations": [
         {
             "name": "POSIX (GCC)",
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "gcc",
+            "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/libcppunitx"
+            ],
+            "defines": [
+                "HAVE_CONFIG_H"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        },
+        {
+            "name": "Win32 (MinGW-w64 cross)",
+            "compilerPath": "i686-w64-mingw32-gcc",
             "includePath": [
                 "${workspaceFolder}",
                 "${workspaceFolder}/libcppunitx"
