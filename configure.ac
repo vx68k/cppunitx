@@ -19,7 +19,7 @@ AC_CHECK_HEADERS([dlfcn.h])
 # Checks for library functions.
 # Checks for other features.
 LT_PREREQ([2.4.6])
-LT_INIT
+LT_INIT([win32-dll])
 gl_INIT
 # Configuration actions.
 AC_CONFIG_FILES([Makefile cppunitx/Makefile libcppunitx/Makefile
