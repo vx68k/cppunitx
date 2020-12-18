@@ -6,9 +6,8 @@ AM_CPPFLAGS = -I$(top_srcdir)/libcppunitx \
 bin_PROGRAMS = cppunitx
 
 cppunitx_SOURCES = cppunitx.cpp
-cppunitx_LDADD = \
-$(top_builddir)/libcppunitx/libcppunitx.la \
-$(top_builddir)/libgnu/libgnu.a
+cppunitx_LDADD = -L$(top_builddir)/libcppunitx -lcppunitx \
+-L$(top_builddir)/libgnu -lgnu
 
 installcheck-local::
 	$(bindir)/cppunitx --version

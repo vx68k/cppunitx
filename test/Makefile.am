@@ -16,10 +16,8 @@ LA_LOG_COMPILER = $(top_builddir)/cppunitx/cppunitx
 
 test_assertion_la_LDFLAGS = -module -no-undefined -shared -avoid-version -rpath $(libdir)
 test_assertion_la_SOURCES = test_assertion.cpp
-test_assertion_la_LIBADD = \
-$(top_builddir)/libcppunitx/libcppunitx.la
+test_assertion_la_LIBADD = -L$(top_builddir)/libcppunitx -lcppunitx
 
 test_example_la_LDFLAGS = -module -no-undefined -shared -avoid-version -rpath $(libdir)
 test_example_la_SOURCES = test_example.cpp
-test_example_la_LIBADD = \
-$(top_builddir)/libcppunitx/libcppunitx.la
+test_example_la_LIBADD = -L$(top_builddir)/libcppunitx -lcppunitx
