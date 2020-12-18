@@ -20,6 +20,11 @@
 #include <config.h>
 #endif
 
+#if _WIN32
+#define WIN32_LEAN_AND_MEAN 1
+#include <windows.h>
+#endif
+
 #include "module_loader.h"
 
 #if HAVE_DLFCN_H
@@ -108,24 +113,31 @@ void module::open(const char *const name)
     close();
 #if HAVE_DLFCN_H
     _native_handle = dlopen(name, RTLD_LAZY);
+#elif _WIN32
+    _native_handle = LoadLibraryA(name);
 #endif
 }
 
 void module::close()
 {
-#if HAVE_DLFCN_H
     native_handle_type handle = nullptr;
     std::swap(_native_handle, handle);
     if (handle != nullptr) {
+#if HAVE_DLFCN_H
         dlclose(handle);
-    }
+#elif _WIN32
+        FreeLibrary(static_cast<HMODULE>(handle));
 #endif
+    }
 }
 
 void *module::sym(const char *symbol)
 {
 #if HAVE_DLFCN_H
     return dlsym(_native_handle, symbol);
+#elif _WIN32
+    return reinterpret_cast<void *>(
+        GetProcAddress(static_cast<HMODULE>(_native_handle), symbol));
 #else
     return nullptr;
 #endif
