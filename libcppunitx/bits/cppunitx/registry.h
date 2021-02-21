@@ -22,6 +22,7 @@
 #include <bits/cppunitx.h>
 #include <unordered_set>
 #include <functional>
+#include <utility>
 #include <memory>
 #include <string>
 
@@ -57,7 +58,7 @@ namespace cppunitx
 
             /// Constructs this object with a 'std::string' value.
             explicit Registrant(std::string &&name)
-                : _name {name}
+                : _name {std::move(name)}
             {
             }
 
