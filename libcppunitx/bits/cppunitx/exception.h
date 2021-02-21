@@ -44,7 +44,7 @@ namespace cppunitx
         ///
         /// This destructor is defined out of line so that this class can be
         /// provided by a shared library.
-        virtual ~AssertionFailedException() noexcept;
+        ~AssertionFailedException() noexcept override;
 
 
         // Assignment operators.
