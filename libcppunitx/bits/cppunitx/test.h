@@ -88,7 +88,7 @@ namespace cppunitx
 
         // Assignment operators.
 
-        Test &operator =(const Test &) = delete;
+        void operator =(const Test &) = delete;
 
 
         const std::string &getName() const
