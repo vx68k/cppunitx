@@ -68,6 +68,8 @@ namespace cppunitx
             getRegistry()->addRegistrant(this);
         }
 
+        TestSuite(const TestSuite &) = delete;
+
 
         // Destructor.
 
@@ -75,6 +77,11 @@ namespace cppunitx
         {
             getRegistry()->removeRegistrant(this);
         }
+
+
+        // Assignment operators.
+
+        void operator =(const TestSuite &) = delete;
 
 
         void runTests() const override
