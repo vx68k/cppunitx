@@ -43,12 +43,16 @@ namespace cppunitx
         using inherited = TestRegistry::Registrant;
 
     protected:
+
         static std::shared_ptr<TestRegistry> getRegistry()
         {
             return TestRegistry::getInstance<_CPPUNITX_TEST_MODULE>();
         }
 
     public:
+
+        // Constructors.
+
         /// Constructs this object.
         explicit TestSuite(const char *name)
             : inherited(name)
@@ -70,13 +74,15 @@ namespace cppunitx
             getRegistry()->addRegistrant(this);
         }
 
-    public:
+
+        // Destructor.
+
         ~TestSuite()
         {
             getRegistry()->removeRegistrant(this);
         }
 
-    public:
+
         void runTests() const override
         {
             std::unique_ptr<Fixture> fixture {new Fixture()};
