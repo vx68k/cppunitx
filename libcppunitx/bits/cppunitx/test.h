@@ -24,6 +24,7 @@
 
 #include <bits/cppunitx.h>
 #include <functional>
+#include <utility>
 #include <string>
 
 namespace cppunitx
@@ -67,7 +68,7 @@ namespace cppunitx
         template<class Function>
         Test(std::string &&name, Function function)
         :
-            _name {name},
+            _name {std::move(name)},
             _function {function}
         {
             enable();
