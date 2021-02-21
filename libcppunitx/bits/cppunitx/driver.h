@@ -30,7 +30,7 @@ namespace cppunitx
     public:
         static std::shared_ptr<TestDriver> getInstance();
 
-        static int main(int argc, char *const *argv);
+        static int run(int argc, char *const *argv);
 
     private:
         std::shared_ptr<TestContext> _currentContext;
