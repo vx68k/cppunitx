@@ -31,13 +31,18 @@ namespace cppunitx
     class _CPPUNITX_PUBLIC TestRegistry
     {
     public:
+
         /// Base class for test registrants.
         class _CPPUNITX_PUBLIC Registrant
         {
         private:
+
             std::string _name;
 
         protected:
+
+            // Constructors.
+
             /// Constructs this object with a null-terminated string value.
             explicit Registrant(const char *const name)
                 : _name {name}
@@ -59,16 +64,22 @@ namespace cppunitx
             // Deleted: this class is not copy-constructible.
             Registrant(const Registrant &) = delete;
 
-            // Deleted: this class is not copy-assignable.
-            void operator =(const Registrant &) = delete;
-
         public:
+
+            // Destructor.
+
             /// Does nothing on destruction of this object.
             virtual ~Registrant()
             {
             }
 
-        public:
+
+            // Assignment operators.
+
+            // Deleted: this class is not copy-assignable.
+            void operator =(const Registrant &) = delete;
+
+
             /// Returns the name of this object.
             const std::string &getName() const noexcept
             {
@@ -79,7 +90,12 @@ namespace cppunitx
             virtual void runTests() const = 0;
         };
 
+    private:
+
+        std::unordered_set<const Registrant *> _registrants;
+
     public:
+
         /// Returns the test registry for a test module.
         template<class Module>
         static std::shared_ptr<TestRegistry> getInstance()
@@ -88,20 +104,25 @@ namespace cppunitx
             return instance;
         }
 
-    private:
-        std::unordered_set<const Registrant *> _registrants;
 
-    public:
+        // Constructors.
+
         TestRegistry();
 
         // To suppress implicit definitions.
         TestRegistry(const TestRegistry &) = delete;
-        void operator =(const TestRegistry &) = delete;
 
-    public:
+
+        // Destructor.
+
         virtual ~TestRegistry();
 
-    public:
+
+        // Assignment operators.
+
+        void operator =(const TestRegistry &) = delete;
+
+
         /// Adds a registrant to this registry.
         void addRegistrant(const Registrant *registrant);
 
