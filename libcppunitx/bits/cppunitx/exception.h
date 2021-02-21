@@ -27,23 +27,29 @@ namespace cppunitx
 {
     class _CPPUNITX_PUBLIC AssertionFailedException: public std::runtime_error
     {
-        using inherited = runtime_error;
-
     public:
+
+        // Constructors.
+
         explicit AssertionFailedException(const char *message);
 
         explicit AssertionFailedException(const std::string &message);
 
         AssertionFailedException(const AssertionFailedException &);
 
-        AssertionFailedException &operator =(const AssertionFailedException &);
 
-    public:
+        // Destructor.
+
         /// Destructs an `AssertionError` object.
         ///
         /// This destructor is defined out of line so that this class can be
         /// provided by a shared library.
         virtual ~AssertionFailedException() noexcept;
+
+
+        // Assignment operators.
+
+        AssertionFailedException &operator =(const AssertionFailedException &);
     };
 }
 
