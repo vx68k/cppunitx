@@ -54,8 +54,10 @@ stages:
               ./configure --disable-static \
                 CXX="g++ -std=c++11" \
                 CFLAGS="-g -O2 -fprofile-arcs -ftest-coverage" \
-                CXXFLAGS="-g -O2 -fprofile-arcs -ftest-coverage" &&
+                CXXFLAGS="-g -O2 -fprofile-arcs -ftest-coverage"
+              status=$?
               echo "##vso[task.uploadfile]`pwd`/config.log"
+              exit $status
             displayName: Configure
           - bash: |
               '$(Agent.TempDirectory)'/build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
@@ -104,8 +106,10 @@ stages:
           - bash: |
               $CC --version
               $CXX --version
-              ./configure --prefix='$(Build.BinariesDirectory)' &&
+              ./configure --prefix='$(Build.BinariesDirectory)'
+              status=$?
               echo "##vso[task.uploadfile]`pwd`/config.log"
+              exit $status
             displayName: Configure
           - bash: |
               make check
