@@ -45,7 +45,7 @@ namespace cppunitx
         [[noreturn]]
         inline void fail(const std::string &message)
         {
-            return fail(message.c_str());
+            fail(message.c_str());
         }
 
 
