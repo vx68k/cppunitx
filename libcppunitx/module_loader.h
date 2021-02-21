@@ -21,6 +21,7 @@
 
 #include <utility>
 
+
 /**
  * Simple wrapper class for the dynamic loading functions.
  */
@@ -49,7 +50,7 @@ public:
 
     module(module &&other) noexcept
     {
-        swap(other);
+        other.swap(*this);
     }
 
 
@@ -67,7 +68,7 @@ public:
 
     module &operator =(module &&other) noexcept
     {
-        swap(other);
+        other.swap(*this);
         return *this;
     }
 
@@ -112,10 +113,7 @@ public:
 
     ltmodule(const ltmodule &) = delete;
 
-    ltmodule(ltmodule &&other) noexcept
-    {
-        swap(other);
-    }
+    ltmodule(ltmodule &&other) noexcept = default;
 
 
     // Destructor.
@@ -127,11 +125,7 @@ public:
 
     void operator =(const ltmodule &) = delete;
 
-    ltmodule &operator =(ltmodule &&other) noexcept
-    {
-        swap(other);
-        return *this;
-    }
+    ltmodule &operator =(ltmodule &&other) noexcept = default;
 
 
     void swap(ltmodule &other) noexcept
