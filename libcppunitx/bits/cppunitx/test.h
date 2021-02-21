@@ -34,10 +34,15 @@ namespace cppunitx
     class _CPPUNITX_PUBLIC Test
     {
     private:
+
         const std::string _name;
+
         const std::function<void ()> _function;
 
     public:
+
+        // Constructors.
+
         /// Constructs this object.
         template<class Function>
         Test(const char *name, Function function)
@@ -70,15 +75,21 @@ namespace cppunitx
 
         // To suppress implicit definitions.
         Test(const Test &) = delete;
-        Test &operator =(const Test &) = delete;
 
-    public:
+
+        // Destructor.
+
         ~Test()
         {
             disable();
         }
 
-    public:
+
+        // Assignment operators.
+
+        Test &operator =(const Test &) = delete;
+
+
         const std::string &getName() const
         {
             return _name;
@@ -91,10 +102,12 @@ namespace cppunitx
         }
 
     private:
+
         void enable();
 
         void disable();
     };
+
 
     /// Object to specify a before-test (or set-up) procedure.
     /// Before-test procedures will run once before each test case.
@@ -103,9 +116,13 @@ namespace cppunitx
     class _CPPUNITX_PUBLIC BeforeTest
     {
     private:
+
         const std::function<void ()> _function;
 
     public:
+
+        // Constructors.
+
         template<class Function>
         explicit BeforeTest(Function function)
         :
@@ -117,16 +134,21 @@ namespace cppunitx
         // Deleted: this class is not copy-constructible.
         BeforeTest(const BeforeTest &) = delete;
 
-        // Deleted: this class is not copy-assignable.
-        void operator =(const BeforeTest &) = delete;
 
-    public:
+        // Destructor.
+
         ~BeforeTest()
         {
             disable();
         }
 
-    public:
+
+        // Assignment operators.
+
+        // Deleted: this class is not copy-assignable.
+        void operator =(const BeforeTest &) = delete;
+
+
         /// Runs this before-test procedure.
         void run() const
         {
@@ -134,10 +156,12 @@ namespace cppunitx
         }
 
     private:
+
         void enable();
 
         void disable();
     };
+
 
     /// Object to specify an after-test (or tear-down) procedure.
     /// After-test procedures will run once after each test case.
@@ -146,9 +170,13 @@ namespace cppunitx
     class _CPPUNITX_PUBLIC AfterTest
     {
     private:
+
         const std::function<void ()> _function;
 
     public:
+
+        // Constructors.
+
         template<class Function>
         explicit AfterTest(Function function)
         :
@@ -160,16 +188,21 @@ namespace cppunitx
         // Deleted: this class is not copy-constructible.
         AfterTest(const AfterTest &) = delete;
 
-        // Deleted: this class is not copy-assignable.
-        void operator =(const AfterTest &) = delete;
 
-    public:
+        // Destructor.
+
         ~AfterTest()
         {
             disable();
         }
 
-    public:
+
+        // Assignment operators.
+
+        // Deleted: this class is not copy-assignable.
+        void operator =(const AfterTest &) = delete;
+
+
         /// Runs this after-test procedure.
         void run() const
         {
@@ -177,6 +210,7 @@ namespace cppunitx
         }
 
     private:
+
         void enable();
 
         void disable();
