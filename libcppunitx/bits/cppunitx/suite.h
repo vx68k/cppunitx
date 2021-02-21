@@ -71,7 +71,7 @@ namespace cppunitx
 
         // Destructor.
 
-        ~TestSuite()
+        ~TestSuite() override
         {
             getRegistry()->removeRegistrant(this);
         }
