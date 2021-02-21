@@ -79,9 +79,9 @@ namespace cppunitx
 
     private:
 
-        void activate();
+        void activate() const;
 
-        void deactivate();
+        void deactivate() const;
     };
 
 
@@ -126,9 +126,9 @@ namespace cppunitx
 
     private:
 
-        void activate();
+        void activate() const;
 
-        void deactivate();
+        void deactivate() const;
     };
 
 
@@ -173,9 +173,9 @@ namespace cppunitx
 
     private:
 
-        void activate();
+        void activate() const;
 
-        void deactivate();
+        void deactivate() const;
     };
 }
 

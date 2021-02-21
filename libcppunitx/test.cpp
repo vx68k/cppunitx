@@ -69,13 +69,13 @@ Test::~Test()
     deactivate();
 }
 
-void Test::activate()
+void Test::activate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addTest(this);
 }
 
-void Test::deactivate()
+void Test::deactivate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->removeTest(this);
@@ -103,13 +103,13 @@ BeforeTest::~BeforeTest()
     deactivate();
 }
 
-void BeforeTest::activate()
+void BeforeTest::activate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addBeforeTest(this);
 }
 
-void BeforeTest::deactivate()
+void BeforeTest::deactivate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->removeBeforeTest(this);
@@ -137,13 +137,13 @@ AfterTest::~AfterTest()
     deactivate();
 }
 
-void AfterTest::activate()
+void AfterTest::activate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addAfterTest(this);
 }
 
-void AfterTest::deactivate()
+void AfterTest::deactivate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->removeAfterTest(this);
