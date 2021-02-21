@@ -93,7 +93,7 @@ namespace cppunitx
     {
     private:
 
-        const std::function<void ()> _function;
+        std::function<void ()> _function;
 
     public:
 
@@ -103,8 +103,7 @@ namespace cppunitx
 
         explicit BeforeTest(std::function<void ()> &&function);
 
-        // Deleted: this class is not copy-constructible.
-        BeforeTest(const BeforeTest &) = delete;
+        BeforeTest(const BeforeTest &other);
 
 
         // Destructor.
@@ -114,8 +113,7 @@ namespace cppunitx
 
         // Assignment operators.
 
-        // Deleted: this class is not copy-assignable.
-        void operator =(const BeforeTest &) = delete;
+        BeforeTest &operator =(const BeforeTest &other);
 
 
         /// Runs this before-test procedure.
@@ -140,7 +138,7 @@ namespace cppunitx
     {
     private:
 
-        const std::function<void ()> _function;
+        std::function<void ()> _function;
 
     public:
 
@@ -150,8 +148,7 @@ namespace cppunitx
 
         explicit AfterTest(std::function<void ()> &&function);
 
-        // Deleted: this class is not copy-constructible.
-        AfterTest(const AfterTest &) = delete;
+        AfterTest(const AfterTest &other);
 
 
         // Destructor.
@@ -161,8 +158,7 @@ namespace cppunitx
 
         // Assignment operators.
 
-        // Deleted: this class is not copy-assignable.
-        void operator =(const AfterTest &) = delete;
+        AfterTest &operator =(const AfterTest &other);
 
 
         /// Runs this after-test procedure.

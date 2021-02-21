@@ -98,9 +98,22 @@ BeforeTest::BeforeTest(function<void ()> &&function)
     activate();
 }
 
+BeforeTest::BeforeTest(const BeforeTest &other)
+:
+    _function {other._function}
+{
+    activate();
+}
+
 BeforeTest::~BeforeTest()
 {
     deactivate();
+}
+
+BeforeTest &BeforeTest::operator =(const BeforeTest &other)
+{
+    _function = other._function;
+    return *this;
 }
 
 void BeforeTest::activate() const
@@ -132,9 +145,22 @@ AfterTest::AfterTest(function<void ()> &&function)
     activate();
 }
 
+AfterTest::AfterTest(const AfterTest &other)
+:
+    _function {other._function}
+{
+    activate();
+}
+
 AfterTest::~AfterTest()
 {
     deactivate();
+}
+
+AfterTest &AfterTest::operator =(const AfterTest &other)
+{
+    _function = other._function;
+    return *this;
 }
 
 void AfterTest::activate() const
