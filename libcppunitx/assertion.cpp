@@ -20,7 +20,6 @@
 #include <config.h>
 #endif
 
-#define _CPPUNITX_ASSERT_IMPLEMENTATION 1
 #include <bits/cppunitx/assertion.h>
 
 #include <cppunitx/exception>
