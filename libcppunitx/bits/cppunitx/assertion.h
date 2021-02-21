@@ -65,6 +65,7 @@ namespace cppunitx
             assertEqual(x, y, message.c_str());
         }
 
+
         template<class T, class U>
         void assertNotEqual(T x, U y, const char *message = nullptr)
         {
@@ -123,13 +124,6 @@ namespace cppunitx
         {
             assertNotNull(x, message.c_str());
         }
-
-
-        _CPPUNITX_PUBLIC void assertEquals(std::intmax_t expected,
-            std::intmax_t actual, const char *message);
-
-        _CPPUNITX_PUBLIC void assertEquals(std::uintmax_t expected,
-            std::uintmax_t actual, const char *message);
     }
 }
 
