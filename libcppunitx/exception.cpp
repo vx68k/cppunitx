@@ -47,10 +47,10 @@ AssertionFailedException::AssertionFailedException(
     // Nothing to do.
 }
 
-auto AssertionFailedException::operator =(const AssertionFailedException &other)
-    -> AssertionFailedException &
+AssertionFailedException &AssertionFailedException::operator =(
+    const AssertionFailedException &other)
 {
-    *(runtime_error *)this = other;
+    runtime_error::operator =(other);
     return *this;
 }
 
