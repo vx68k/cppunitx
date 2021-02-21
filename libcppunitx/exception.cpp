@@ -22,18 +22,19 @@
 
 #include <bits/cppunitx/exception.h>
 
+using std::runtime_error;
 using namespace cppunitx;
 
 AssertionFailedException::AssertionFailedException(const char *message)
 :
-    inherited(message)
+    runtime_error(message)
 {
     // Nothing to do.
 }
 
 AssertionFailedException::AssertionFailedException(const std::string &message)
 :
-    inherited(message)
+    runtime_error(message)
 {
     // Nothing to do.
 }
@@ -41,7 +42,7 @@ AssertionFailedException::AssertionFailedException(const std::string &message)
 AssertionFailedException::AssertionFailedException(
     const AssertionFailedException &other)
 :
-    inherited(other)
+    runtime_error(other)
 {
     // Nothing to do.
 }
@@ -49,7 +50,7 @@ AssertionFailedException::AssertionFailedException(
 auto AssertionFailedException::operator =(const AssertionFailedException &other)
     -> AssertionFailedException &
 {
-    *(inherited *)this = other;
+    *(runtime_error *)this = other;
     return *this;
 }
 
