@@ -41,7 +41,9 @@ namespace cppunitx
         /// Constructs this object.
         template<class Function>
         Test(const char *name, Function function)
-            : _name {name}, _function {std::forward<Function>(function)}
+        :
+            _name {name},
+            _function {function}
         {
             enable();
         }
@@ -49,7 +51,9 @@ namespace cppunitx
         /// Constructs this object.
         template<class Function>
         Test(const std::string &name, Function function)
-            : _name {name}, _function {std::forward<Function>(function)}
+        :
+            _name {name},
+            _function {function}
         {
             enable();
         }
@@ -57,7 +61,9 @@ namespace cppunitx
         /// Constructs this object.
         template<class Function>
         Test(std::string &&name, Function function)
-            : _name {name}, _function {std::forward<Function>(function)}
+        :
+            _name {name},
+            _function {function}
         {
             enable();
         }
@@ -102,7 +108,8 @@ namespace cppunitx
     public:
         template<class Function>
         explicit BeforeTest(Function function)
-            : _function {std::forward<Function>(function)}
+        :
+            _function {function}
         {
             enable();
         }
@@ -144,7 +151,8 @@ namespace cppunitx
     public:
         template<class Function>
         explicit AfterTest(Function function)
-            : _function {std::forward<Function>(function)}
+        :
+            _function {function}
         {
             enable();
         }
