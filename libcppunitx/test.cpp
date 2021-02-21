@@ -105,6 +105,13 @@ BeforeTest::BeforeTest(const BeforeTest &other)
     activate();
 }
 
+BeforeTest::BeforeTest(BeforeTest &&other)
+:
+    _function {move(other._function)}
+{
+    activate();
+}
+
 BeforeTest::~BeforeTest()
 {
     deactivate();
@@ -113,6 +120,12 @@ BeforeTest::~BeforeTest()
 BeforeTest &BeforeTest::operator =(const BeforeTest &other)
 {
     _function = other._function;
+    return *this;
+}
+
+BeforeTest &BeforeTest::operator =(BeforeTest &&other)
+{
+    _function = move(other._function);
     return *this;
 }
 
@@ -152,6 +165,13 @@ AfterTest::AfterTest(const AfterTest &other)
     activate();
 }
 
+AfterTest::AfterTest(AfterTest &&other)
+:
+    _function {move(other._function)}
+{
+    activate();
+}
+
 AfterTest::~AfterTest()
 {
     deactivate();
@@ -160,6 +180,12 @@ AfterTest::~AfterTest()
 AfterTest &AfterTest::operator =(const AfterTest &other)
 {
     _function = other._function;
+    return *this;
+}
+
+AfterTest &AfterTest::operator =(AfterTest &&other)
+{
+    _function = move(other._function);
     return *this;
 }
 

@@ -105,6 +105,8 @@ namespace cppunitx
 
         BeforeTest(const BeforeTest &other);
 
+        BeforeTest(BeforeTest &&other);
+
 
         // Destructor.
 
@@ -114,6 +116,8 @@ namespace cppunitx
         // Assignment operators.
 
         BeforeTest &operator =(const BeforeTest &other);
+
+        BeforeTest &operator =(BeforeTest &&other);
 
 
         /// Runs this before-test procedure.
@@ -150,6 +154,8 @@ namespace cppunitx
 
         AfterTest(const AfterTest &other);
 
+        AfterTest(AfterTest &&other);
+
 
         // Destructor.
 
@@ -159,6 +165,8 @@ namespace cppunitx
         // Assignment operators.
 
         AfterTest &operator =(const AfterTest &other);
+
+        AfterTest &operator =(AfterTest &&other);
 
 
         /// Runs this after-test procedure.
