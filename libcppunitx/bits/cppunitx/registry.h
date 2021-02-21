@@ -22,7 +22,6 @@
 #include <bits/cppunitx.h>
 #include <unordered_set>
 #include <functional>
-#include <utility>
 #include <memory>
 #include <string>
 
@@ -45,20 +44,10 @@ namespace cppunitx
             // Constructors.
 
             /// Constructs this object with a 'std::string' value.
-            explicit Registrant(const std::string &name)
-            :
-                _name {name}
-            {
-                // Nothing to do.
-            }
+            explicit Registrant(const std::string &name);
 
             /// Constructs this object with a 'std::string' value.
-            explicit Registrant(std::string &&name)
-            :
-                _name {std::move(name)}
-            {
-                // Nothing to do.
-            }
+            explicit Registrant(std::string &&name);
 
             // Deleted: this class is not copy-constructible.
             Registrant(const Registrant &) = delete;

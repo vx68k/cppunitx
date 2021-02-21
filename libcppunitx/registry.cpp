@@ -23,10 +23,28 @@
 #include <bits/cppunitx/registry.h>
 
 #include <algorithm>
+#include <utility>
 
 using std::for_each;
+using std::move;
 using namespace cppunitx;
 
+
+// Implementations of class 'TestRegistry::Registrant'
+
+TestRegistry::Registrant::Registrant(const std::string &name)
+:
+    _name {name}
+{
+    // Nothing to do.
+}
+
+TestRegistry::Registrant::Registrant(std::string &&name)
+:
+    _name {move(name)}
+{
+    // Nothing to do.
+}
 
 TestRegistry::Registrant::~Registrant()
 {
