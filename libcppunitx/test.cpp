@@ -38,7 +38,7 @@ Test::Test(const string &name, const function<void ()> &function)
     _name {name},
     _function {function}
 {
-    enable();
+    activate();
 }
 
 Test::Test(const string &name, function<void ()> &&function)
@@ -46,7 +46,7 @@ Test::Test(const string &name, function<void ()> &&function)
     _name {name},
     _function {move(function)}
 {
-    enable();
+    activate();
 }
 
 Test::Test(string &&name, const function<void ()> &function)
@@ -54,7 +54,7 @@ Test::Test(string &&name, const function<void ()> &function)
     _name {move(name)},
     _function {function}
 {
-    enable();
+    activate();
 }
 
 Test::Test(string &&name, function<void ()> &&function)
@@ -62,21 +62,21 @@ Test::Test(string &&name, function<void ()> &&function)
     _name {move(name)},
     _function {move(function)}
 {
-    enable();
+    activate();
 }
 
 Test::~Test()
 {
-    disable();
+    deactivate();
 }
 
-void Test::enable()
+void Test::activate()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addTest(this);
 }
 
-void Test::disable()
+void Test::deactivate()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->removeTest(this);
@@ -89,28 +89,28 @@ BeforeTest::BeforeTest(const function<void ()> &function)
 :
     _function {function}
 {
-    enable();
+    activate();
 }
 
 BeforeTest::BeforeTest(function<void ()> &&function)
 :
     _function {move(function)}
 {
-    enable();
+    activate();
 }
 
 BeforeTest::~BeforeTest()
 {
-    disable();
+    deactivate();
 }
 
-void BeforeTest::enable()
+void BeforeTest::activate()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addBeforeTest(this);
 }
 
-void BeforeTest::disable()
+void BeforeTest::deactivate()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->removeBeforeTest(this);
@@ -123,28 +123,28 @@ AfterTest::AfterTest(const function<void ()> &function)
 :
     _function {function}
 {
-    enable();
+    activate();
 }
 
 AfterTest::AfterTest(function<void ()> &&function)
 :
     _function {move(function)}
 {
-    enable();
+    activate();
 }
 
 AfterTest::~AfterTest()
 {
-    disable();
+    deactivate();
 }
 
-void AfterTest::enable()
+void AfterTest::activate()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addAfterTest(this);
 }
 
-void AfterTest::disable()
+void AfterTest::deactivate()
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->removeAfterTest(this);
