@@ -30,7 +30,7 @@ using std::function;
 using namespace cppunitx;
 
 
-// Class 'Test' implementation.
+// Implementation of class 'Test'.
 
 Test::~Test()
 {
@@ -50,7 +50,7 @@ void Test::disable()
 }
 
 
-// Class 'BeforeTest' implementation.
+// Implementation of class 'BeforeTest'.
 
 BeforeTest::~BeforeTest()
 {
@@ -70,7 +70,7 @@ void BeforeTest::disable()
 }
 
 
-// Class 'AfterTest' implementation.
+// Implementation of class 'AfterTest'.
 
 AfterTest::~AfterTest()
 {
