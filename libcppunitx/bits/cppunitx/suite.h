@@ -21,6 +21,7 @@
 
 #include <bits/cppunitx/registry.h>
 #include <bits/cppunitx/driver.h>
+#include <utility>
 #include <memory>
 #include <string>
 
@@ -62,7 +63,7 @@ namespace cppunitx
         /// Constructs this object.
         explicit TestSuite(std::string &&name)
         :
-            Registrant(name)
+            Registrant(std::move(name))
         {
             getRegistry()->addRegistrant(this);
         }
