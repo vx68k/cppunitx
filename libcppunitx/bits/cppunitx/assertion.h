@@ -48,6 +48,7 @@ namespace cppunitx
             return fail(message.c_str());
         }
 
+
         template<class T, class U>
         void assertEqual(T x, U y, const char *message = nullptr)
         {
