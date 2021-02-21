@@ -35,15 +35,21 @@ private:
 
     native_handle_type _native_handle = nullptr;
 
+protected:
+
+    static native_handle_type open(const char *name);
+
 public:
 
     // Constructors.
 
     module() noexcept = default;
 
-    explicit module(const char *name)
+    explicit module(native_handle_type native_handle)
+    :
+        _native_handle {native_handle}
     {
-        open(name);
+        // Nothing to do.
     }
 
     module(const module &) = delete;
@@ -56,7 +62,7 @@ public:
 
     // Destructor.
 
-    virtual ~module()
+    ~module()
     {
         close();
     }
@@ -87,8 +93,6 @@ public:
         swap(_native_handle, other._native_handle);
     }
 
-    virtual void open(const char *name);
-
     void close();
 
     void *sym(const char *symbol);
@@ -100,6 +104,10 @@ public:
  */
 class ltmodule: public module
 {
+protected:
+
+    static native_handle_type open(const char *name);
+
 public:
 
     // Constructors.
@@ -107,8 +115,10 @@ public:
     ltmodule() noexcept = default;
 
     explicit ltmodule(const char *const name)
+    :
+        module(open(name))
     {
-        open(name);
+        // Nothing to do.
     }
 
     ltmodule(const ltmodule &) = delete;
@@ -118,7 +128,7 @@ public:
 
     // Destructor.
 
-    ~ltmodule() override = default;
+    ~ltmodule() = default;
 
 
     // Assignment operators.
@@ -126,14 +136,6 @@ public:
     void operator =(const ltmodule &) = delete;
 
     ltmodule &operator =(ltmodule &&other) noexcept = default;
-
-
-    void swap(ltmodule &other) noexcept
-    {
-        module::swap(other);
-    }
-
-    void open(const char *name) override;
 };
 
 #endif

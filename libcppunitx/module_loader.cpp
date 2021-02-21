@@ -103,19 +103,22 @@ namespace
     const std::regex ltlibrary_loader::INSTALLED {"^installed=([^ ]*)"};
 }
 
-void module::open(const char *const name)
+
+auto module::open(const char *const name) -> native_handle_type
 {
-    close();
 #if HAVE_DLFCN_H
-    _native_handle = dlopen(name, RTLD_LAZY);
+    return dlopen(name, RTLD_LAZY);
+#else
+    return nullptr;
 #endif
 }
 
 void module::close()
 {
 #if HAVE_DLFCN_H
+    using std::swap;
     native_handle_type handle = nullptr;
-    std::swap(_native_handle, handle);
+    swap(_native_handle, handle);
     if (handle != nullptr) {
         dlclose(handle);
     }
@@ -131,14 +134,15 @@ void *module::sym(const char *symbol)
 #endif
 }
 
-void ltmodule::open(const char *const name)
+
+auto ltmodule::open(const char *const name) -> native_handle_type
 {
-    ltlibrary_loader loader;
+    ltlibrary_loader loader {};
     loader.load(name);
 
-    std::string dlname = loader.dlname();
-    if (dlname.empty()) {
-        dlname.assign(name);
+    auto &&dlname = loader.dlname();
+    if (!dlname.empty()) {
+        return module::open(dlname.c_str());
     }
-    module::open(dlname.c_str());
+    return module::open(name);
 }
