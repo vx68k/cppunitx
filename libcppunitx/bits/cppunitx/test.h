@@ -80,10 +80,7 @@ namespace cppunitx
 
         // Destructor.
 
-        ~Test()
-        {
-            disable();
-        }
+        ~Test();
 
 
         // Assignment operators.
@@ -138,10 +135,7 @@ namespace cppunitx
 
         // Destructor.
 
-        ~BeforeTest()
-        {
-            disable();
-        }
+        ~BeforeTest();
 
 
         // Assignment operators.
@@ -192,10 +186,7 @@ namespace cppunitx
 
         // Destructor.
 
-        ~AfterTest()
-        {
-            disable();
-        }
+        ~AfterTest();
 
 
         // Assignment operators.

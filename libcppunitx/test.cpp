@@ -29,7 +29,13 @@ using std::string;
 using std::function;
 using namespace cppunitx;
 
+
 // Class 'Test' implementation.
+
+Test::~Test()
+{
+    disable();
+}
 
 void Test::enable()
 {
@@ -43,7 +49,13 @@ void Test::disable()
     context->removeTest(this);
 }
 
+
 // Class 'BeforeTest' implementation.
+
+BeforeTest::~BeforeTest()
+{
+    disable();
+}
 
 void BeforeTest::enable()
 {
@@ -57,7 +69,13 @@ void BeforeTest::disable()
     context->removeBeforeTest(this);
 }
 
+
 // Class 'AfterTest' implementation.
+
+AfterTest::~AfterTest()
+{
+    disable();
+}
 
 void AfterTest::enable()
 {
