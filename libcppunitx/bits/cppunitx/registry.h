@@ -68,7 +68,7 @@ namespace cppunitx
             // Destructor.
 
             /// Does nothing on destruction of this object.
-            virtual ~Registrant() = default;
+            virtual ~Registrant();
 
 
             // Assignment operators.

@@ -27,6 +27,13 @@
 using std::for_each;
 using namespace cppunitx;
 
+
+TestRegistry::Registrant::~Registrant()
+{
+    // Nothing to do.
+}
+
+
 // Class 'TestRegistry' implementation.
 
 TestRegistry::TestRegistry()
