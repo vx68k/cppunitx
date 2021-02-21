@@ -35,17 +35,3 @@ void assertion::fail(const char *message)
     }
     throw AssertionFailedException(description);
 }
-
-void assertion::assertNull(const volatile void *ptr, const char *message)
-{
-    if (ptr != nullptr) {
-        fail("Pointer is not null");
-    }
-}
-
-void assertion::assertNotNull(const volatile void *ptr, const char *message)
-{
-    if (ptr == nullptr) {
-        fail("Pointer is null");
-    }
-}

@@ -45,7 +45,7 @@ private:
     };
 
     Test testAssertNull {"test 'assertNull'", [this]() {
-            assertNull(0);
+            assertNull(nullptr);
             // TODO: Add more assertions here.
         }};
 
