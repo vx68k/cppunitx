@@ -40,8 +40,6 @@ namespace cppunitx
     template<class Fixture>
     class TestSuite: public TestRegistry::Registrant
     {
-        using inherited = TestRegistry::Registrant;
-
     protected:
 
         static std::shared_ptr<TestRegistry> getRegistry()
@@ -55,21 +53,24 @@ namespace cppunitx
 
         /// Constructs this object.
         explicit TestSuite(const char *name)
-            : inherited(name)
+        :
+            Registrant(name)
         {
             getRegistry()->addRegistrant(this);
         }
 
         /// Constructs this object.
         explicit TestSuite(const std::string &name)
-            : inherited(name)
+        :
+            Registrant(name)
         {
             getRegistry()->addRegistrant(this);
         }
 
         /// Constructs this object.
         explicit TestSuite(std::string &&name)
-            : inherited(name)
+        :
+            Registrant(name)
         {
             getRegistry()->addRegistrant(this);
         }
