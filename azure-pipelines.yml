@@ -69,6 +69,7 @@ stages:
                 (cd "$subdir" && find . -name '*.gcda' -print | xargs -r gcov -r)
               done
             displayName: Produce test coverage reports
+          - task: SonarCloudAnalyze@1
           - bash: |
               make dist &&
               mkdir -p _dist &&
