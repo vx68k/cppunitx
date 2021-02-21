@@ -27,13 +27,23 @@
 class module
 {
 public:
+
     using native_handle_type = void *;
 
 private:
+
     native_handle_type _native_handle = nullptr;
 
 public:
+
+    // Constructors.
+
     module() noexcept = default;
+
+    explicit module(const char *name)
+    {
+        open(name);
+    }
 
     module(const module &) = delete;
 
@@ -42,12 +52,17 @@ public:
         swap(other);
     }
 
-    explicit module(const char *name)
+
+    // Destructor.
+
+    ~module()
     {
-        open(name);
+        close();
     }
 
-public:
+
+    // Assignment operators.
+
     void operator =(const module &) = delete;
 
     module &operator =(module &&other) noexcept
@@ -56,31 +71,25 @@ public:
         return *this;
     }
 
-public:
-    ~module()
-    {
-        close();
-    }
 
-public:
+    // Conversions.
+
     explicit operator bool() const noexcept
     {
         return _native_handle != nullptr;
     }
 
-public:
+
     void swap(module &other) noexcept
     {
-        std::swap(_native_handle, other._native_handle);
+        using std::swap;
+        swap(_native_handle, other._native_handle);
     }
 
-public:
     void open(const char *name);
 
-public:
     void close();
 
-public:
     void *sym(const char *symbol);
 };
 
@@ -90,12 +99,20 @@ public:
 class ltmodule: private module
 {
 public:
+
     using module::close;
     using module::sym;
     using module::operator bool;
 
-public:
+
+    // Constructors.
+
     ltmodule() noexcept = default;
+
+    ltmodule(const char *const name)
+    {
+        open(name);
+    }
 
     ltmodule(const ltmodule &) = delete;
 
@@ -104,12 +121,9 @@ public:
         swap(other);
     }
 
-    ltmodule(const char *const name)
-    {
-        open(name);
-    }
 
-public:
+    // Assignment operators.
+
     void operator =(const ltmodule &) = delete;
 
     ltmodule &operator =(ltmodule &&other) noexcept
@@ -118,13 +132,12 @@ public:
         return *this;
     }
 
-public:
+
     void swap(ltmodule &other) noexcept
     {
         module::swap(other);
     }
 
-public:
     void open(const char *name);
 };
 
