@@ -86,10 +86,9 @@ namespace cppunitx
 
         void runTests() const override
         {
-            std::unique_ptr<Fixture> fixture {new Fixture()};
-
-            auto &&driver = TestDriver::getInstance();
-            driver->getCurrentContext()->runTests();
+            auto &&fixture = std::unique_ptr<Fixture>(new Fixture());
+            auto &&context = TestDriver::getInstance()->getCurrentContext();
+            context->runTests();
         }
     };
 }
