@@ -36,24 +36,22 @@ namespace
     class ltlibrary_loader
     {
     private:
+
         static const std::regex DLNAME;
 
-    private:
         static const std::regex INSTALLED;
 
-    private:
         std::string _dlname;
 
-    private:
         std::string _installed;
 
     public:
+
         const std::string &dlname() const
         {
             return _dlname;
         }
 
-    public:
         void load(const char *const name)
         {
             auto &&length = std::strlen(name);
@@ -82,6 +80,7 @@ namespace
         }
 
     protected:
+
         void load(std::istream &input)
         {
             if (input) {
@@ -100,6 +99,7 @@ namespace
     };
 
     const std::regex ltlibrary_loader::DLNAME {"^dlname='(.*)'"};
+
     const std::regex ltlibrary_loader::INSTALLED {"^installed=([^ ]*)"};
 }
 
