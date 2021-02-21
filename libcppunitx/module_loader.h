@@ -56,7 +56,7 @@ public:
 
     // Destructor.
 
-    ~module()
+    virtual ~module()
     {
         close();
     }
@@ -87,7 +87,7 @@ public:
         swap(_native_handle, other._native_handle);
     }
 
-    void open(const char *name);
+    virtual void open(const char *name);
 
     void close();
 
@@ -118,7 +118,7 @@ public:
 
     // Destructor.
 
-    ~ltmodule() = default;
+    ~ltmodule() override = default;
 
 
     // Assignment operators.
@@ -133,7 +133,7 @@ public:
         module::swap(other);
     }
 
-    void open(const char *name);
+    void open(const char *name) override;
 };
 
 #endif
