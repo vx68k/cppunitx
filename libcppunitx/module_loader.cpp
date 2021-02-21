@@ -59,7 +59,7 @@ namespace
                 std::ifstream input {name};
                 load(input);
 
-                if (not(_dlname.empty())) {
+                if (!_dlname.empty()) {
                     std::string pathname = name;
 
                     auto &&sep = pathname.rfind('/');
