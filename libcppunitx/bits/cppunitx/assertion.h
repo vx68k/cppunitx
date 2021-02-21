@@ -34,6 +34,7 @@ namespace cppunitx
          *
          * @param message a message string to be given to the exception
          */
+        [[noreturn]]
         _CPPUNITX_PUBLIC void fail(const char *message = nullptr);
 
         /**
@@ -41,6 +42,7 @@ namespace cppunitx
          *
          * @param message a message string to be given to the exception
          */
+        [[noreturn]]
         inline void fail(const std::string &message)
         {
             return fail(message.c_str());
