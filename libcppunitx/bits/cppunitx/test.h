@@ -48,36 +48,6 @@ namespace cppunitx
 
         Test(std::string &&name, const std::function<void ()> &function);
 
-        /// Constructs this object.
-        template<class Function>
-        Test(const char *name, Function function)
-        :
-            _name {name},
-            _function {function}
-        {
-            enable();
-        }
-
-        /// Constructs this object.
-        template<class Function>
-        Test(const std::string &name, Function function)
-        :
-            _name {name},
-            _function {function}
-        {
-            enable();
-        }
-
-        /// Constructs this object.
-        template<class Function>
-        Test(std::string &&name, Function function)
-        :
-            _name {std::move(name)},
-            _function {function}
-        {
-            enable();
-        }
-
         // To suppress implicit definitions.
         Test(const Test &) = delete;
 
@@ -127,14 +97,6 @@ namespace cppunitx
 
         explicit BeforeTest(const std::function<void ()> &function);
 
-        template<class Function>
-        explicit BeforeTest(Function function)
-        :
-            _function {function}
-        {
-            enable();
-        }
-
         // Deleted: this class is not copy-constructible.
         BeforeTest(const BeforeTest &) = delete;
 
@@ -179,14 +141,6 @@ namespace cppunitx
         // Constructors.
 
         explicit AfterTest(const std::function<void ()> &function);
-
-        template<class Function>
-        explicit AfterTest(Function function)
-        :
-            _function {function}
-        {
-            enable();
-        }
 
         // Deleted: this class is not copy-constructible.
         AfterTest(const AfterTest &) = delete;
