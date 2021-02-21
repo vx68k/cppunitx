@@ -56,4 +56,5 @@ auto AssertionFailedException::operator =(const AssertionFailedException &other)
 
 AssertionFailedException::~AssertionFailedException() noexcept
 {
+    // Nothing to do.
 }
