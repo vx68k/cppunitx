@@ -20,7 +20,6 @@
 #include <config.h>
 #endif
 
-#define _CPPUNITX_DRIVER_IMPLEMENTATION 1
 #include <bits/cppunitx/driver.h>
 
 #include <cppunitx/framework>
