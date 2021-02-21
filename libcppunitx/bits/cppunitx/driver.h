@@ -27,24 +27,35 @@ namespace cppunitx
     /// Test driver.
     class _CPPUNITX_PUBLIC TestDriver
     {
+    private:
+
+        std::shared_ptr<TestContext> _currentContext;
+
     public:
+
         static std::shared_ptr<TestDriver> getInstance();
 
         static int run(int argc, char *const *argv);
 
-    private:
-        std::shared_ptr<TestContext> _currentContext;
-
     protected:
+
+        // Constructors.
+
         TestDriver();
 
         TestDriver(const TestDriver &) = delete;
-        TestDriver &operator =(const TestDriver &) = delete;
 
     public:
+
+        // Destructor.
+
         virtual ~TestDriver();
 
-    public:
+        // Assignment operators.
+
+        void operator =(const TestDriver &) = delete;
+
+
         /// Returns the current test context.
         std::shared_ptr<TestContext> getCurrentContext() const
         {
