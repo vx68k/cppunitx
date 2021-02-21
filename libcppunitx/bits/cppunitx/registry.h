@@ -44,22 +44,20 @@ namespace cppunitx
 
             // Constructors.
 
-            /// Constructs this object with a null-terminated string value.
-            explicit Registrant(const char *const name)
-                : _name {name}
-            {
-            }
-
             /// Constructs this object with a 'std::string' value.
             explicit Registrant(const std::string &name)
-                : _name {name}
+            :
+                _name {name}
             {
+                // Nothing to do.
             }
 
             /// Constructs this object with a 'std::string' value.
             explicit Registrant(std::string &&name)
-                : _name {std::move(name)}
+            :
+                _name {std::move(name)}
             {
+                // Nothing to do.
             }
 
             // Deleted: this class is not copy-constructible.
