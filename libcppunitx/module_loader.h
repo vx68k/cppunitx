@@ -41,11 +41,6 @@ public:
 
     module() noexcept = default;
 
-    explicit module(const char *name)
-    {
-        open(name);
-    }
-
     module(const module &) = delete;
 
     module(module &&other) noexcept
@@ -105,11 +100,6 @@ public:
     // Constructors.
 
     ltmodule() noexcept = default;
-
-    explicit ltmodule(const char *const name)
-    {
-        open(name);
-    }
 
     ltmodule(const ltmodule &) = delete;
 

@@ -76,7 +76,8 @@ void TestDriver::run(const char *const suiteName)
 {
     using GetRegistryFunction = TestRegistry *();
 
-    std::unique_ptr<ltmodule> suite {new ltmodule(suiteName)};
+    std::unique_ptr<ltmodule> suite {new ltmodule()};
+    suite->open(suiteName);
     if (not(*suite)) {
         throw runtime_error(string(suiteName) + ": File not loadable");
     }
