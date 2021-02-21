@@ -25,9 +25,17 @@ LibrarySupport
 .deps
 *.trs
 *.pc
+*.exe
 *.la
+*.dll
+*.so.*
+*.so
+*.lib
 *.a
+*.gcda
+*.gcno
 *.lo
+*.obj
 *.o
 *.tvsconfig
 *.local
