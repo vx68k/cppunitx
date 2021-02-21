@@ -44,6 +44,10 @@ namespace cppunitx
 
         // Constructors.
 
+        Test(const std::string &name, const std::function<void ()> &function);
+
+        Test(std::string &&name, const std::function<void ()> &function);
+
         /// Constructs this object.
         template<class Function>
         Test(const char *name, Function function)
@@ -121,6 +125,8 @@ namespace cppunitx
 
         // Constructors.
 
+        explicit BeforeTest(const std::function<void ()> &function);
+
         template<class Function>
         explicit BeforeTest(Function function)
         :
@@ -171,6 +177,8 @@ namespace cppunitx
     public:
 
         // Constructors.
+
+        explicit AfterTest(const std::function<void ()> &function);
 
         template<class Function>
         explicit AfterTest(Function function)

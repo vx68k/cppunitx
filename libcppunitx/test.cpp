@@ -25,12 +25,29 @@
 
 #include <cppunitx/driver>
 
-using std::string;
 using std::function;
+using std::move;
+using std::string;
 using namespace cppunitx;
 
 
 // Implementation of class 'Test'.
+
+Test::Test(const string &name, const function<void ()> &function)
+:
+    _name {name},
+    _function {function}
+{
+    enable();
+}
+
+Test::Test(string &&name, const function<void ()> &function)
+:
+    _name {move(name)},
+    _function {function}
+{
+    enable();
+}
 
 Test::~Test()
 {
@@ -52,6 +69,13 @@ void Test::disable()
 
 // Implementation of class 'BeforeTest'.
 
+BeforeTest::BeforeTest(const function<void ()> &function)
+:
+    _function {function}
+{
+    enable();
+}
+
 BeforeTest::~BeforeTest()
 {
     disable();
@@ -71,6 +95,13 @@ void BeforeTest::disable()
 
 
 // Implementation of class 'AfterTest'.
+
+AfterTest::AfterTest(const function<void ()> &function)
+:
+    _function {function}
+{
+    enable();
+}
 
 AfterTest::~AfterTest()
 {
