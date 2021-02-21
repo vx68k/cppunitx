@@ -93,17 +93,13 @@ public:
     void *sym(const char *symbol);
 };
 
+
 /**
  * Module class for Libtool libraries.
  */
-class ltmodule: private module
+class ltmodule: public module
 {
 public:
-
-    using module::close;
-    using module::sym;
-    using module::operator bool;
-
 
     // Constructors.
 
