@@ -52,14 +52,6 @@ namespace cppunitx
         // Constructors.
 
         /// Constructs this object.
-        explicit TestSuite(const char *name)
-        :
-            Registrant(name)
-        {
-            getRegistry()->addRegistrant(this);
-        }
-
-        /// Constructs this object.
         explicit TestSuite(const std::string &name)
         :
             Registrant(name)
