@@ -46,7 +46,11 @@ namespace cppunitx
 
         Test(const std::string &name, const std::function<void ()> &function);
 
+        Test(const std::string &name, std::function<void ()> &&function);
+
         Test(std::string &&name, const std::function<void ()> &function);
+
+        Test(std::string &&name, std::function<void ()> &&function);
 
         // To suppress implicit definitions.
         Test(const Test &) = delete;
@@ -97,6 +101,8 @@ namespace cppunitx
 
         explicit BeforeTest(const std::function<void ()> &function);
 
+        explicit BeforeTest(std::function<void ()> &&function);
+
         // Deleted: this class is not copy-constructible.
         BeforeTest(const BeforeTest &) = delete;
 
@@ -141,6 +147,8 @@ namespace cppunitx
         // Constructors.
 
         explicit AfterTest(const std::function<void ()> &function);
+
+        explicit AfterTest(std::function<void ()> &&function);
 
         // Deleted: this class is not copy-constructible.
         AfterTest(const AfterTest &) = delete;

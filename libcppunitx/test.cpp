@@ -41,10 +41,26 @@ Test::Test(const string &name, const function<void ()> &function)
     enable();
 }
 
+Test::Test(const string &name, function<void ()> &&function)
+:
+    _name {name},
+    _function {move(function)}
+{
+    enable();
+}
+
 Test::Test(string &&name, const function<void ()> &function)
 :
     _name {move(name)},
     _function {function}
+{
+    enable();
+}
+
+Test::Test(string &&name, function<void ()> &&function)
+:
+    _name {move(name)},
+    _function {move(function)}
 {
     enable();
 }
@@ -76,6 +92,13 @@ BeforeTest::BeforeTest(const function<void ()> &function)
     enable();
 }
 
+BeforeTest::BeforeTest(function<void ()> &&function)
+:
+    _function {move(function)}
+{
+    enable();
+}
+
 BeforeTest::~BeforeTest()
 {
     disable();
@@ -99,6 +122,13 @@ void BeforeTest::disable()
 AfterTest::AfterTest(const function<void ()> &function)
 :
     _function {function}
+{
+    enable();
+}
+
+AfterTest::AfterTest(function<void ()> &&function)
+:
+    _function {move(function)}
 {
     enable();
 }
