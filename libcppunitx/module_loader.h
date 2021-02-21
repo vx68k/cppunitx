@@ -118,6 +118,11 @@ public:
     }
 
 
+    // Destructor.
+
+    ~ltmodule() = default;
+
+
     // Assignment operators.
 
     void operator =(const ltmodule &) = delete;
