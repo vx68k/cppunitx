@@ -105,7 +105,7 @@ public:
 
     ltmodule() noexcept = default;
 
-    ltmodule(const char *const name)
+    explicit ltmodule(const char *const name)
     {
         open(name);
     }
