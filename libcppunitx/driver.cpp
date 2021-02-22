@@ -40,7 +40,8 @@ using namespace cppunitx;
 const int SKIP = 77;
 const int ERROR = 99;
 
-// Class 'TestDriver' implementation.
+
+// Implementation of class 'TestDriver'
 
 shared_ptr<TestDriver> TestDriver::getInstance()
 {
@@ -67,10 +68,12 @@ int TestDriver::run(const int argc, char *const *const argv)
 
 TestDriver::TestDriver()
 {
+    // Nothing to do.
 }
 
 TestDriver::~TestDriver()
 {
+    // Nothing to do.
 }
 
 void TestDriver::run(const char *const suiteName)
