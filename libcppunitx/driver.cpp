@@ -28,12 +28,13 @@
 #include <cstdio>
 #include "module_loader.h"
 
-using std::string;
 using std::exception;
-using std::runtime_error;
-using std::locale;
-using std::shared_ptr;
 using std::fprintf;
+using std::locale;
+using std::make_shared;
+using std::runtime_error;
+using std::shared_ptr;
+using std::string;
 using namespace cppunitx;
 
 const int SKIP = 77;
@@ -87,10 +88,10 @@ void TestDriver::run(const char *const suiteName)
         throw runtime_error(string(suiteName) + ": Not test suite module");
     }
 
-    _currentContext.reset(new TestContext()); // TODO: This must be per-fixture.
-    auto registry = getRegistry();
-    registry->forEachRegistrant(
-        [this](const TestRegistry::Registrant *const registrant) {
-            registrant->runTests();
+    getRegistry()->forEachRegistrant(
+        [this](const TestRegistry::Registrant *const r)
+        {
+            _currentContext = make_shared<TestContext>();
+            r->runTests();
         });
 }
