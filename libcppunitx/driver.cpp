@@ -91,7 +91,7 @@ void TestDriver::run(const char *const suiteName)
         throw runtime_error(string(suiteName) + ": Not test suite module");
     }
 
-    getRegistry()->forEachRegistrant(
+    getRegistry()->forEach(
         [this](const TestRegistry::Registrant *const r)
         {
             _currentContext = make_shared<TestContext>();

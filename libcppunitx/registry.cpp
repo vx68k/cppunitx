@@ -74,7 +74,7 @@ void TestRegistry::removeRegistrant(
     _registrants.erase(registrant);
 }
 
-void TestRegistry::forEachRegistrant(
+void TestRegistry::forEach(
     const std::function<void (const Registrant *)> &f
 ) const
 {

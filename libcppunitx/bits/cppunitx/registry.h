@@ -116,7 +116,7 @@ namespace cppunitx
         void removeRegistrant(const Registrant *registrant);
 
         /// Invokes a function for each registrant.
-        void forEachRegistrant(
+        void forEach(
             const std::function<void (const Registrant *)> &f
         ) const;
     };
