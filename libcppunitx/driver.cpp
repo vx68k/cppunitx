@@ -52,8 +52,6 @@ shared_ptr<TestDriver> TestDriver::getInstance()
 
 int TestDriver::run(const int argc, char *const *const argv)
 {
-    locale::global(locale(""));
-
     try {
         auto driver = getInstance();
         for (int i = 1; i != argc; i += 1) {
