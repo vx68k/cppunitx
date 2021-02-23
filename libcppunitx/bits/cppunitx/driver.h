@@ -62,7 +62,7 @@ namespace cppunitx
             return _currentContext;
         }
 
-        virtual void run(const char *suiteName);
+        virtual int run(const char *suiteName);
     };
 }
 

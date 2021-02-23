@@ -75,7 +75,7 @@ TestDriver::~TestDriver()
     // Nothing to do.
 }
 
-void TestDriver::run(const char *const suiteName)
+int TestDriver::run(const char *const suiteName)
 {
     using GetRegistryFunction = TestRegistry *();
 
@@ -96,4 +96,6 @@ void TestDriver::run(const char *const suiteName)
             _currentContext = make_shared<TestContext>();
             r->runTests();
         });
+
+    return 0;
 }
