@@ -28,13 +28,10 @@
 #include <cstdio>
 #include "module_loader.h"
 
-using std::exception;
 using std::fprintf;
-using std::locale;
 using std::make_shared;
 using std::runtime_error;
 using std::shared_ptr;
-using std::string;
 using namespace cppunitx;
 
 const int SKIP = 77;
@@ -63,13 +60,15 @@ int TestDriver::run(const char *const suiteName)
 
     std::unique_ptr<ltmodule> suite {new ltmodule(suiteName)};
     if (!*suite) {
-        throw runtime_error(string(suiteName) + ": File not loadable");
+        fprintf(stderr, "%s: failed to load\n", suiteName);
+        return ERROR;
     }
 
-    auto getRegistry = reinterpret_cast<GetRegistryFunction *>(
+    auto &&getRegistry = reinterpret_cast<GetRegistryFunction *>(
         suite->sym("cppunitx_registry"));
     if (getRegistry == nullptr) {
-        throw runtime_error(string(suiteName) + ": Not test suite module");
+        fprintf(stderr, "%s: registry not found\n", suiteName);
+        return ERROR;
     }
 
     getRegistry()->forEach(
