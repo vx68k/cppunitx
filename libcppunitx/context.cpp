@@ -99,17 +99,11 @@ void TestContext::removeAfterTest(const AfterTest *const afterTest)
 void TestContext::runTests() const
 {
     for_each(_tests.begin(), _tests.end(), [&](const Test *test) {
-        for_each(_beforeTests.begin(), _beforeTests.end(),
-            [&](const BeforeTest *before) {
-                before->run();
-            });
-
-        defered runAfterTests([&]() {
-            for_each(_afterTests.begin(), _afterTests.end(),
-                [&](const AfterTest *after) {
-                    after->run();
-                });
-        });
+        runBeforeTests();
+        defered afterTests {
+            [this]() {
+                runAfterTests();
+            }};
 
         try {
             test->run();
@@ -119,4 +113,20 @@ void TestContext::runTests() const
             // TODO: Handle failures.
         }
     });
+}
+
+void TestContext::runBeforeTests() const
+{
+    for_each(_beforeTests.begin(), _beforeTests.end(),
+        [](const BeforeTest *bt) {
+            bt->run();
+        });
+}
+
+void TestContext::runAfterTests() const
+{
+    for_each(_afterTests.begin(), _afterTests.end(),
+        [](const AfterTest *at) {
+            at->run();
+        });
 }

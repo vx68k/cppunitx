@@ -76,6 +76,12 @@ namespace cppunitx
         virtual void removeAfterTest(const AfterTest *afterTest);
 
         virtual void runTests() const;
+
+    protected:
+
+        void runBeforeTests() const;
+
+        void runAfterTests() const;
     };
 }
 
