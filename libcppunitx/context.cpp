@@ -35,9 +35,11 @@ namespace
     class defered
     {
     private:
+
         function<void ()> _function;
 
     public:
+
         template<class Function>
         defered(Function f)
         :
@@ -46,7 +48,6 @@ namespace
             // Nothing to do.
         }
 
-    public:
         ~defered()
         {
             _function();
