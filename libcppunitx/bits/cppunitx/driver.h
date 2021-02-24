@@ -35,8 +35,6 @@ namespace cppunitx
 
         static std::shared_ptr<TestDriver> getInstance();
 
-        static int run(int argc, char *const *argv);
-
     protected:
 
         // Constructors.

@@ -50,21 +50,6 @@ shared_ptr<TestDriver> TestDriver::getInstance()
     return instance;
 }
 
-int TestDriver::run(const int argc, char *const *const argv)
-{
-    try {
-        auto driver = getInstance();
-        for (int i = 1; i != argc; i += 1) {
-            driver->run(argv[i]);
-        }
-    }
-    catch (const exception &e) {
-        fprintf(stderr, "Caught exception: %s\n", e.what());
-        return SKIP;
-    }
-    return 0;
-}
-
 TestDriver::TestDriver()
 {
     // Nothing to do.
