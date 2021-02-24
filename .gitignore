@@ -6,9 +6,6 @@
 **/libgnu/sysexits.h
 **/libgnu/unistd.h
 **/libgnu/sys/types.h
-**/libgnu/arg-nonnull.h
-**/libgnu/c++defs.h
-**/libgnu/warn-on-use.h
 Makefile
 config.h
 libtool
