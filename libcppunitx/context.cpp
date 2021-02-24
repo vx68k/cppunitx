@@ -24,10 +24,12 @@
 #include <bits/cppunitx/exception.h>
 #include <algorithm>
 #include <functional>
+#include <utility>
 #include <stdexcept>
 
 using std::for_each;
 using std::function;
+using std::move;
 using namespace cppunitx;
 
 namespace
@@ -40,18 +42,30 @@ namespace
 
     public:
 
-        template<class Function>
-        defered(Function f)
+        defered(const function<void ()> &function)
         :
-            _function {f}
+            _function {function}
         {
             // Nothing to do.
         }
 
+        defered(function<void ()> &&function)
+        :
+            _function {move(function)}
+        {
+            // Nothing to do.
+        }
+
+        defered(const defered &) = delete;
+
         ~defered()
         {
-            _function();
+            if (_function != nullptr) {
+                _function();
+            }
         }
+
+        void operator =(const defered &) = delete;
     };
 }
 
