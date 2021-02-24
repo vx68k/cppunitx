@@ -29,11 +29,16 @@ namespace cppunitx
     {
     private:
 
+        static std::shared_ptr<TestDriver> _instance;
+
         std::shared_ptr<TestContext> _currentContext;
 
     public:
 
-        static std::shared_ptr<TestDriver> getInstance();
+        static std::shared_ptr<TestDriver> getInstance()
+        {
+            return _instance;
+        }
 
     protected:
 

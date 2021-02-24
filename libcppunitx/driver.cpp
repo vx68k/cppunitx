@@ -43,12 +43,9 @@ const int ERROR = 99;
 
 // Implementation of class 'TestDriver'
 
-shared_ptr<TestDriver> TestDriver::getInstance()
-{
+shared_ptr<TestDriver> TestDriver::_instance =
     // The constructors of class 'TestDriver' are protected.
-    static auto &&instance = shared_ptr<TestDriver>(new TestDriver());
-    return instance;
-}
+    shared_ptr<TestDriver>(new TestDriver());
 
 TestDriver::TestDriver()
 {
