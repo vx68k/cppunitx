@@ -42,14 +42,7 @@ namespace
 
     public:
 
-        defered(const function<void ()> &function)
-        :
-            _function {function}
-        {
-            // Nothing to do.
-        }
-
-        defered(function<void ()> &&function)
+        explicit defered(function<void ()> &&function)
         :
             _function {move(function)}
         {
