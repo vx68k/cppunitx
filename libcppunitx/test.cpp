@@ -64,6 +64,12 @@ Test::Test(string &&name, function<void ()> &&function)
     activate();
 }
 
+Test::Test(Test &&other)
+{
+    activate();
+    other.swap(*this);
+}
+
 Test::~Test()
 {
     deactivate();

@@ -55,6 +55,8 @@ namespace cppunitx
         // To suppress implicit definitions.
         Test(const Test &) = delete;
 
+        Test(Test &&other);
+
 
         // Destructor.
 
