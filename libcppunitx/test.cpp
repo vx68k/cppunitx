@@ -116,11 +116,6 @@ BeforeTest &BeforeTest::operator =(BeforeTest &&other)
     return *this;
 }
 
-void BeforeTest::swap(BeforeTest &other) noexcept
-{
-    _function.swap(other._function);
-}
-
 void BeforeTest::activate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
@@ -166,11 +161,6 @@ AfterTest &AfterTest::operator =(AfterTest &&other)
 {
     _function = move(other._function);
     return *this;
-}
-
-void AfterTest::swap(AfterTest &other) noexcept
-{
-    _function.swap(other._function);
 }
 
 void AfterTest::activate() const
