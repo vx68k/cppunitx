@@ -103,7 +103,7 @@ namespace cppunitx
 
         explicit BeforeTest(std::function<void ()> &&function);
 
-        BeforeTest(const BeforeTest &other);
+        BeforeTest(const BeforeTest &other) = delete;
 
         BeforeTest(BeforeTest &&other);
 
@@ -115,7 +115,7 @@ namespace cppunitx
 
         // Assignment operators.
 
-        BeforeTest &operator =(const BeforeTest &other);
+        void operator =(const BeforeTest &other) = delete;
 
         BeforeTest &operator =(BeforeTest &&other);
 
@@ -152,7 +152,7 @@ namespace cppunitx
 
         explicit AfterTest(std::function<void ()> &&function);
 
-        AfterTest(const AfterTest &other);
+        AfterTest(const AfterTest &other) = delete;
 
         AfterTest(AfterTest &&other);
 
@@ -164,7 +164,7 @@ namespace cppunitx
 
         // Assignment operators.
 
-        AfterTest &operator =(const AfterTest &other);
+        void operator =(const AfterTest &other) = delete;
 
         AfterTest &operator =(AfterTest &&other);
 
