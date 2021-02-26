@@ -120,6 +120,8 @@ namespace cppunitx
         BeforeTest &operator =(BeforeTest &&other);
 
 
+        void swap(BeforeTest &other);
+
         /// Runs this before-test procedure.
         void run() const
         {
@@ -168,6 +170,8 @@ namespace cppunitx
 
         AfterTest &operator =(AfterTest &&other);
 
+
+        void swap(AfterTest &other);
 
         /// Runs this after-test procedure.
         void run() const
