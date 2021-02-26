@@ -116,7 +116,7 @@ BeforeTest &BeforeTest::operator =(BeforeTest &&other)
     return *this;
 }
 
-void BeforeTest::swap(BeforeTest &other)
+void BeforeTest::swap(BeforeTest &other) noexcept
 {
     _function.swap(other._function);
 }
@@ -168,7 +168,7 @@ AfterTest &AfterTest::operator =(AfterTest &&other)
     return *this;
 }
 
-void AfterTest::swap(AfterTest &other)
+void AfterTest::swap(AfterTest &other) noexcept
 {
     _function.swap(other._function);
 }
