@@ -65,6 +65,8 @@ namespace cppunitx
 
         void operator =(const Test &) = delete;
 
+        Test &operator =(Test &&other) noexcept;
+
 
         /**
          * Swaps the values of this object and another.

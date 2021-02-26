@@ -69,6 +69,12 @@ Test::~Test()
     deactivate();
 }
 
+Test &Test::operator =(Test &&other) noexcept
+{
+    other.swap(*this);
+    return *this;
+}
+
 void Test::activate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
