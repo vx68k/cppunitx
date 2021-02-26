@@ -110,9 +110,9 @@ BeforeTest::~BeforeTest()
     deactivate();
 }
 
-BeforeTest &BeforeTest::operator =(BeforeTest &&other)
+BeforeTest &BeforeTest::operator =(BeforeTest &&other) noexcept
 {
-    _function = move(other._function);
+    other.swap(*this);
     return *this;
 }
 
@@ -157,9 +157,9 @@ AfterTest::~AfterTest()
     deactivate();
 }
 
-AfterTest &AfterTest::operator =(AfterTest &&other)
+AfterTest &AfterTest::operator =(AfterTest &&other) noexcept
 {
-    _function = move(other._function);
+    other.swap(*this);
     return *this;
 }
 

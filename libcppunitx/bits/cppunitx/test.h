@@ -117,7 +117,7 @@ namespace cppunitx
 
         void operator =(const BeforeTest &other) = delete;
 
-        BeforeTest &operator =(BeforeTest &&other);
+        BeforeTest &operator =(BeforeTest &&other) noexcept;
 
 
         void swap(BeforeTest &other) noexcept
@@ -182,7 +182,7 @@ namespace cppunitx
 
         void operator =(const AfterTest &other) = delete;
 
-        AfterTest &operator =(AfterTest &&other);
+        AfterTest &operator =(AfterTest &&other) noexcept;
 
 
         void swap(AfterTest &other) noexcept
