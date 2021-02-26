@@ -99,10 +99,9 @@ BeforeTest::BeforeTest(function<void ()> &&function)
 }
 
 BeforeTest::BeforeTest(BeforeTest &&other)
-:
-    _function {move(other._function)}
 {
     activate();
+    other.swap(*this);
 }
 
 BeforeTest::~BeforeTest()
@@ -146,10 +145,9 @@ AfterTest::AfterTest(function<void ()> &&function)
 }
 
 AfterTest::AfterTest(AfterTest &&other)
-:
-    _function {move(other._function)}
 {
     activate();
+    other.swap(*this);
 }
 
 AfterTest::~AfterTest()
