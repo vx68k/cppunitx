@@ -135,6 +135,17 @@ namespace cppunitx
         void deactivate() const;
     };
 
+    /**
+     * Swaps the values of two `BeforeTest` objects.
+     *
+     * @param one a `BeforeTest` object
+     * @param other another `BeforeTest` object
+     */
+    inline void swap(BeforeTest &one, BeforeTest &other) noexcept
+    {
+        one.swap(other);
+    }
+
 
     /// Object to specify an after-test (or tear-down) procedure.
     /// After-test procedures will run once after each test case.
@@ -185,6 +196,17 @@ namespace cppunitx
 
         void deactivate() const;
     };
+
+    /**
+     * Swaps the values of two `AfterTest` objects.
+     *
+     * @param one an `AfterTest` object
+     * @param other another `AfterTest` object
+     */
+    inline void swap(AfterTest &one, AfterTest &other) noexcept
+    {
+        one.swap(other);
+    }
 }
 
 #endif
