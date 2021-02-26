@@ -36,9 +36,9 @@ namespace cppunitx
     {
     private:
 
-        const std::string _name;
+        std::string _name;
 
-        const std::function<void ()> _function;
+        std::function<void ()> _function;
 
     public:
 
@@ -66,6 +66,17 @@ namespace cppunitx
         void operator =(const Test &) = delete;
 
 
+        /**
+         * Swaps the values of this object and another.
+         *
+         * @param other another `Test` object
+         */
+        void swap(Test &other) noexcept
+        {
+            _name.swap(other._name);
+            _function.swap(other._function);
+        }
+
         const std::string &getName() const
         {
             return _name;
@@ -83,6 +94,17 @@ namespace cppunitx
 
         void deactivate() const;
     };
+
+    /**
+     * Swaps the values of two `Test` objects.
+     *
+     * @param one a `Test` object
+     * @param other another `Test` object
+     */
+    inline void swap(Test &one, Test &other) noexcept
+    {
+        one.swap(other);
+    }
 
 
     /// Object to specify a before-test (or set-up) procedure.
