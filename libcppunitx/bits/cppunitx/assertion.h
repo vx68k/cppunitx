@@ -50,7 +50,7 @@ namespace cppunitx
 
 
         template<class T, class U>
-        void assertEqual(T x, U y, const char *message = nullptr)
+        inline void assertEqual(T x, U y, const char *message = nullptr)
         {
             if (x != y) {
                 std::string description = "Values must be equal";
@@ -70,7 +70,7 @@ namespace cppunitx
 
 
         template<class T, class U>
-        void assertNotEqual(T x, U y, const char *message = nullptr)
+        inline void assertNotEqual(T x, U y, const char *message = nullptr)
         {
             if (x == y) {
                 std::string description = "Values must not be equal";
