@@ -1,6 +1,6 @@
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.69])
-AC_INIT([C++UnitX], [1-alpha.5],
+AC_INIT([C++UnitX], [1-alpha.6],
 [https://github.com/vx68k/cppunitx/issues/new], [cppunitx],
 [https://www.vx68k.org/cppunitx])
 AC_CONFIG_SRCDIR([libcppunitx/registry.cpp])
