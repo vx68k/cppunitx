@@ -21,6 +21,7 @@
 
 #include <bits/cppunitx.h>
 
+#include <bits/cppunitx/exception.h>
 #include <memory>
 #include <string>
 #include <cstdint>
@@ -126,6 +127,33 @@ namespace cppunitx
         inline void assertNotNull(T x, const std::string &message)
         {
             assertNotNull(x, message.c_str());
+        }
+
+
+        template<class Function>
+        inline void expectFailure(Function f, const char *message = nullptr)
+        {
+            bool thrown = false;
+            try {
+                f();
+            }
+            catch (const AssertionFailedException &) {
+                thrown = true;
+            }
+            if (!thrown) {
+                std::string description = "assertion failure expected";
+                if (message != nullptr) {
+                    description.append(": ");
+                    description.append(message);
+                }
+                fail(description);
+            }
+        }
+
+        template<class Function>
+        inline void expectFailure(Function f, const std::string &message)
+        {
+            expectFailure(f, message.c_str());
         }
     }
 }
