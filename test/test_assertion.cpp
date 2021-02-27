@@ -52,7 +52,7 @@ private:
             assertNull(nullptr, string("nullptr must be null"));
             expectFailure(
                 [this] {
-                    assertNull(this);
+                    assertNull(this, string("this must be null"));
                 }, string("this must not be null"));
         }};
 
@@ -62,7 +62,7 @@ private:
             assertNotNull(this, string("this must not be null"));
             expectFailure(
                 [this] {
-                    assertNotNull(nullptr);
+                    assertNotNull(nullptr, string("nullptr must not be null"));
                 }, string("nullptr must be null"));
         }};
 };
