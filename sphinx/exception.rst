@@ -1,8 +1,10 @@
 Exceptions
 ==========
 
+The header ``<cppunitx/exception>`` defines the class for exceptions.
+
 .. cpp:namespace:: cppunitx
 
-.. cpp:class:: AssertionError : public std::runtime_error
+.. cpp:class:: AssertionFailedException: public std::runtime_error
 
-   This exception class indicates an assertion failure was detected.
+   This class represents the exceptions thrown when an assertion failed.
