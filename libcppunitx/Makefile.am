@@ -36,6 +36,7 @@ registry.cpp \
 test.cpp \
 context.cpp \
 driver.cpp \
+suite.cpp \
 module_loader.cpp
 
 CLEANFILES = $(pkgconfig_DATA)
