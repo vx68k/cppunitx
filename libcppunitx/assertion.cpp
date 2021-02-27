@@ -20,7 +20,6 @@
 #include <config.h>
 #endif
 
-#define _CPPUNITX_ASSERT_IMPLEMENTATION 1
 #include <bits/cppunitx/assertion.h>
 
 #include <cppunitx/exception>
@@ -35,18 +34,4 @@ void assertion::fail(const char *message)
         description.append(message);
     }
     throw AssertionFailedException(description);
-}
-
-void assertion::assertNull(const volatile void *ptr, const char *message)
-{
-    if (ptr != nullptr) {
-        fail("Pointer is not null");
-    }
-}
-
-void assertion::assertNotNull(const volatile void *ptr, const char *message)
-{
-    if (ptr == nullptr) {
-        fail("Pointer is null");
-    }
 }

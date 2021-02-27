@@ -1,5 +1,5 @@
 // <bits/cppunitx/exception.h>
-// Copyright (C) 2020 Kaz Nishimura
+// Copyright (C) 2020-2021 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -27,23 +27,29 @@ namespace cppunitx
 {
     class _CPPUNITX_PUBLIC AssertionFailedException: public std::runtime_error
     {
-        using inherited = runtime_error;
-
     public:
+
+        // Constructors.
+
         explicit AssertionFailedException(const char *message);
 
         explicit AssertionFailedException(const std::string &message);
 
         AssertionFailedException(const AssertionFailedException &);
 
-        AssertionFailedException &operator =(const AssertionFailedException &);
 
-    public:
+        // Destructor.
+
         /// Destructs an `AssertionError` object.
         ///
         /// This destructor is defined out of line so that this class can be
         /// provided by a shared library.
-        virtual ~AssertionFailedException() noexcept;
+        ~AssertionFailedException() noexcept override;
+
+
+        // Assignment operators.
+
+        AssertionFailedException &operator =(const AssertionFailedException &);
     };
 }
 

@@ -1,5 +1,5 @@
 // <bits/cppunitx/suite.h>
-// Copyright (C) 2020 Kaz Nishimura
+// Copyright (C) 2020-2021 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -21,6 +21,7 @@
 
 #include <bits/cppunitx/registry.h>
 #include <bits/cppunitx/driver.h>
+#include <utility>
 #include <memory>
 #include <string>
 
@@ -38,51 +39,56 @@ namespace cppunitx
 {
     /// Test suite.
     template<class Fixture>
-    class _CPPUNITX_PUBLIC TestSuite: public TestRegistry::Registrant
+    class TestSuite: public TestRegistry::Registrant
     {
-        using inherited = TestRegistry::Registrant;
-
     protected:
+
         static std::shared_ptr<TestRegistry> getRegistry()
         {
             return TestRegistry::getInstance<_CPPUNITX_TEST_MODULE>();
         }
 
     public:
-        /// Constructs this object.
-        explicit TestSuite(const char *name)
-            : inherited(name)
-        {
-            getRegistry()->addRegistrant(this);
-        }
+
+        // Constructors.
 
         /// Constructs this object.
         explicit TestSuite(const std::string &name)
-            : inherited(name)
+        :
+            Registrant(name)
         {
             getRegistry()->addRegistrant(this);
         }
 
         /// Constructs this object.
         explicit TestSuite(std::string &&name)
-            : inherited(name)
+        :
+            Registrant(std::move(name))
         {
             getRegistry()->addRegistrant(this);
         }
 
-    public:
-        ~TestSuite()
+        TestSuite(const TestSuite &) = delete;
+
+
+        // Destructor.
+
+        ~TestSuite() override
         {
             getRegistry()->removeRegistrant(this);
         }
 
-    public:
+
+        // Assignment operators.
+
+        void operator =(const TestSuite &) = delete;
+
+
         void runTests() const override
         {
-            std::unique_ptr<Fixture> fixture {new Fixture()};
-
-            auto &&driver = TestDriver::getInstance();
-            driver->getCurrentContext()->runTests();
+            auto &&fixture = std::unique_ptr<Fixture>(new Fixture());
+            auto &&context = TestDriver::getInstance()->getCurrentContext();
+            context->runTests();
         }
     };
 }

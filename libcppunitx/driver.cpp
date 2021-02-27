@@ -1,5 +1,5 @@
 // driver.cpp
-// Copyright (C) 2018-2020 Kaz Nishimura
+// Copyright (C) 2018-2021 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -20,7 +20,6 @@
 #include <config.h>
 #endif
 
-#define _CPPUNITX_DRIVER_IMPLEMENTATION 1
 #include <bits/cppunitx/driver.h>
 
 #include <cppunitx/framework>
@@ -29,69 +28,55 @@
 #include <cstdio>
 #include "module_loader.h"
 
-using std::string;
-using std::exception;
-using std::runtime_error;
-using std::locale;
-using std::shared_ptr;
 using std::fprintf;
+using std::make_shared;
+using std::runtime_error;
+using std::shared_ptr;
 using namespace cppunitx;
 
 const int SKIP = 77;
 const int ERROR = 99;
 
-// Class 'TestDriver' implementation.
 
-shared_ptr<TestDriver> TestDriver::getInstance()
-{
-    static shared_ptr<TestDriver> instance {new TestDriver()};
-    return instance;
-}
+// Implementation of class 'TestDriver'
 
-int TestDriver::main(const int argc, char *const *const argv)
-{
-    locale::global(locale(""));
-
-    try {
-        auto driver = getInstance();
-        for (int i = 1; i != argc; i += 1) {
-            driver->run(argv[i]);
-        }
-    }
-    catch (const exception &e) {
-        fprintf(stderr, "Caught exception: %s\n", e.what());
-        return SKIP;
-    }
-    return 0;
-}
+shared_ptr<TestDriver> TestDriver::_instance =
+    // The constructors of class 'TestDriver' are protected.
+    shared_ptr<TestDriver>(new TestDriver());
 
 TestDriver::TestDriver()
 {
+    // Nothing to do.
 }
 
 TestDriver::~TestDriver()
 {
+    // Nothing to do.
 }
 
-void TestDriver::run(const char *const suiteName)
+int TestDriver::run(const char *const suiteName)
 {
     using GetRegistryFunction = TestRegistry *();
 
     std::unique_ptr<ltmodule> suite {new ltmodule(suiteName)};
-    if (not(*suite)) {
-        throw runtime_error(string(suiteName) + ": File not loadable");
+    if (!*suite) {
+        fprintf(stderr, "%s: failed to load\n", suiteName);
+        return ERROR;
     }
 
-    auto getRegistry = reinterpret_cast<GetRegistryFunction *>(
+    auto &&getRegistry = reinterpret_cast<GetRegistryFunction *>(
         suite->sym("cppunitx_registry"));
     if (getRegistry == nullptr) {
-        throw runtime_error(string(suiteName) + ": Not test suite module");
+        fprintf(stderr, "%s: registry not found\n", suiteName);
+        return ERROR;
     }
 
-    _currentContext.reset(new TestContext()); // TODO: This must be per-fixture.
-    auto registry = getRegistry();
-    registry->forEachRegistrant(
-        [this](const TestRegistry::Registrant *const registrant) {
-            registrant->runTests();
+    getRegistry()->forEach(
+        [this](const TestRegistry::Registrant *const r)
+        {
+            _currentContext = make_shared<TestContext>();
+            r->runTests();
         });
+
+    return 0;
 }

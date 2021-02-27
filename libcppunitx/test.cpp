@@ -1,5 +1,5 @@
 // test.cpp
-// Copyright (C) 2020 Kaz Nishimura
+// Copyright (C) 2020-2021 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -20,52 +20,166 @@
 #include <config.h>
 #endif
 
-#define _CPPUNITX_FRAMEWORK_IMPLEMENTATION 1
 #include <bits/cppunitx/test.h>
 
 #include <cppunitx/driver>
 
-using std::string;
 using std::function;
+using std::move;
+using std::string;
 using namespace cppunitx;
 
-// Class 'Test' implementation.
 
-void Test::enable()
+// Implementation of class 'Test'.
+
+Test::Test(const string &name, const function<void ()> &function)
+:
+    _name {name},
+    _function {function}
+{
+    activate();
+}
+
+Test::Test(const string &name, function<void ()> &&function)
+:
+    _name {name},
+    _function {move(function)}
+{
+    activate();
+}
+
+Test::Test(string &&name, const function<void ()> &function)
+:
+    _name {move(name)},
+    _function {function}
+{
+    activate();
+}
+
+Test::Test(string &&name, function<void ()> &&function)
+:
+    _name {move(name)},
+    _function {move(function)}
+{
+    activate();
+}
+
+Test::Test(Test &&other)
+{
+    activate();
+    other.swap(*this);
+}
+
+Test::~Test()
+{
+    deactivate();
+}
+
+Test &Test::operator =(Test &&other) noexcept
+{
+    other.swap(*this);
+    return *this;
+}
+
+void Test::activate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addTest(this);
 }
 
-void Test::disable()
+void Test::deactivate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->removeTest(this);
 }
 
-// Class 'BeforeTest' implementation.
 
-void BeforeTest::enable()
+// Implementation of class 'BeforeTest'.
+
+BeforeTest::BeforeTest(const function<void ()> &function)
+:
+    _function {function}
+{
+    activate();
+}
+
+BeforeTest::BeforeTest(function<void ()> &&function)
+:
+    _function {move(function)}
+{
+    activate();
+}
+
+BeforeTest::BeforeTest(BeforeTest &&other)
+{
+    activate();
+    other.swap(*this);
+}
+
+BeforeTest::~BeforeTest()
+{
+    deactivate();
+}
+
+BeforeTest &BeforeTest::operator =(BeforeTest &&other) noexcept
+{
+    other.swap(*this);
+    return *this;
+}
+
+void BeforeTest::activate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addBeforeTest(this);
 }
 
-void BeforeTest::disable()
+void BeforeTest::deactivate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->removeBeforeTest(this);
 }
 
-// Class 'AfterTest' implementation.
 
-void AfterTest::enable()
+// Implementation of class 'AfterTest'.
+
+AfterTest::AfterTest(const function<void ()> &function)
+:
+    _function {function}
+{
+    activate();
+}
+
+AfterTest::AfterTest(function<void ()> &&function)
+:
+    _function {move(function)}
+{
+    activate();
+}
+
+AfterTest::AfterTest(AfterTest &&other)
+{
+    activate();
+    other.swap(*this);
+}
+
+AfterTest::~AfterTest()
+{
+    deactivate();
+}
+
+AfterTest &AfterTest::operator =(AfterTest &&other) noexcept
+{
+    other.swap(*this);
+    return *this;
+}
+
+void AfterTest::activate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->addAfterTest(this);
 }
 
-void AfterTest::disable()
+void AfterTest::deactivate() const
 {
     auto context = TestDriver::getInstance()->getCurrentContext();
     context->removeAfterTest(this);

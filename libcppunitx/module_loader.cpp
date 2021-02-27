@@ -1,5 +1,5 @@
 // module_loader.cpp
-// Copyright (C) 2020 Kaz Nishimura
+// Copyright (C) 2020-2021 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -36,24 +36,22 @@ namespace
     class ltlibrary_loader
     {
     private:
+
         static const std::regex DLNAME;
 
-    private:
         static const std::regex INSTALLED;
 
-    private:
         std::string _dlname;
 
-    private:
         std::string _installed;
 
     public:
+
         const std::string &dlname() const
         {
             return _dlname;
         }
 
-    public:
         void load(const char *const name)
         {
             auto &&length = std::strlen(name);
@@ -61,7 +59,7 @@ namespace
                 std::ifstream input {name};
                 load(input);
 
-                if (not(_dlname.empty())) {
+                if (!_dlname.empty()) {
                     std::string pathname = name;
 
                     auto &&sep = pathname.rfind('/');
@@ -82,6 +80,7 @@ namespace
         }
 
     protected:
+
         void load(std::istream &input)
         {
             if (input) {
@@ -100,22 +99,26 @@ namespace
     };
 
     const std::regex ltlibrary_loader::DLNAME {"^dlname='(.*)'"};
+
     const std::regex ltlibrary_loader::INSTALLED {"^installed=([^ ]*)"};
 }
 
-void module::open(const char *const name)
+
+auto module::open(const char *const name) -> native_handle_type
 {
-    close();
 #if HAVE_DLFCN_H
-    _native_handle = dlopen(name, RTLD_LAZY);
+    return dlopen(name, RTLD_LAZY);
+#else
+    return nullptr;
 #endif
 }
 
 void module::close()
 {
 #if HAVE_DLFCN_H
+    using std::swap;
     native_handle_type handle = nullptr;
-    std::swap(_native_handle, handle);
+    swap(_native_handle, handle);
     if (handle != nullptr) {
         dlclose(handle);
     }
@@ -131,14 +134,15 @@ void *module::sym(const char *symbol)
 #endif
 }
 
-void ltmodule::open(const char *const name)
+
+auto ltmodule::open(const char *const name) -> native_handle_type
 {
-    ltlibrary_loader loader;
+    ltlibrary_loader loader {};
     loader.load(name);
 
-    std::string dlname = loader.dlname();
-    if (dlname.empty()) {
-        dlname.assign(name);
+    auto &&dlname = loader.dlname();
+    if (!dlname.empty()) {
+        return module::open(dlname.c_str());
     }
-    module::open(dlname.c_str());
+    return module::open(name);
 }

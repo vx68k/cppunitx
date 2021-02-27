@@ -1,13 +1,14 @@
 # azure-pipelines.yml - configuration for Azure Pipelines
-# Copyright (C) 2020 Kaz Nishimura
+# Copyright (C) 2020-2021 Kaz Nishimura
 #
 # Copying and distribution of this file, with or without modification, are
 # permitted in any medium without royalty provided the copyright notice and
 # this notice are preserved.  This file is offered as-is, without any warranty.
 ---
 variables:
-  package.distName: cppunitx-1-alpha.4
-  uploadRepository: kazssym/cppunitx
+  package.name: cppunitx
+  package.version: 1-alpha.5
+  upload.repository: kazssym/cppunitx
 trigger:
   - master
   - release/*
@@ -25,42 +26,71 @@ stages:
             inputs:
               secureFile: keys.asc
           - bash: |
-              echo '$(gpg.passphrase)' | \
+              echo '$(gpg.passphrase)' |
               sh ./setupkeys.sh '$(Keys.secureFilePath)'
             displayName: Set up signing keys
+          - task: SonarCloudPrepare@1
+            inputs:
+              SonarCloud: sonarcloud
+              organization: vx68k
+              scannerMode: CLI
+              extraProperties: |
+                sonar.cfamily.build-wrapper-output=build-wrapper-output
+                sonar.cfamily.gcov.reportsPath=.
+                sonar.cfamily.threads=2
+                sonar.cfamily.cache.enabled=false
+          - bash: |
+              curl -OL https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip &&
+              unzip build-wrapper-linux-x86.zip
+            displayName: Download SonarCloud build wrapper
+            workingDirectory: $(Agent.TempDirectory)
           - bash: |
               sudo apt-get install -q --no-install-recommends \
-                  texinfo
+                texinfo
             displayName: Install build dependencies
           - bash: |
-              autoreconf
+              autoreconf --verbose
             displayName: Bootstrap
           - bash: |
-              ./configure --disable-static
+              ./configure --disable-static \
+                CXX="g++ -std=c++11" \
+                CFLAGS="-g -O2 -fprofile-arcs -ftest-coverage" \
+                CXXFLAGS="-g -O2 -fprofile-arcs -ftest-coverage"
+              status=$?
+              echo "##vso[task.uploadfile]`pwd`/config.log"
+              exit $status
             displayName: Configure
           - bash: |
-              make check
+              '$(Agent.TempDirectory)'/build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
+                --out-dir build-wrapper-output \
+                make check
             displayName: Build
           - task: PublishTestResults@2
             condition: succeededOrFailed()
           - bash: |
-              make dist || exit $?
-              mkdir -p _dist
-              mv -f '$(package.distName)'.* _dist/
-            displayName: Make source archive
+              for subdir in libcppunitx cppunitx test; do
+                (cd "$subdir" && find . -name '*.gcda' -print | xargs -r gcov -r)
+              done
+            displayName: Produce test coverage reports
+          - task: SonarCloudAnalyze@1
+          - bash: |
+              make dist &&
+              mkdir -p _dist &&
+              mv -f '$(package.name)-$(package.version)'.* _dist/
+            displayName: Make distributables
           - publish: _dist
             artifact: dist
   - stage: Test
     jobs:
-      - job: Test
+      - job: Build
         strategy:
           matrix:
             Ubuntu:
-              VM_IMAGE: ubuntu-latest
+              VM_IMAGE: ubuntu-18.04
               CC: gcc
               CXX: g++
             macOS:
-              VM_IMAGE: macOS-latest
+              VM_IMAGE: macOS-10.14
               CC: clang
               CXX: clang++ -std=c++11
         continueOnError: true
@@ -71,24 +101,24 @@ stages:
           - download: current
             artifact: dist
           - bash: |
-              gzip -dc '$(Agent.BuildDirectory)/dist/$(package.distName).tar.gz' | \
-              tar -x
+              gzip -dc '$(Agent.BuildDirectory)'/dist/'$(package.name)-$(package.version)'.tar.gz |
+              tar -x --strip-components=1
             displayName: Unpack
           - bash: |
               $CC --version
               $CXX --version
               ./configure --prefix='$(Build.BinariesDirectory)'
+              status=$?
               echo "##vso[task.uploadfile]`pwd`/config.log"
+              exit $status
             displayName: Configure
-            workingDirectory: $(package.distName)
           - bash: |
               make check
             displayName: Build
-            workingDirectory: $(package.distName)
           - bash: |
-              make install installcheck
+              make install &&
+              make installcheck
             displayName: Install
-            workingDirectory: $(package.distName)
   - stage: Release
     dependsOn: Default
     condition:
@@ -105,6 +135,8 @@ stages:
           - download: current
             artifact: dist
           - bash: |
-              sh ./upload.sh -u '$(bitbucket.username):$(bitbucket.password)' \
-                  -r '$(uploadRepository)' '$(Agent.BuildDirectory)'/dist/*
+              sh ./upload.sh \
+                -u '$(bitbucket.username):$(bitbucket.password)' \
+                -r '$(upload.repository)' \
+                '$(Agent.BuildDirectory)'/dist/'$(package.name)-$(package.version)'.*
             displayName: Upload

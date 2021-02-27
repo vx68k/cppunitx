@@ -1,5 +1,5 @@
 // <bits/cppunitx/registry.h>
-// Copyright (C) 2020 Kaz Nishimura
+// Copyright (C) 2020-2021 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -31,44 +31,41 @@ namespace cppunitx
     class _CPPUNITX_PUBLIC TestRegistry
     {
     public:
+
         /// Base class for test registrants.
         class _CPPUNITX_PUBLIC Registrant
         {
         private:
+
             std::string _name;
 
         protected:
-            /// Constructs this object with a null-terminated string value.
-            explicit Registrant(const char *const name)
-                : _name {name}
-            {
-            }
+
+            // Constructors.
 
             /// Constructs this object with a 'std::string' value.
-            explicit Registrant(const std::string &name)
-                : _name {name}
-            {
-            }
+            explicit Registrant(const std::string &name);
 
             /// Constructs this object with a 'std::string' value.
-            explicit Registrant(std::string &&name)
-                : _name {name}
-            {
-            }
+            explicit Registrant(std::string &&name);
 
             // Deleted: this class is not copy-constructible.
             Registrant(const Registrant &) = delete;
 
+        public:
+
+            // Destructor.
+
+            /// Does nothing on destruction of this object.
+            virtual ~Registrant();
+
+
+            // Assignment operators.
+
             // Deleted: this class is not copy-assignable.
             void operator =(const Registrant &) = delete;
 
-        public:
-            /// Does nothing on destruction of this object.
-            virtual ~Registrant()
-            {
-            }
 
-        public:
             /// Returns the name of this object.
             const std::string &getName() const noexcept
             {
@@ -79,7 +76,12 @@ namespace cppunitx
             virtual void runTests() const = 0;
         };
 
+    private:
+
+        std::unordered_set<const Registrant *> _registrants;
+
     public:
+
         /// Returns the test registry for a test module.
         template<class Module>
         static std::shared_ptr<TestRegistry> getInstance()
@@ -88,20 +90,25 @@ namespace cppunitx
             return instance;
         }
 
-    private:
-        std::unordered_set<const Registrant *> _registrants;
 
-    public:
+        // Constructors.
+
         TestRegistry();
 
         // To suppress implicit definitions.
         TestRegistry(const TestRegistry &) = delete;
-        void operator =(const TestRegistry &) = delete;
 
-    public:
+
+        // Destructor.
+
         virtual ~TestRegistry();
 
-    public:
+
+        // Assignment operators.
+
+        void operator =(const TestRegistry &) = delete;
+
+
         /// Adds a registrant to this registry.
         void addRegistrant(const Registrant *registrant);
 
@@ -109,7 +116,7 @@ namespace cppunitx
         void removeRegistrant(const Registrant *registrant);
 
         /// Invokes a function for each registrant.
-        void forEachRegistrant(
+        void forEach(
             const std::function<void (const Registrant *)> &f
         ) const;
     };

@@ -1,5 +1,5 @@
 // <bits/cppunitx/driver.h>
-// Copyright (C) 2018-2020 Kaz Nishimura
+// Copyright (C) 2018-2021 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -27,31 +27,45 @@ namespace cppunitx
     /// Test driver.
     class _CPPUNITX_PUBLIC TestDriver
     {
-    public:
-        static std::shared_ptr<TestDriver> getInstance();
-
-        static int main(int argc, char *const *argv);
-
     private:
+
+        static std::shared_ptr<TestDriver> _instance;
+
         std::shared_ptr<TestContext> _currentContext;
 
+    public:
+
+        static std::shared_ptr<TestDriver> getInstance()
+        {
+            return _instance;
+        }
+
     protected:
+
+        // Constructors.
+
         TestDriver();
 
         TestDriver(const TestDriver &) = delete;
-        TestDriver &operator =(const TestDriver &) = delete;
 
     public:
+
+        // Destructor.
+
         virtual ~TestDriver();
 
-    public:
+        // Assignment operators.
+
+        void operator =(const TestDriver &) = delete;
+
+
         /// Returns the current test context.
         std::shared_ptr<TestContext> getCurrentContext() const
         {
             return _currentContext;
         }
 
-        virtual void run(const char *suiteName);
+        virtual int run(const char *suiteName);
     };
 }
 

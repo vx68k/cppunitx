@@ -1,5 +1,5 @@
 // <bits/cppunitx/test.h>
-// Copyright (C) 2020 Kaz Nishimura
+// Copyright (C) 2020-2021 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -24,6 +24,7 @@
 
 #include <bits/cppunitx.h>
 #include <functional>
+#include <utility>
 #include <string>
 
 namespace cppunitx
@@ -34,45 +35,52 @@ namespace cppunitx
     class _CPPUNITX_PUBLIC Test
     {
     private:
-        const std::string _name;
-        const std::function<void ()> _function;
+
+        std::string _name;
+
+        std::function<void ()> _function;
 
     public:
-        /// Constructs this object.
-        template<class Function>
-        Test(const char *name, Function function)
-            : _name {name}, _function {std::forward<Function>(function)}
-        {
-            enable();
-        }
 
-        /// Constructs this object.
-        template<class Function>
-        Test(const std::string &name, Function function)
-            : _name {name}, _function {std::forward<Function>(function)}
-        {
-            enable();
-        }
+        // Constructors.
 
-        /// Constructs this object.
-        template<class Function>
-        Test(std::string &&name, Function function)
-            : _name {name}, _function {std::forward<Function>(function)}
-        {
-            enable();
-        }
+        Test(const std::string &name, const std::function<void ()> &function);
+
+        Test(const std::string &name, std::function<void ()> &&function);
+
+        Test(std::string &&name, const std::function<void ()> &function);
+
+        Test(std::string &&name, std::function<void ()> &&function);
 
         // To suppress implicit definitions.
         Test(const Test &) = delete;
-        Test &operator =(const Test &) = delete;
 
-    public:
-        ~Test()
+        Test(Test &&other);
+
+
+        // Destructor.
+
+        ~Test();
+
+
+        // Assignment operators.
+
+        void operator =(const Test &) = delete;
+
+        Test &operator =(Test &&other) noexcept;
+
+
+        /**
+         * Swaps the values of this object and another.
+         *
+         * @param other another `Test` object
+         */
+        void swap(Test &other) noexcept
         {
-            disable();
+            _name.swap(other._name);
+            _function.swap(other._function);
         }
 
-    public:
         const std::string &getName() const
         {
             return _name;
@@ -85,10 +93,23 @@ namespace cppunitx
         }
 
     private:
-        void enable();
 
-        void disable();
+        void activate() const;
+
+        void deactivate() const;
     };
+
+    /**
+     * Swaps the values of two `Test` objects.
+     *
+     * @param one a `Test` object
+     * @param other another `Test` object
+     */
+    inline void swap(Test &one, Test &other) noexcept
+    {
+        one.swap(other);
+    }
+
 
     /// Object to specify a before-test (or set-up) procedure.
     /// Before-test procedures will run once before each test case.
@@ -97,29 +118,39 @@ namespace cppunitx
     class _CPPUNITX_PUBLIC BeforeTest
     {
     private:
-        const std::function<void ()> _function;
+
+        std::function<void ()> _function;
 
     public:
-        template<class Function>
-        explicit BeforeTest(Function function)
-            : _function {std::forward<Function>(function)}
+
+        // Constructors.
+
+        explicit BeforeTest(const std::function<void ()> &function);
+
+        explicit BeforeTest(std::function<void ()> &&function);
+
+        BeforeTest(const BeforeTest &other) = delete;
+
+        BeforeTest(BeforeTest &&other);
+
+
+        // Destructor.
+
+        ~BeforeTest();
+
+
+        // Assignment operators.
+
+        void operator =(const BeforeTest &other) = delete;
+
+        BeforeTest &operator =(BeforeTest &&other) noexcept;
+
+
+        void swap(BeforeTest &other) noexcept
         {
-            enable();
+            _function.swap(other._function);
         }
 
-        // Deleted: this class is not copy-constructible.
-        BeforeTest(const BeforeTest &) = delete;
-
-        // Deleted: this class is not copy-assignable.
-        void operator =(const BeforeTest &) = delete;
-
-    public:
-        ~BeforeTest()
-        {
-            disable();
-        }
-
-    public:
         /// Runs this before-test procedure.
         void run() const
         {
@@ -127,10 +158,23 @@ namespace cppunitx
         }
 
     private:
-        void enable();
 
-        void disable();
+        void activate() const;
+
+        void deactivate() const;
     };
+
+    /**
+     * Swaps the values of two `BeforeTest` objects.
+     *
+     * @param one a `BeforeTest` object
+     * @param other another `BeforeTest` object
+     */
+    inline void swap(BeforeTest &one, BeforeTest &other) noexcept
+    {
+        one.swap(other);
+    }
+
 
     /// Object to specify an after-test (or tear-down) procedure.
     /// After-test procedures will run once after each test case.
@@ -139,29 +183,39 @@ namespace cppunitx
     class _CPPUNITX_PUBLIC AfterTest
     {
     private:
-        const std::function<void ()> _function;
+
+        std::function<void ()> _function;
 
     public:
-        template<class Function>
-        explicit AfterTest(Function function)
-            : _function {std::forward<Function>(function)}
+
+        // Constructors.
+
+        explicit AfterTest(const std::function<void ()> &function);
+
+        explicit AfterTest(std::function<void ()> &&function);
+
+        AfterTest(const AfterTest &other) = delete;
+
+        AfterTest(AfterTest &&other);
+
+
+        // Destructor.
+
+        ~AfterTest();
+
+
+        // Assignment operators.
+
+        void operator =(const AfterTest &other) = delete;
+
+        AfterTest &operator =(AfterTest &&other) noexcept;
+
+
+        void swap(AfterTest &other) noexcept
         {
-            enable();
+            _function.swap(other._function);
         }
 
-        // Deleted: this class is not copy-constructible.
-        AfterTest(const AfterTest &) = delete;
-
-        // Deleted: this class is not copy-assignable.
-        void operator =(const AfterTest &) = delete;
-
-    public:
-        ~AfterTest()
-        {
-            disable();
-        }
-
-    public:
         /// Runs this after-test procedure.
         void run() const
         {
@@ -169,10 +223,22 @@ namespace cppunitx
         }
 
     private:
-        void enable();
 
-        void disable();
+        void activate() const;
+
+        void deactivate() const;
     };
+
+    /**
+     * Swaps the values of two `AfterTest` objects.
+     *
+     * @param one an `AfterTest` object
+     * @param other another `AfterTest` object
+     */
+    inline void swap(AfterTest &one, AfterTest &other) noexcept
+    {
+        one.swap(other);
+    }
 }
 
 #endif

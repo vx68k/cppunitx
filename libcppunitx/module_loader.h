@@ -1,5 +1,5 @@
 // module_loader.h
-// Copyright (C) 2020 Kaz Nishimura
+// Copyright (C) 2020-2021 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -21,111 +21,121 @@
 
 #include <utility>
 
+
 /**
  * Simple wrapper class for the dynamic loading functions.
  */
 class module
 {
 public:
+
     using native_handle_type = void *;
 
 private:
+
     native_handle_type _native_handle = nullptr;
 
+protected:
+
+    static native_handle_type open(const char *name);
+
 public:
+
+    // Constructors.
+
     module() noexcept = default;
+
+    explicit module(native_handle_type native_handle)
+    :
+        _native_handle {native_handle}
+    {
+        // Nothing to do.
+    }
 
     module(const module &) = delete;
 
     module(module &&other) noexcept
     {
-        swap(other);
+        other.swap(*this);
     }
 
-    explicit module(const char *name)
-    {
-        open(name);
-    }
 
-public:
-    void operator =(const module &) = delete;
+    // Destructor.
 
-    module &operator =(module &&other) noexcept
-    {
-        swap(other);
-        return *this;
-    }
-
-public:
     ~module()
     {
         close();
     }
 
-public:
+
+    // Assignment operators.
+
+    void operator =(const module &) = delete;
+
+    module &operator =(module &&other) noexcept
+    {
+        other.swap(*this);
+        return *this;
+    }
+
+
+    // Conversions.
+
     explicit operator bool() const noexcept
     {
         return _native_handle != nullptr;
     }
 
-public:
+
     void swap(module &other) noexcept
     {
-        std::swap(_native_handle, other._native_handle);
+        using std::swap;
+        swap(_native_handle, other._native_handle);
     }
 
-public:
-    void open(const char *name);
-
-public:
     void close();
 
-public:
     void *sym(const char *symbol);
 };
+
 
 /**
  * Module class for Libtool libraries.
  */
-class ltmodule: private module
+class ltmodule: public module
 {
-public:
-    using module::close;
-    using module::sym;
-    using module::operator bool;
+protected:
+
+    static native_handle_type open(const char *name);
 
 public:
+
+    // Constructors.
+
     ltmodule() noexcept = default;
+
+    explicit ltmodule(const char *const name)
+    :
+        module(open(name))
+    {
+        // Nothing to do.
+    }
 
     ltmodule(const ltmodule &) = delete;
 
-    ltmodule(ltmodule &&other) noexcept
-    {
-        swap(other);
-    }
+    ltmodule(ltmodule &&other) noexcept = default;
 
-    ltmodule(const char *const name)
-    {
-        open(name);
-    }
 
-public:
+    // Destructor.
+
+    ~ltmodule() = default;
+
+
+    // Assignment operators.
+
     void operator =(const ltmodule &) = delete;
 
-    ltmodule &operator =(ltmodule &&other) noexcept
-    {
-        swap(other);
-        return *this;
-    }
-
-public:
-    void swap(ltmodule &other) noexcept
-    {
-        module::swap(other);
-    }
-
-public:
-    void open(const char *name);
+    ltmodule &operator =(ltmodule &&other) noexcept = default;
 };
 
 #endif

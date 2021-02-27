@@ -1,5 +1,5 @@
 // registry.cpp
-// Copyright (C) 2020 Kaz Nishimura
+// Copyright (C) 2020-2021 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -20,13 +20,37 @@
 #include <config.h>
 #endif
 
-#define _CPPUNITX_FRAMEWORK_IMPLEMENTATION 1
 #include <bits/cppunitx/registry.h>
 
 #include <algorithm>
+#include <utility>
 
 using std::for_each;
+using std::move;
 using namespace cppunitx;
+
+
+// Implementations of class 'TestRegistry::Registrant'
+
+TestRegistry::Registrant::Registrant(const std::string &name)
+:
+    _name {name}
+{
+    // Nothing to do.
+}
+
+TestRegistry::Registrant::Registrant(std::string &&name)
+:
+    _name {move(name)}
+{
+    // Nothing to do.
+}
+
+TestRegistry::Registrant::~Registrant()
+{
+    // Nothing to do.
+}
+
 
 // Class 'TestRegistry' implementation.
 
@@ -50,7 +74,7 @@ void TestRegistry::removeRegistrant(
     _registrants.erase(registrant);
 }
 
-void TestRegistry::forEachRegistrant(
+void TestRegistry::forEach(
     const std::function<void (const Registrant *)> &f
 ) const
 {

@@ -27,9 +27,11 @@
 
 #include <cppunitx/framework>
 #include <cppunitx/assertion>
+#include <string>
 
 using namespace cppunitx;
 using namespace cppunitx::assertion;
+using std::string;
 
 class AssertionTest
 {
@@ -44,14 +46,24 @@ private:
         }
     };
 
-    Test testAssertNull {"test 'assertNull'", [this]() {
-            assertNull(0);
-            // TODO: Add more assertions here.
+    Test testAssertNull = {
+        "test 'assertNull'",
+        [this]() {
+            assertNull(nullptr, string("nullptr must be null"));
+            expectFailure(
+                [this] {
+                    assertNull(this, string("this must be null"));
+                }, string("this must not be null"));
         }};
 
-    Test testAssertNotNull {"test 'assertNotNull'", [this]() {
-            assertNotNull(this);
-            // TODO: Add more assertions here.
+    Test testAssertNotNull = {
+        "test 'assertNotNull'",
+        [this]() {
+            assertNotNull(this, string("this must not be null"));
+            expectFailure(
+                [this] {
+                    assertNotNull(nullptr, string("nullptr must not be null"));
+                }, string("nullptr must be null"));
         }};
 };
 TestSuite<AssertionTest> test {"assertion"};

@@ -1,5 +1,5 @@
 // exception.cpp
-// Copyright (C) 2020 Kaz Nishimura
+// Copyright (C) 2020-2021 Kaz Nishimura
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
@@ -22,18 +22,19 @@
 
 #include <bits/cppunitx/exception.h>
 
+using std::runtime_error;
 using namespace cppunitx;
 
 AssertionFailedException::AssertionFailedException(const char *message)
 :
-    inherited(message)
+    runtime_error(message)
 {
     // Nothing to do.
 }
 
 AssertionFailedException::AssertionFailedException(const std::string &message)
 :
-    inherited(message)
+    runtime_error(message)
 {
     // Nothing to do.
 }
@@ -41,18 +42,19 @@ AssertionFailedException::AssertionFailedException(const std::string &message)
 AssertionFailedException::AssertionFailedException(
     const AssertionFailedException &other)
 :
-    inherited(other)
+    runtime_error(other)
 {
     // Nothing to do.
 }
 
-auto AssertionFailedException::operator =(const AssertionFailedException &other)
-    -> AssertionFailedException &
+AssertionFailedException &AssertionFailedException::operator =(
+    const AssertionFailedException &other)
 {
-    *(inherited *)this = other;
+    runtime_error::operator =(other);
     return *this;
 }
 
 AssertionFailedException::~AssertionFailedException() noexcept
 {
+    // Nothing to do.
 }
