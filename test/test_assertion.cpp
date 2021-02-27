@@ -46,14 +46,24 @@ private:
         }
     };
 
-    Test testAssertNull {"test 'assertNull'", [this]() {
+    Test testAssertNull = {
+        "test 'assertNull'",
+        [this]() {
             assertNull(nullptr, string("nullptr must be null"));
-            // TODO: Add more assertions here.
+            expectFailure(
+                [this] {
+                    assertNull(this);
+                }, string("this must not be null"));
         }};
 
-    Test testAssertNotNull {"test 'assertNotNull'", [this]() {
+    Test testAssertNotNull = {
+        "test 'assertNotNull'",
+        [this]() {
             assertNotNull(this, string("this must not be null"));
-            // TODO: Add more assertions here.
+            expectFailure(
+                [this] {
+                    assertNotNull(nullptr);
+                }, string("nullptr must be null"));
         }};
 };
 TestSuite<AssertionTest> test {"assertion"};
