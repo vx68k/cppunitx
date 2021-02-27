@@ -14,17 +14,17 @@ nobase_include_HEADERS = \
 cppunitx/exception \
 cppunitx/assertion \
 cppunitx/framework \
-cppunitx/driver \
 cppunitx/module \
+cppunitx/driver \
 bits/cppunitx.h \
 bits/cppunitx/exception.h \
 bits/cppunitx/assertion.h \
-bits/cppunitx/test.h \
 bits/cppunitx/registry.h \
-bits/cppunitx/suite.h \
 bits/cppunitx/context.h \
-bits/cppunitx/driver.h \
-bits/cppunitx/module.h
+bits/cppunitx/test.h \
+bits/cppunitx/suite.h \
+bits/cppunitx/module.h \
+bits/cppunitx/driver.h
 noinst_HEADERS = \
 module_loader.h
 
@@ -33,10 +33,10 @@ libcppunitx_la_SOURCES = \
 exception.cpp \
 assertion.cpp \
 registry.cpp \
-test.cpp \
 context.cpp \
-driver.cpp \
+test.cpp \
 suite.cpp \
+driver.cpp \
 module_loader.cpp
 
 CLEANFILES = $(pkgconfig_DATA)
